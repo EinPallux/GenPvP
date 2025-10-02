@@ -67,14 +67,12 @@ public class ArmorManager {
                     int armor = pieceSection.getInt("armor", 1);
                     double moneyCost = pieceSection.getDouble("money-cost", 0);
                     int gemsCost = pieceSection.getInt("gems-cost", 0);
-                    String requiredItem = pieceSection.getString("required-item", "");
 
                     ArmorPiece piece = new ArmorPiece(
                             pieceType,
                             armor,
                             moneyCost,
-                            gemsCost,
-                            requiredItem
+                            gemsCost
                     );
 
                     pieces.put(pieceType, piece);
@@ -169,16 +167,18 @@ public class ArmorManager {
             Color color = hexToColor(armorSet.getColorHex());
             meta.setColor(color);
 
-            // Set lore
+            // Set lore from config
             List<String> lore = new ArrayList<>();
-            lore.add(ColorUtil.colorize("&#808080Armor: &#FFFFFF" + piece.getArmor()));
-            lore.add(ColorUtil.colorize("&#808080Effect: &#FFFF00" + armorSet.getEffectType()));
-            lore.add("");
+            List<String> configLore = plugin.getConfigManager().getArmorsConfig()
+                    .getStringList("armor-sets." + setName + "." + pieceType + ".lore");
 
-            String effectDescription = getEffectDescription(armorSet.getEffectType(), armorSet.getEffectValue());
-            lore.add(ColorUtil.colorize(effectDescription));
-            lore.add("");
-            lore.add(ColorUtil.colorize("&#00FF00Unbreakable"));
+            for (String line : configLore) {
+                String processedLine = line
+                        .replace("{armor}", String.valueOf(piece.getArmor()))
+                        .replace("{effect}", armorSet.getEffectType())
+                        .replace("{effect_description}", getEffectDescription(armorSet.getEffectType(), armorSet.getEffectValue()));
+                lore.add(ColorUtil.colorize(processedLine));
+            }
 
             meta.setLore(lore);
 
@@ -273,7 +273,7 @@ public class ArmorManager {
             case "HARDENED":
                 return "&#808080Enhanced armor protection!";
             case "EXTRA_HEARTS":
-                return "&#FF1493+" + (effectValue * 2) + " HP per piece!";
+                return "&#FF1493+" + (effectValue) + " ❤ per piece!";
             case "SPEED":
                 return "&#00FFFFIncreased movement speed!";
             default:
@@ -334,20 +334,17 @@ public class ArmorManager {
         private final int armor;
         private final double moneyCost;
         private final int gemsCost;
-        private final String requiredItem;
 
-        public ArmorPiece(String type, int armor, double moneyCost, int gemsCost, String requiredItem) {
+        public ArmorPiece(String type, int armor, double moneyCost, int gemsCost) {
             this.type = type;
             this.armor = armor;
             this.moneyCost = moneyCost;
             this.gemsCost = gemsCost;
-            this.requiredItem = requiredItem;
         }
 
         public String getType() { return type; }
         public int getArmor() { return armor; }
         public double getMoneyCost() { return moneyCost; }
         public int getGemsCost() { return gemsCost; }
-        public String getRequiredItem() { return requiredItem; }
     }
 }

@@ -390,18 +390,182 @@ public class GenPvPCommand implements CommandExecutor, TabCompleter {
     }
 
     private boolean handleGemsCommand(CommandSender sender, String[] args) {
-        if (!(sender instanceof Player)) {
-            sender.sendMessage(plugin.getConfigManager().getMessage("player-only"));
+        if (args.length == 1) {
+            if (!(sender instanceof Player)) {
+                sender.sendMessage(plugin.getConfigManager().getMessage("player-only"));
+                return true;
+            }
+            Player player = (Player) sender;
+            PlayerData data = plugin.getDataManager().getPlayerData(player);
+            player.sendMessage(plugin.getConfigManager().getMessage("stats.gems-balance", "{gems}", String.valueOf(data.getGems())));
             return true;
         }
 
-        Player player = (Player) sender;
-        PlayerData data = plugin.getDataManager().getPlayerData(player);
+        String action = args[1].toLowerCase();
 
-        player.sendMessage(plugin.getConfigManager()
-                .getMessage("stats.gems-balance", "{gems}", String.valueOf(data.getGems())));
+        switch (action) {
+            case "set":
+                if (!sender.hasPermission("gpvp.gems.set")) {
+                    sender.sendMessage(plugin.getConfigManager().getMessage("no-permission"));
+                    return true;
+                }
+                if (args.length < 4) {
+                    sender.sendMessage(plugin.getConfigManager().getMessage("prefix") + " &#FFFF00Usage: /gpvp gems set <player> <amount>");
+                    return true;
+                }
+                handleGemsSet(sender, args);
+                break;
+
+            case "add":
+                if (!sender.hasPermission("gpvp.gems.add")) {
+                    sender.sendMessage(plugin.getConfigManager().getMessage("no-permission"));
+                    return true;
+                }
+                if (args.length < 4) {
+                    sender.sendMessage(plugin.getConfigManager().getMessage("prefix") + " &#FFFF00Usage: /gpvp gems add <player> <amount>");
+                    return true;
+                }
+                handleGemsAdd(sender, args);
+                break;
+
+            case "remove":
+                if (!sender.hasPermission("gpvp.gems.remove")) {
+                    sender.sendMessage(plugin.getConfigManager().getMessage("no-permission"));
+                    return true;
+                }
+                if (args.length < 4) {
+                    sender.sendMessage(plugin.getConfigManager().getMessage("prefix") + " &#FFFF00Usage: /gpvp gems remove <player> <amount>");
+                    return true;
+                }
+                handleGemsRemove(sender, args);
+                break;
+
+            case "pay":
+                if (!(sender instanceof Player)) {
+                    sender.sendMessage(plugin.getConfigManager().getMessage("player-only"));
+                    return true;
+                }
+                if (args.length < 4) {
+                    sender.sendMessage(plugin.getConfigManager().getMessage("prefix") + " &#FFFF00Usage: /gpvp gems pay <player> <amount>");
+                    return true;
+                }
+                handleGemsPay((Player) sender, args);
+                break;
+
+            default:
+                sendHelp(sender);
+                break;
+        }
+
         return true;
     }
+
+    private void handleGemsSet(CommandSender sender, String[] args) {
+        Player target = Bukkit.getPlayer(args[2]);
+        if (target == null) {
+            sender.sendMessage(plugin.getConfigManager().getMessage("player-not-found", "{player}", args[2]));
+            return;
+        }
+
+        int amount;
+        try {
+            amount = Integer.parseInt(args[3]);
+        } catch (NumberFormatException e) {
+            sender.sendMessage(plugin.getConfigManager().getMessage("invalid-amount"));
+            return;
+        }
+
+        PlayerData data = plugin.getDataManager().getPlayerData(target);
+        data.setGems(amount);
+
+        sender.sendMessage(plugin.getConfigManager().getMessage("gems.set", "{player}", target.getName(), "{amount}", String.valueOf(amount)));
+        target.sendMessage(plugin.getConfigManager().getMessage("gems.set_target", "{amount}", String.valueOf(amount)));
+    }
+
+    private void handleGemsAdd(CommandSender sender, String[] args) {
+        Player target = Bukkit.getPlayer(args[2]);
+        if (target == null) {
+            sender.sendMessage(plugin.getConfigManager().getMessage("player-not-found", "{player}", args[2]));
+            return;
+        }
+
+        int amount;
+        try {
+            amount = Integer.parseInt(args[3]);
+        } catch (NumberFormatException e) {
+            sender.sendMessage(plugin.getConfigManager().getMessage("invalid-amount"));
+            return;
+        }
+
+        PlayerData data = plugin.getDataManager().getPlayerData(target);
+        data.addGems(amount);
+
+        sender.sendMessage(plugin.getConfigManager().getMessage("gems.add", "{player}", target.getName(), "{amount}", String.valueOf(amount)));
+        target.sendMessage(plugin.getConfigManager().getMessage("gems.add_target", "{amount}", String.valueOf(amount)));
+    }
+
+    private void handleGemsRemove(CommandSender sender, String[] args) {
+        Player target = Bukkit.getPlayer(args[2]);
+        if (target == null) {
+            sender.sendMessage(plugin.getConfigManager().getMessage("player-not-found", "{player}", args[2]));
+            return;
+        }
+
+        int amount;
+        try {
+            amount = Integer.parseInt(args[3]);
+        } catch (NumberFormatException e) {
+            sender.sendMessage(plugin.getConfigManager().getMessage("invalid-amount"));
+            return;
+        }
+
+        PlayerData data = plugin.getDataManager().getPlayerData(target);
+        data.removeGems(amount);
+
+        sender.sendMessage(plugin.getConfigManager().getMessage("gems.remove", "{player}", target.getName(), "{amount}", String.valueOf(amount)));
+        target.sendMessage(plugin.getConfigManager().getMessage("gems.remove_target", "{amount}", String.valueOf(amount)));
+    }
+
+    private void handleGemsPay(Player player, String[] args) {
+        Player target = Bukkit.getPlayer(args[2]);
+        if (target == null) {
+            player.sendMessage(plugin.getConfigManager().getMessage("player-not-found", "{player}", args[2]));
+            return;
+        }
+
+        if (player.equals(target)) {
+            player.sendMessage(plugin.getConfigManager().getMessage("gems.pay-self"));
+            return;
+        }
+
+        int amount;
+        try {
+            amount = Integer.parseInt(args[3]);
+        } catch (NumberFormatException e) {
+            player.sendMessage(plugin.getConfigManager().getMessage("invalid-amount"));
+            return;
+        }
+
+        if (amount <= 0) {
+            player.sendMessage(plugin.getConfigManager().getMessage("invalid-amount"));
+            return;
+        }
+
+        PlayerData senderData = plugin.getDataManager().getPlayerData(player);
+        if (!senderData.hasGems(amount)) {
+            player.sendMessage(plugin.getConfigManager().getMessage("gems.not-enough"));
+            return;
+        }
+
+        PlayerData targetData = plugin.getDataManager().getPlayerData(target);
+
+        senderData.removeGems(amount);
+        targetData.addGems(amount);
+
+        player.sendMessage(plugin.getConfigManager().getMessage("gems.paid", "{player}", target.getName(), "{amount}", String.valueOf(amount)));
+        target.sendMessage(plugin.getConfigManager().getMessage("gems.received", "{player}", player.getName(), "{amount}", String.valueOf(amount)));
+    }
+
 
     private boolean handleStatsCommand(CommandSender sender, String[] args) {
         if (!(sender instanceof Player)) {
@@ -471,6 +635,8 @@ public class GenPvPCommand implements CommandExecutor, TabCompleter {
                 completions.addAll(Arrays.asList("give", "giveall"));
             } else if (args[0].equalsIgnoreCase("armor")) {
                 completions.addAll(Arrays.asList("give"));
+            } else if (args[0].equalsIgnoreCase("gems")) {
+                completions.addAll(Arrays.asList("set", "add", "remove", "pay"));
             }
         } else if (args.length == 3) {
             if (args[0].equalsIgnoreCase("gen") && args[1].equalsIgnoreCase("give")) {
@@ -488,6 +654,10 @@ public class GenPvPCommand implements CommandExecutor, TabCompleter {
             } else if (args[0].equalsIgnoreCase("cube") && args[1].equalsIgnoreCase("giveall")) {
                 completions.addAll(Arrays.asList("common", "uncommon", "rare", "epic", "legendary"));
             } else if (args[0].equalsIgnoreCase("armor") && args[1].equalsIgnoreCase("give")) {
+                completions.addAll(Bukkit.getOnlinePlayers().stream()
+                        .map(Player::getName)
+                        .collect(Collectors.toList()));
+            } else if (args[0].equalsIgnoreCase("gems") && (args[1].equalsIgnoreCase("set") || args[1].equalsIgnoreCase("add") || args[1].equalsIgnoreCase("remove") || args[1].equalsIgnoreCase("pay"))) {
                 completions.addAll(Bukkit.getOnlinePlayers().stream()
                         .map(Player::getName)
                         .collect(Collectors.toList()));

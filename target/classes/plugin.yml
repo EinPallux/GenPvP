@@ -52,7 +52,10 @@ permissions:
       gpvp.gen.giveall: true
       gpvp.cube.give: true
       gpvp.cube.giveall: true
-      gpvp.armor.give: true  # ADD THIS LINE
+      gpvp.armor.give: true
+      gpvp.gems.set: true
+      gpvp.gems.add: true
+      gpvp.gems.remove: true
       gpvp.reload: true
 
   gpvp.gen.give:
@@ -73,6 +76,18 @@ permissions:
 
   gpvp.armor.give:
     description: Give armor to players
+    default: op
+
+  gpvp.gems.set:
+    description: Set a player's gem balance.
+    default: op
+
+  gpvp.gems.add:
+    description: Add gems to a player's balance.
+    default: op
+
+  gpvp.gems.remove:
+    description: Remove gems from a player's balance.
     default: op
 
   gpvp.reload:

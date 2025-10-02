@@ -37,10 +37,22 @@ armory:
   purchased: "{prefix} &#00FF00You purchased {armor}!"
   not-enough-money: "{prefix} &#FF0000You need ${cost} to purchase this armor!"
   not-enough-gems: "{prefix} &#FF0000You need {gems} gem(s) to purchase this armor!"
-  missing-required-item: "{prefix} &#FF0000You need a {item} to purchase this armor!"
   inventory-full: "{prefix} &#FF0000Your inventory is full!"
   given: "{prefix} &#00FF00You gave {armor} to {player}!"
   received: "{prefix} &#00FF00You received {armor}!"
+
+# Gems Messages
+gems:
+  set: "{prefix} &#00FF00Set {player}'s gems to {amount}."
+  set_target: "{prefix} &#00FF00Your gems have been set to {amount}."
+  add: "{prefix} &#00FF00Added {amount} gems to {player}."
+  add_target: "{prefix} &#00FF00You received {amount} gems."
+  remove: "{prefix} &#00FF00Removed {amount} gems from {player}."
+  remove_target: "{prefix} &#00FF00{amount} gems have been removed from your account."
+  paid: "{prefix} &#00FF00You sent {amount} gems to {player}."
+  received: "{prefix} &#00FF00You received {amount} gems from {player}."
+  not-enough: "{prefix} &#FF0000You don't have enough gems."
+  pay-self: "{prefix} &#FF0000You can't pay yourself."
 
 # Money & Gems Nugget Messages
 nugget:
@@ -126,13 +138,14 @@ gui:
   armory:
     armor-piece:
       lore:
-        - "&#808080Armor: &#FFFFFF{armor}"
-        - "&#808080Effect: &#FFFF00{effect}"
+        - "&#808080&m                          "
+        - "  &#FFFFFF&l» &#808080Armor: &#FFFFFF{armor}"
+        - "  &#FFFF00&l» &#808080Effect: &#FFFF00{effect}"
         - ""
-        - "&#FFFF00Cost:"
-        - "&#808080• Money: &#FFD700${money}"
-        - "&#808080• Gems: &#DDA0DD{gems}"
-        - "&#808080• Required: &#FFFFFF{required}"
+        - "  &#FFD700&lCOST"
+        - "  &#808080&l- &#FFD700${money}"
+        - "  &#DDA0DD&l- {gems} Gems"
+        - "&#808080&m                          "
         - ""
         - "&#00FF00Click to purchase!"
 

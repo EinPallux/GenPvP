@@ -23,28 +23,60 @@ armor-sets:
       armor: 1
       money-cost: 250000
       gems-cost: 25
-      required-item: "LEATHER_HELMET"
+      lore:
+        - "&#808080&m                          "
+        - "  &#FFFFFF&l» &#808080Armor: &#FFFFFF{armor}"
+        - "  &#FFFF00&l» &#808080Effect: &#FFFF00{effect}"
+        - ""
+        - "  {effect_description}"
+        - ""
+        - "  &#00FF00&l✔ &#808080Unbreakable"
+        - "&#808080&m                          "
 
     chestplate:
       name: "<gradient:#FF4500:#FF8C00>Blaze Chestplate</gradient>"
       armor: 3
       money-cost: 750000
       gems-cost: 25
-      required-item: "LEATHER_CHESTPLATE"
+      lore:
+        - "&#808080&m                          "
+        - "  &#FFFFFF&l» &#808080Armor: &#FFFFFF{armor}"
+        - "  &#FFFF00&l» &#808080Effect: &#FFFF00{effect}"
+        - ""
+        - "  {effect_description}"
+        - ""
+        - "  &#00FF00&l✔ &#808080Unbreakable"
+        - "&#808080&m                          "
 
     leggings:
       name: "<gradient:#FF4500:#FF8C00>Blaze Leggings</gradient>"
       armor: 2
       money-cost: 500000
       gems-cost: 25
-      required-item: "LEATHER_LEGGINGS"
+      lore:
+        - "&#808080&m                          "
+        - "  &#FFFFFF&l» &#808080Armor: &#FFFFFF{armor}"
+        - "  &#FFFF00&l» &#808080Effect: &#FFFF00{effect}"
+        - ""
+        - "  {effect_description}"
+        - ""
+        - "  &#00FF00&l✔ &#808080Unbreakable"
+        - "&#808080&m                          "
 
     boots:
       name: "<gradient:#FF4500:#FF8C00>Blaze Boots</gradient>"
       armor: 1
       money-cost: 250000
       gems-cost: 25
-      required-item: "LEATHER_BOOTS"
+      lore:
+        - "&#808080&m                          "
+        - "  &#FFFFFF&l» &#808080Armor: &#FFFFFF{armor}"
+        - "  &#FFFF00&l» &#808080Effect: &#FFFF00{effect}"
+        - ""
+        - "  {effect_description}"
+        - ""
+        - "  &#00FF00&l✔ &#808080Unbreakable"
+        - "&#808080&m                          "
 
   armadillo:
     display-name: "<gradient:#2F4F4F:#000000>Armadillo Armor</gradient>"
@@ -65,34 +97,66 @@ armor-sets:
       armor: 3
       money-cost: 250000
       gems-cost: 25
-      required-item: "LEATHER_HELMET"
+      lore:
+        - "&#808080&m                          "
+        - "  &#FFFFFF&l» &#808080Armor: &#FFFFFF{armor}"
+        - "  &#FFFF00&l» &#808080Effect: &#FFFF00{effect}"
+        - ""
+        - "  {effect_description}"
+        - ""
+        - "  &#00FF00&l✔ &#808080Unbreakable"
+        - "&#808080&m                          "
 
     chestplate:
       name: "<gradient:#2F4F4F:#000000>Armadillo Chestplate</gradient>"
       armor: 5
       money-cost: 750000
       gems-cost: 25
-      required-item: "LEATHER_CHESTPLATE"
+      lore:
+        - "&#808080&m                          "
+        - "  &#FFFFFF&l» &#808080Armor: &#FFFFFF{armor}"
+        - "  &#FFFF00&l» &#808080Effect: &#FFFF00{effect}"
+        - ""
+        - "  {effect_description}"
+        - ""
+        - "  &#00FF00&l✔ &#808080Unbreakable"
+        - "&#808080&m                          "
 
     leggings:
       name: "<gradient:#2F4F4F:#000000>Armadillo Leggings</gradient>"
       armor: 4
       money-cost: 500000
       gems-cost: 25
-      required-item: "LEATHER_LEGGINGS"
+      lore:
+        - "&#808080&m                          "
+        - "  &#FFFFFF&l» &#808080Armor: &#FFFFFF{armor}"
+        - "  &#FFFF00&l» &#808080Effect: &#FFFF00{effect}"
+        - ""
+        - "  {effect_description}"
+        - ""
+        - "  &#00FF00&l✔ &#808080Unbreakable"
+        - "&#808080&m                          "
 
     boots:
       name: "<gradient:#2F4F4F:#000000>Armadillo Boots</gradient>"
       armor: 3
       money-cost: 250000
       gems-cost: 25
-      required-item: "LEATHER_BOOTS"
+      lore:
+        - "&#808080&m                          "
+        - "  &#FFFFFF&l» &#808080Armor: &#FFFFFF{armor}"
+        - "  &#FFFF00&l» &#808080Effect: &#FFFF00{effect}"
+        - ""
+        - "  {effect_description}"
+        - ""
+        - "  &#00FF00&l✔ &#808080Unbreakable"
+        - "&#808080&m                          "
 
   angel:
     display-name: "<gradient:#FFFFFF:#F0F8FF>Angel Armor</gradient>"
     color: "#FFFFFF" # White
     effect-type: "EXTRA_HEARTS"
-    effect-value: 0.5 # 0.5 hearts per piece
+    effect-value: 1.0 # 0.5 hearts per piece (1 HP)
 
     header-name: "<gradient:#FFFFFF:#F0F8FF>Angel Armor</gradient>"
     header-lore:
@@ -107,28 +171,60 @@ armor-sets:
       armor: 1
       money-cost: 250000
       gems-cost: 25
-      required-item: "LEATHER_HELMET"
+      lore:
+        - "&#808080&m                          "
+        - "  &#FFFFFF&l» &#808080Armor: &#FFFFFF{armor}"
+        - "  &#FFFF00&l» &#808080Effect: &#FFFF00{effect}"
+        - ""
+        - "  {effect_description}"
+        - ""
+        - "  &#00FF00&l✔ &#808080Unbreakable"
+        - "&#808080&m                          "
 
     chestplate:
       name: "<gradient:#FFFFFF:#F0F8FF>Angel Chestplate</gradient>"
       armor: 3
       money-cost: 750000
       gems-cost: 25
-      required-item: "LEATHER_CHESTPLATE"
+      lore:
+        - "&#808080&m                          "
+        - "  &#FFFFFF&l» &#808080Armor: &#FFFFFF{armor}"
+        - "  &#FFFF00&l» &#808080Effect: &#FFFF00{effect}"
+        - ""
+        - "  {effect_description}"
+        - ""
+        - "  &#00FF00&l✔ &#808080Unbreakable"
+        - "&#808080&m                          "
 
     leggings:
       name: "<gradient:#FFFFFF:#F0F8FF>Angel Leggings</gradient>"
       armor: 2
       money-cost: 500000
       gems-cost: 25
-      required-item: "LEATHER_LEGGINGS"
+      lore:
+        - "&#808080&m                          "
+        - "  &#FFFFFF&l» &#808080Armor: &#FFFFFF{armor}"
+        - "  &#FFFF00&l» &#808080Effect: &#FFFF00{effect}"
+        - ""
+        - "  {effect_description}"
+        - ""
+        - "  &#00FF00&l✔ &#808080Unbreakable"
+        - "&#808080&m                          "
 
     boots:
       name: "<gradient:#FFFFFF:#F0F8FF>Angel Boots</gradient>"
       armor: 1
       money-cost: 250000
       gems-cost: 25
-      required-item: "LEATHER_BOOTS"
+      lore:
+        - "&#808080&m                          "
+        - "  &#FFFFFF&l» &#808080Armor: &#FFFFFF{armor}"
+        - "  &#FFFF00&l» &#808080Effect: &#FFFF00{effect}"
+        - ""
+        - "  {effect_description}"
+        - ""
+        - "  &#00FF00&l✔ &#808080Unbreakable"
+        - "&#808080&m                          "
 
   speedstar:
     display-name: "<gradient:#00FFFF:#87CEEB>Speedstar Armor</gradient>"
@@ -149,28 +245,60 @@ armor-sets:
       armor: 1
       money-cost: 250000
       gems-cost: 25
-      required-item: "LEATHER_HELMET"
+      lore:
+        - "&#808080&m                          "
+        - "  &#FFFFFF&l» &#808080Armor: &#FFFFFF{armor}"
+        - "  &#FFFF00&l» &#808080Effect: &#FFFF00{effect}"
+        - ""
+        - "  {effect_description}"
+        - ""
+        - "  &#00FF00&l✔ &#808080Unbreakable"
+        - "&#808080&m                          "
 
     chestplate:
       name: "<gradient:#00FFFF:#87CEEB>Speedstar Chestplate</gradient>"
       armor: 3
       money-cost: 750000
       gems-cost: 25
-      required-item: "LEATHER_CHESTPLATE"
+      lore:
+        - "&#808080&m                          "
+        - "  &#FFFFFF&l» &#808080Armor: &#FFFFFF{armor}"
+        - "  &#FFFF00&l» &#808080Effect: &#FFFF00{effect}"
+        - ""
+        - "  {effect_description}"
+        - ""
+        - "  &#00FF00&l✔ &#808080Unbreakable"
+        - "&#808080&m                          "
 
     leggings:
       name: "<gradient:#00FFFF:#87CEEB>Speedstar Leggings</gradient>"
       armor: 2
       money-cost: 500000
       gems-cost: 25
-      required-item: "LEATHER_LEGGINGS"
+      lore:
+        - "&#808080&m                          "
+        - "  &#FFFFFF&l» &#808080Armor: &#FFFFFF{armor}"
+        - "  &#FFFF00&l» &#808080Effect: &#FFFF00{effect}"
+        - ""
+        - "  {effect_description}"
+        - ""
+        - "  &#00FF00&l✔ &#808080Unbreakable"
+        - "&#808080&m                          "
 
     boots:
       name: "<gradient:#00FFFF:#87CEEB>Speedstar Boots</gradient>"
       armor: 1
       money-cost: 250000
       gems-cost: 25
-      required-item: "LEATHER_BOOTS"
+      lore:
+        - "&#808080&m                          "
+        - "  &#FFFFFF&l» &#808080Armor: &#FFFFFF{armor}"
+        - "  &#FFFF00&l» &#808080Effect: &#FFFF00{effect}"
+        - ""
+        - "  {effect_description}"
+        - ""
+        - "  &#00FF00&l✔ &#808080Unbreakable"
+        - "&#808080&m                          "
 
 # Armor update settings
 armor-effects:

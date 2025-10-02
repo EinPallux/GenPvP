@@ -113,38 +113,27 @@ public class ArmoryGUI extends BaseGUI {
             return createItem(Material.BARRIER, "&#FF0000Error", Arrays.asList("&#FF0000Invalid armor piece"));
         }
 
-        String name = plugin.getConfigManager().getArmorsConfig()
-                .getString("armor-sets." + armorSet.getName() + "." + pieceType + ".name",
-                        armorSet.getDisplayName() + " " + capitalize(pieceType));
-
-        List<String> loreFormat = plugin.getConfigManager().getMessagesConfig()
-                .getStringList("gui.armory.armor-piece.lore");
-
-        List<String> lore = replacePlaceholders(loreFormat,
-                "{armor}", String.valueOf(piece.getArmor()),
-                "{effect}", armorSet.getEffectType(),
-                "{money}", ColorUtil.formatNumber(piece.getMoneyCost()),
-                "{gems}", String.valueOf(piece.getGemsCost()),
-                "{required}", getRequiredItemDisplay(piece.getRequiredItem()));
-
-        // Colorize each line of lore
-        List<String> colorizedLore = new ArrayList<>();
-        for (String line : lore) {
-            colorizedLore.add(ColorUtil.colorize(line));
-        }
-
         // Create the actual armor item as display
         ItemStack displayItem = plugin.getArmorManager().createArmorItem(armorSet.getName(), pieceType);
         if (displayItem != null && displayItem.hasItemMeta()) {
             ItemStack clone = displayItem.clone();
             org.bukkit.inventory.meta.ItemMeta meta = clone.getItemMeta();
-            meta.setDisplayName(ColorUtil.colorize(name));
-            meta.setLore(colorizedLore);
+
+            // Get the base lore and add cost information for the GUI
+            List<String> newLore = new ArrayList<>(meta.getLore() != null ? meta.getLore() : new ArrayList<>());
+            newLore.add("");
+            newLore.add(ColorUtil.colorize("&#FFD700&lCOST"));
+            newLore.add(ColorUtil.colorize("  &#808080&l- &#FFD700$" + ColorUtil.formatNumber(piece.getMoneyCost())));
+            newLore.add(ColorUtil.colorize("  &#DDA0DD&l- " + piece.getGemsCost() + " Gems"));
+            newLore.add("");
+            newLore.add(ColorUtil.colorize("&#00FF00Click to purchase!"));
+
+            meta.setLore(newLore);
             clone.setItemMeta(meta);
             return clone;
         }
 
-        return createItem(Material.BARRIER, name, lore);
+        return createItem(Material.BARRIER, "Error", new ArrayList<>());
     }
 
     /**
@@ -180,28 +169,6 @@ public class ArmoryGUI extends BaseGUI {
             player.sendMessage(plugin.getConfigManager()
                     .getMessage("armory.not-enough-gems", "{gems}", String.valueOf(piece.getGemsCost())));
             return;
-        }
-
-        // Check required item
-        if (!piece.getRequiredItem().isEmpty()) {
-            Material requiredMaterial;
-            try {
-                requiredMaterial = Material.valueOf(piece.getRequiredItem());
-            } catch (IllegalArgumentException e) {
-                playErrorSound();
-                return;
-            }
-
-            if (!player.getInventory().contains(requiredMaterial)) {
-                playErrorSound();
-                player.sendMessage(plugin.getConfigManager()
-                        .getMessage("armory.missing-required-item", "{item}",
-                                requiredMaterial.toString().replace("_", " ").toLowerCase()));
-                return;
-            }
-
-            // Remove required item
-            player.getInventory().removeItem(new ItemStack(requiredMaterial, 1));
         }
 
         // Check inventory space
@@ -270,17 +237,6 @@ public class ArmoryGUI extends BaseGUI {
         }
 
         return null;
-    }
-
-    /**
-     * Gets display text for required item
-     */
-    private String getRequiredItemDisplay(String requiredItem) {
-        if (requiredItem == null || requiredItem.isEmpty()) {
-            return "None";
-        }
-
-        return "1x " + requiredItem.replace("_", " ");
     }
 
     /**
