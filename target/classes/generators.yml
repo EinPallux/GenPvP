@@ -203,7 +203,7 @@ generators:
 # Money Nugget Item Configuration
 money-nugget:
   material: IRON_NUGGET
-  name: "<gradient:#2ECC71:#27AE60>${amount} Money</gradient>"
+  name: "<gradient:#2ECC71:#27AE60>{amount} Money</gradient>"
   lore:
     - "&#808080Right-click to collect!"
     - ""

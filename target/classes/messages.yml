@@ -58,7 +58,7 @@ level:
 # Cube Messages
 cube:
   opening: "{prefix} <gradient:#9B59B6:#E74C3C>Opening {rarity} Cube...</gradient>"
-  won: "{prefix} <gradient:#FFD700:#FFA500>You won: {reward}!</gradient>"
+  won: "{prefix} <gradient:#FFD700:#FFA500>You won: </gradient>{reward}!"
   given: "{prefix} &#00FF00You gave {amount}x {rarity} cube(s) to {player}!"
   received: "{prefix} &#00FF00You received {amount}x {rarity} cube(s)!"
   given-all: "{prefix} &#00FF00You gave {amount}x {rarity} cube(s) to all online players!"
