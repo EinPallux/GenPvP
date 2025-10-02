@@ -1,0 +1,335 @@
+# ═══════════════════════════════════════════════════════════
+#  GenPvP Cubes Configuration
+#  Configure all cube rarities and their rewards
+# ═══════════════════════════════════════════════════════════
+
+# Cube Rarities Configuration
+cubes:
+  common:
+    # Material for the cube item
+    material: WHITE_DYE
+
+    # Display name
+    name: "<gradient:#FFFFFF:#CCCCCC>Common Cube</gradient>"
+
+    # Lore (rewards will be added automatically)
+    lore:
+      - "&#808080Right-click to open!"
+      - ""
+      - "&#FFFFFFPossible Rewards:"
+
+    # Glow effect
+    glow: true
+
+    # Custom model data (optional)
+    custom-model-data: 0
+
+    # Rewards configuration
+    rewards:
+      1:
+        type: MONEY
+        amount: 100
+        chance: 30.0
+        display: "&#00FF00$100"
+
+      2:
+        type: MONEY
+        amount: 250
+        chance: 25.0
+        display: "&#00FF00$250"
+
+      3:
+        type: MONEY
+        amount: 500
+        chance: 20.0
+        display: "&#00FF00$500"
+
+      4:
+        type: GEMS
+        amount: 1
+        chance: 15.0
+        display: "&#DDA0DD1 Gem"
+
+      5:
+        type: COMMAND
+        commands:
+          - "give {player} diamond 1"
+        chance: 7.0
+        display: "&#00FFFF1 Diamond"
+
+      6:
+        type: ITEM
+        material: IRON_INGOT
+        amount: 16
+        chance: 3.0
+        display: "&#FFFFFF16 Iron Ingots"
+
+  uncommon:
+    material: LIME_DYE
+    name: "<gradient:#00FF00:#32CD32>Uncommon Cube</gradient>"
+    lore:
+      - "&#808080Right-click to open!"
+      - ""
+      - "&#00FF00Possible Rewards:"
+    glow: true
+    custom-model-data: 0
+    rewards:
+      1:
+        type: MONEY
+        amount: 500
+        chance: 28.0
+        display: "&#00FF00$500"
+
+      2:
+        type: MONEY
+        amount: 1000
+        chance: 24.0
+        display: "&#00FF00$1,000"
+
+      3:
+        type: MONEY
+        amount: 2500
+        chance: 18.0
+        display: "&#00FF00$2,500"
+
+      4:
+        type: GEMS
+        amount: 3
+        chance: 15.0
+        display: "&#DDA0DD3 Gems"
+
+      5:
+        type: GEMS
+        amount: 5
+        chance: 8.0
+        display: "&#DDA0DD5 Gems"
+
+      6:
+        type: COMMAND
+        commands:
+          - "give {player} diamond 5"
+        chance: 5.0
+        display: "&#00FFFF5 Diamonds"
+
+      7:
+        type: ITEM
+        material: GOLDEN_APPLE
+        amount: 3
+        chance: 2.0
+        display: "&#FFD7003 Golden Apples"
+
+  rare:
+    material: BLUE_DYE
+    name: "<gradient:#0000FF:#1E90FF>Rare Cube</gradient>"
+    lore:
+      - "&#808080Right-click to open!"
+      - ""
+      - "&#0000FFPossible Rewards:"
+    glow: true
+    custom-model-data: 0
+    rewards:
+      1:
+        type: MONEY
+        amount: 2500
+        chance: 25.0
+        display: "&#00FF00$2,500"
+
+      2:
+        type: MONEY
+        amount: 5000
+        chance: 22.0
+        display: "&#00FF00$5,000"
+
+      3:
+        type: MONEY
+        amount: 10000
+        chance: 18.0
+        display: "&#00FF00$10,000"
+
+      4:
+        type: GEMS
+        amount: 10
+        chance: 15.0
+        display: "&#DDA0DD10 Gems"
+
+      5:
+        type: GEMS
+        amount: 15
+        chance: 10.0
+        display: "&#DDA0DD15 Gems"
+
+      6:
+        type: COMMAND
+        commands:
+          - "give {player} diamond 16"
+        chance: 6.0
+        display: "&#00FFFF16 Diamonds"
+
+      7:
+        type: ITEM
+        material: ENCHANTED_GOLDEN_APPLE
+        amount: 1
+        chance: 3.0
+        display: "&#FFD7001 Enchanted Golden Apple"
+
+      8:
+        type: ITEM
+        material: NETHERITE_INGOT
+        amount: 1
+        chance: 1.0
+        display: "&#8B00001 Netherite Ingot"
+
+  epic:
+    material: PURPLE_DYE
+    name: "<gradient:#9B59B6:#8B008B>Epic Cube</gradient>"
+    lore:
+      - "&#808080Right-click to open!"
+      - ""
+      - "&#DDA0DDPossible Rewards:"
+    glow: true
+    custom-model-data: 0
+    rewards:
+      1:
+        type: MONEY
+        amount: 10000
+        chance: 23.0
+        display: "&#00FF00$10,000"
+
+      2:
+        type: MONEY
+        amount: 25000
+        chance: 20.0
+        display: "&#00FF00$25,000"
+
+      3:
+        type: MONEY
+        amount: 50000
+        chance: 17.0
+        display: "&#00FF00$50,000"
+
+      4:
+        type: GEMS
+        amount: 25
+        chance: 15.0
+        display: "&#DDA0DD25 Gems"
+
+      5:
+        type: GEMS
+        amount: 50
+        chance: 12.0
+        display: "&#DDA0DD50 Gems"
+
+      6:
+        type: COMMAND
+        commands:
+          - "give {player} diamond_block 5"
+        chance: 7.0
+        display: "&#00FFFF5 Diamond Blocks"
+
+      7:
+        type: ITEM
+        material: NETHERITE_INGOT
+        amount: 3
+        chance: 4.0
+        display: "&#8B00003 Netherite Ingots"
+
+      8:
+        type: COMMAND
+        commands:
+          - "gpvp gen give {player} 10 1"
+        chance: 2.0
+        display: "&#FFD7001 Tier 10 Generator"
+
+  legendary:
+    material: ORANGE_DYE
+    name: "<gradient:#FF8C00:#FFD700>Legendary Cube</gradient>"
+    lore:
+      - "&#808080Right-click to open!"
+      - ""
+      - "&#FFD700Possible Rewards:"
+    glow: true
+    custom-model-data: 0
+    rewards:
+      1:
+        type: MONEY
+        amount: 50000
+        chance: 20.0
+        display: "&#00FF00$50,000"
+
+      2:
+        type: MONEY
+        amount: 100000
+        chance: 18.0
+        display: "&#00FF00$100,000"
+
+      3:
+        type: MONEY
+        amount: 250000
+        chance: 15.0
+        display: "&#00FF00$250,000"
+
+      4:
+        type: GEMS
+        amount: 100
+        chance: 15.0
+        display: "&#DDA0DD100 Gems"
+
+      5:
+        type: GEMS
+        amount: 200
+        chance: 12.0
+        display: "&#DDA0DD200 Gems"
+
+      6:
+        type: MONEY
+        amount: 500000
+        chance: 8.0
+        display: "&#00FF00$500,000"
+
+      7:
+        type: COMMAND
+        commands:
+          - "gpvp gen give {player} 15 1"
+        chance: 5.0
+        display: "<gradient:#7FFFD4:#48D1CC>1 Tier 15 Generator</gradient>"
+
+      8:
+        type: ITEM
+        material: NETHERITE_BLOCK
+        amount: 1
+        chance: 4.0
+        display: "&#8B00001 Netherite Block"
+
+      9:
+        type: COMMAND
+        commands:
+          - "gpvp gen give {player} 18 1"
+        chance: 2.0
+        display: "<gradient:#7FFF00:#32CD32>1 Tier 18 Generator</gradient>"
+
+      10:
+        type: GEMS
+        amount: 500
+        chance: 1.0
+        display: "<gradient:#E74C3C:#9B59B6>500 Gems</gradient>"
+
+# Roll animation settings
+animation:
+  # GUI title during roll
+  title: "<gradient:#FF1493:#9400D3>Rolling {rarity} Cube...</gradient>"
+
+  # Number of items to cycle through during animation
+  cycle-items: 20
+
+  # Item to show during cycling (before result)
+  cycle-item:
+    material: BARRIER
+    name: "<gradient:#FF0000:#00FF00>???</gradient>"
+    lore:
+      - "&#808080Rolling..."
+
+# Reward display format in lore
+reward-lore-format: "&#808080• {display} &#404040({chance}%)"
+
+# Total chance validation (should sum to 100 or close to it)
+validate-chances: true

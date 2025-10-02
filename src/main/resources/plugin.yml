@@ -1,0 +1,73 @@
+name: GenPvP
+version: '1.0.0'
+main: com.pallux.genpvp.GenPvP
+api-version: '1.19'
+author: Pallux
+description: Generator PvP Plugin with upgradable generators, levels, and cubes
+website: https://pallux.com
+softdepend: [Vault, PlaceholderAPI]
+
+commands:
+  gpvp:
+    description: Main GenPvP command
+    usage: /gpvp <gen|cube|level|shop|gems|stats|reload>
+    aliases: []
+
+  level:
+    description: Opens level up GUI
+    usage: /level
+    aliases: [levelup]
+
+  gens:
+    description: Opens generator shop
+    usage: /gens
+    aliases: [generators]
+
+  gems:
+    description: Shows player gems
+    usage: /gems
+    aliases: []
+
+  stats:
+    description: Shows player statistics
+    usage: /stats
+    aliases: []
+
+permissions:
+  gpvp.admin:
+    description: Access to all admin commands
+    default: op
+    children:
+      gpvp.gen.give: true
+      gpvp.gen.giveall: true
+      gpvp.cube.give: true
+      gpvp.cube.giveall: true
+      gpvp.reload: true
+
+  gpvp.gen.give:
+    description: Give generators to players
+    default: op
+
+  gpvp.gen.giveall:
+    description: Give generators to all online players
+    default: op
+
+  gpvp.cube.give:
+    description: Give cubes to players
+    default: op
+
+  gpvp.cube.giveall:
+    description: Give cubes to all online players
+    default: op
+
+  gpvp.reload:
+    description: Reload plugin configuration
+    default: op
+
+  gpvp.shop.tierunlock:
+    description: Unlock all generator tiers in shop
+    default: false
+
+  gpvp.use:
+    description: Basic plugin usage
+    default: true

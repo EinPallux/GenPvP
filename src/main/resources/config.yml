@@ -1,0 +1,126 @@
+# ═══════════════════════════════════════════════════════════
+#  GenPvP Configuration File
+#  Author: Pallux
+# ═══════════════════════════════════════════════════════════
+
+# General Settings
+settings:
+  # Money loss percentage on death (0.0 to 1.0, where 0.15 = 15%)
+  death-money-loss-percentage: 0.15
+
+  # Generator generation interval in seconds
+  generator-interval: 10
+
+  # Maximum items that can stack on top of a generator
+  max-items-per-generator: 64
+
+  # Auto-pickup generators when broken (if false, drops as item)
+  auto-pickup-on-break: true
+
+  # World whitelist for generator placement (empty = all worlds)
+  allowed-worlds:
+    - world
+
+  # Enable debug mode
+  debug: false
+
+# Level System Configuration
+levels:
+  # Starting level for new players
+  starting-level: 1
+
+  # Base cost for first level up
+  base-cost: 1000
+
+  # Cost multiplier per level (increases exponentially)
+  cost-multiplier: 1.5
+
+  # From which level gems are required for levelup
+  gems-required-from-level: 30
+
+  # Base gem cost when gems start being required
+  base-gem-cost: 5
+
+  # Gem cost multiplier per level
+  gem-cost-multiplier: 1.3
+
+  # Generator slots per level (1 slot per level)
+  slots-per-level: 1
+
+  # From level 20, only every 2nd level gives a new slot
+  reduced-slots-from-level: 20
+
+  # Slots given every X levels after reduced-slots-from-level
+  slots-every-x-levels: 2
+
+  # Maximum level (0 = unlimited)
+  max-level: 100
+
+# Statistics tracked for players
+statistics:
+  track-kills: true
+  track-deaths: true
+  track-blocks-placed: true
+  track-blocks-broken: true
+  track-money-collected: true
+  track-gems-collected: true
+  track-playtime: true
+
+# GUI Settings
+gui:
+  # Fill empty slots with glass panes
+  fill-empty-slots: true
+
+  # Glass pane material for empty slots
+  filler-material: BLACK_STAINED_GLASS_PANE
+
+  # Enable sound effects
+  sounds-enabled: true
+
+  # Sound when opening GUIs
+  open-sound: BLOCK_CHEST_OPEN
+
+  # Sound when purchasing/upgrading
+  success-sound: ENTITY_PLAYER_LEVELUP
+
+  # Sound when action fails
+  error-sound: ENTITY_VILLAGER_NO
+
+# Cube Roll Animation Settings
+cube-animation:
+  # Duration of roll animation in ticks (20 ticks = 1 second)
+  duration-ticks: 60
+
+  # Update interval in ticks (how fast items cycle)
+  update-interval: 2
+
+  # Sound during rolling
+  roll-sound: BLOCK_NOTE_BLOCK_HAT
+
+  # Sound when reward is determined
+  win-sound: ENTITY_PLAYER_LEVELUP
+
+# Data Storage
+storage:
+  # Storage type: YAML, SQLITE, or MYSQL
+  type: YAML
+
+  # Auto-save interval in minutes
+  auto-save-interval: 5
+
+  # MySQL settings (only if type is MYSQL)
+  mysql:
+    host: localhost
+    port: 3306
+    database: genpvp
+    username: root
+    password: password
+    use-ssl: false
+
+# PlaceholderAPI Settings
+placeholders:
+  # Number format for large numbers (true = 1.5K, false = 1500)
+  compact-numbers: true
+
+  # Decimal places for compact numbers
+  decimal-places: 1

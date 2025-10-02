@@ -1,0 +1,260 @@
+# ═══════════════════════════════════════════════════════════
+#  GenPvP Generators Configuration
+#  Configure all generator tiers here
+# ═══════════════════════════════════════════════════════════
+
+# Generator Tiers Configuration
+generators:
+  1:
+    # Block type for this generator tier
+    block: COAL_ORE
+
+    # Money generated per cycle (in seconds from config.yml)
+    money: 1
+
+    # Gems generated (always 1 for all tiers)
+    gems: 1
+
+    # Chance to generate gems (0.001 = 0.001%)
+    gem-chance: 0.001
+
+    # Price to buy in shop (Tier 1 is special at $100)
+    shop-price: 100
+
+    # Upgrade cost (N/A for tier 1, but kept for consistency)
+    upgrade-cost: 0
+
+    # Display name in GUIs
+    display-name: "<gradient:#808080:#404040>Coal Generator</gradient>"
+
+    # Custom model data (optional, 0 = disabled)
+    custom-model-data: 0
+
+  2:
+    block: COAL_BLOCK
+    money: 2
+    gems: 1
+    gem-chance: 0.001
+    shop-price: 600
+    upgrade-cost: 200
+    display-name: "<gradient:#1a1a1a:#4d4d4d>Coal Block Generator</gradient>"
+    custom-model-data: 0
+
+  3:
+    block: COPPER_ORE
+    money: 3
+    gems: 1
+    gem-chance: 0.001
+    shop-price: 1500
+    upgrade-cost: 500
+    display-name: "<gradient:#B87333:#CD7F32>Copper Generator</gradient>"
+    custom-model-data: 0
+
+  4:
+    block: RAW_COPPER_BLOCK
+    money: 4
+    gems: 1
+    gem-chance: 0.001
+    shop-price: 3300
+    upgrade-cost: 1100
+    display-name: "<gradient:#C9936B:#8B4513>Raw Copper Generator</gradient>"
+    custom-model-data: 0
+
+  5:
+    block: IRON_ORE
+    money: 5
+    gems: 1
+    gem-chance: 0.001
+    shop-price: 7500
+    upgrade-cost: 2500
+    display-name: "<gradient:#C0C0C0:#808080>Iron Generator</gradient>"
+    custom-model-data: 0
+
+  6:
+    block: IRON_BLOCK
+    money: 6
+    gems: 1
+    gem-chance: 0.001
+    shop-price: 19500
+    upgrade-cost: 6500
+    display-name: "<gradient:#D3D3D3:#A9A9A9>Iron Block Generator</gradient>"
+    custom-model-data: 0
+
+  7:
+    block: LAPIS_ORE
+    money: 7
+    gems: 1
+    gem-chance: 0.001
+    shop-price: 30000
+    upgrade-cost: 10000
+    display-name: "<gradient:#1E90FF:#0000CD>Lapis Generator</gradient>"
+    custom-model-data: 0
+
+  8:
+    block: LAPIS_BLOCK
+    money: 8
+    gems: 1
+    gem-chance: 0.001
+    shop-price: 37500
+    upgrade-cost: 12500
+    display-name: "<gradient:#4169E1:#000080>Lapis Block Generator</gradient>"
+    custom-model-data: 0
+
+  9:
+    block: GOLD_ORE
+    money: 9
+    gems: 1
+    gem-chance: 0.001
+    shop-price: 52500
+    upgrade-cost: 17500
+    display-name: "<gradient:#FFD700:#FFA500>Gold Generator</gradient>"
+    custom-model-data: 0
+
+  10:
+    block: GOLD_BLOCK
+    money: 10
+    gems: 1
+    gem-chance: 0.1
+    shop-price: 75000
+    upgrade-cost: 25000
+    display-name: "<gradient:#FFD700:#FF8C00>Gold Block Generator</gradient>"
+    custom-model-data: 0
+
+  11:
+    block: DIAMOND_ORE
+    money: 12
+    gems: 1
+    gem-chance: 0.1
+    shop-price: 105000
+    upgrade-cost: 35000
+    display-name: "<gradient:#00CED1:#1E90FF>Diamond Generator</gradient>"
+    custom-model-data: 0
+
+  12:
+    block: DIAMOND_BLOCK
+    money: 14
+    gems: 1
+    gem-chance: 0.5
+    shop-price: 165000
+    upgrade-cost: 55000
+    display-name: "<gradient:#00BFFF:#4169E1>Diamond Block Generator</gradient>"
+    custom-model-data: 0
+
+  13:
+    block: EMERALD_ORE
+    money: 16
+    gems: 1
+    gem-chance: 0.5
+    shop-price: 285000
+    upgrade-cost: 95000
+    display-name: "<gradient:#50C878:#2E8B57>Emerald Generator</gradient>"
+    custom-model-data: 0
+
+  14:
+    block: EMERALD_BLOCK
+    money: 18
+    gems: 1
+    gem-chance: 1.0
+    shop-price: 450000
+    upgrade-cost: 150000
+    display-name: "<gradient:#00FF7F:#3CB371>Emerald Block Generator</gradient>"
+    custom-model-data: 0
+
+  15:
+    block: SEA_LANTERN
+    money: 20
+    gems: 1
+    gem-chance: 2.0
+    shop-price: 1500000
+    upgrade-cost: 500000
+    display-name: "<gradient:#7FFFD4:#48D1CC>Sea Lantern Generator</gradient>"
+    custom-model-data: 0
+
+  16:
+    block: BLACKSTONE
+    money: 22
+    gems: 1
+    gem-chance: 2.0
+    shop-price: 3750000
+    upgrade-cost: 1250000
+    display-name: "<gradient:#2F4F4F:#000000>Blackstone Generator</gradient>"
+    custom-model-data: 0
+
+  17:
+    block: END_STONE
+    money: 24
+    gems: 1
+    gem-chance: 2.0
+    shop-price: 7500000
+    upgrade-cost: 2500000
+    display-name: "<gradient:#FFFACD:#F0E68C>End Stone Generator</gradient>"
+    custom-model-data: 0
+
+  18:
+    block: SLIME_BLOCK
+    money: 26
+    gems: 1
+    gem-chance: 3.0
+    shop-price: 15000000
+    upgrade-cost: 5000000
+    display-name: "<gradient:#7FFF00:#32CD32>Slime Generator</gradient>"
+    custom-model-data: 0
+
+# Money Nugget Item Configuration
+money-nugget:
+  material: IRON_NUGGET
+  name: "<gradient:#2ECC71:#27AE60>${amount} Money</gradient>"
+  lore:
+    - "&#808080Right-click to collect!"
+    - ""
+    - "&#00FF00Collects all money nuggets"
+    - "&#00FF00from your inventory!"
+  glow: true
+  custom-model-data: 0
+
+# Gem Nugget Item Configuration
+gem-nugget:
+  material: GOLD_NUGGET
+  name: "<gradient:#E74C3C:#9B59B6>{amount} Gem(s)</gradient>"
+  lore:
+    - "&#808080Right-click to collect!"
+    - ""
+    - "&#DDA0DDCollects all gem nuggets"
+    - "&#DDA0DDfrom your inventory!"
+  glow: true
+  custom-model-data: 0
+
+# Particle effects when generator produces items (optional)
+particles:
+  enabled: true
+
+  # Money generation particles
+  money:
+    type: VILLAGER_HAPPY
+    count: 5
+    offset-x: 0.3
+    offset-y: 0.3
+    offset-z: 0.3
+
+  # Gem generation particles (rare)
+  gems:
+    type: DRAGON_BREATH
+    count: 10
+    offset-x: 0.5
+    offset-y: 0.5
+    offset-z: 0.5
+
+# Hologram settings (if you want floating text above generators)
+holograms:
+  enabled: false
+
+  # Lines to display above generator
+  lines:
+    - "<gradient:#FFD700:#FFA500>Tier {tier}</gradient>"
+    - "&#808080$&#00FF00{money} &#404040/ 10s"
+
+  # Height above generator block
+  height: 1.5
+
+  # Update interval in ticks
+  update-interval: 20

@@ -1,0 +1,233 @@
+# ═══════════════════════════════════════════════════════════
+#  GenPvP Messages Configuration
+#  Supports HEX colors: &#RRGGBB
+#  Supports gradients: <gradient:#FF0000:#00FF00>text</gradient>
+# ═══════════════════════════════════════════════════════════
+
+prefix: "<gradient:#FF6B6B:#4ECDC4>GenPvP</gradient> &#808080»"
+
+# General Messages
+no-permission: "{prefix} &#FF0000You don't have permission to do that!"
+player-not-found: "{prefix} &#FF0000Player {player} not found or is offline!"
+invalid-amount: "{prefix} &#FF0000Invalid amount! Please use a positive number."
+invalid-tier: "{prefix} &#FF0000Invalid generator tier! Valid tiers: 1-18"
+invalid-rarity: "{prefix} &#FF0000Invalid cube rarity! Valid: common, uncommon, rare, epic, legendary"
+console-only: "{prefix} &#FF0000This command can only be executed from console!"
+player-only: "{prefix} &#FF0000This command can only be executed by players!"
+config-reloaded: "{prefix} &#00FF00All configurations have been reloaded!"
+
+# Generator Messages
+generator:
+  placed: "{prefix} &#00FF00Generator placed! &#808080({current}/{max})"
+  removed: "{prefix} &#FFFF00Generator removed! &#808080({current}/{max})"
+  max-reached: "{prefix} &#FF0000You've reached your maximum generator limit! &#808080({max})"
+  max-reached-hint: "{prefix} &#FFD700Use /level to purchase more generator slots!"
+  not-generator: "{prefix} &#FF0000This is not a generator block!"
+  upgraded: "{prefix} <gradient:#FFD700:#FFA500>Generator upgraded to Tier {tier}!</gradient>"
+  max-tier: "{prefix} <gradient:#FF1493:#9400D3>This generator is already at maximum tier!</gradient>"
+  not-enough-money: "{prefix} &#FF0000You need ${amount} to upgrade this generator!"
+  world-disabled: "{prefix} &#FF0000Generators cannot be placed in this world!"
+
+  given: "{prefix} &#00FF00You gave {amount}x Tier {tier} generator(s) to {player}!"
+  received: "{prefix} &#00FF00You received {amount}x Tier {tier} generator(s)!"
+  given-all: "{prefix} &#00FF00You gave {amount}x Tier {tier} generator(s) to all online players!"
+
+# Money & Gems Nugget Messages
+nugget:
+  money-collected: "{prefix} <gradient:#2ECC71:#27AE60>+${amount}</gradient> &#808080collected!"
+  gems-collected: "{prefix} <gradient:#E74C3C:#9B59B6>+{amount} Gem(s)</gradient> &#808080collected!"
+  all-collected: "{prefix} &#00FF00Collected all nuggets from inventory!"
+  none-found: "{prefix} &#FFFF00No collectable nuggets found in your inventory!"
+
+# Shop Messages
+shop:
+  purchased: "{prefix} &#00FF00You purchased {amount}x Tier {tier} generator(s) for ${cost}!"
+  not-enough-money: "{prefix} &#FF0000You need ${cost} to purchase this!"
+  tier-locked: "{prefix} &#FFD700This tier is locked! You need premium to unlock higher tiers."
+  inventory-full: "{prefix} &#FF0000Your inventory is full!"
+
+# Level Messages
+level:
+  leveled-up: "{prefix} <gradient:#FFD700:#FF69B4>Level Up! You are now level {level}!</gradient>"
+  new-slots: "{prefix} &#00FF00You now have {slots} generator slot(s)!"
+  not-enough-money: "{prefix} &#FF0000You need ${cost} to level up!"
+  not-enough-gems: "{prefix} &#FF0000You need {gems} gem(s) to level up!"
+  max-level: "{prefix} <gradient:#FF1493:#9400D3>You've reached the maximum level!</gradient>"
+  current-level: "{prefix} &#00FFFF Your current level: &#FFFFFFe{level}"
+
+# Cube Messages
+cube:
+  opening: "{prefix} <gradient:#9B59B6:#E74C3C>Opening {rarity} Cube...</gradient>"
+  won: "{prefix} <gradient:#FFD700:#FFA500>You won: {reward}!</gradient>"
+  given: "{prefix} &#00FF00You gave {amount}x {rarity} cube(s) to {player}!"
+  received: "{prefix} &#00FF00You received {amount}x {rarity} cube(s)!"
+  given-all: "{prefix} &#00FF00You gave {amount}x {rarity} cube(s) to all online players!"
+
+# Death Messages
+death:
+  money-lost: "{prefix} &#FF0000You lost ${amount} ({percentage}% of your money)!"
+  money-stolen: "{prefix} &#00FF00You stole ${amount} from {player}!"
+
+# Stats Messages
+stats:
+  gems-balance: "{prefix} <gradient:#E74C3C:#9B59B6>Gems:</gradient> &#FFFFFF{gems}"
+
+# GUI Titles (Supports hex colors and gradients)
+gui-titles:
+  generator-upgrade: "<gradient:#FF6B6B:#4ECDC4>Generator Upgrade</gradient>"
+  shop: "<gradient:#FFD700:#FFA500>Generator Shop</gradient>"
+  level-up: "<gradient:#4ECDC4:#556270>Level Up</gradient>"
+  stats: "<gradient:#9B59B6:#E74C3C>{player}'s Stats</gradient>"
+  cube-roll: "<gradient:#FF1493:#9400D3>{rarity} Cube</gradient>"
+
+# GUI Item Names and Lore
+gui:
+  # Generator Upgrade GUI
+  upgrade:
+    current-tier:
+      name: "<gradient:#FFD700:#FFA500>Current: Tier {tier}</gradient>"
+      lore:
+        - "&#808080Money Generation: &#00FF00${money}"
+        - "&#808080Gem Generation: &#DDA0DD{gems} Gem(s)"
+        - "&#808080Gem Chance: &#00FFFF{chance}%"
+        - ""
+        - "&#FFFF00Shift + Right-Click to upgrade!"
+
+    next-tier:
+      name: "<gradient:#2ECC71:#27AE60>Upgrade to Tier {tier}</gradient>"
+      lore:
+        - "&#808080Money Generation: &#00FF00${money}"
+        - "&#808080Gem Generation: &#DDA0DD{gems} Gem(s)"
+        - "&#808080Gem Chance: &#00FFFF{chance}%"
+        - ""
+        - "&#FFFF00Cost: &#FFD700${cost}"
+        - ""
+        - "&#00FF00Click to upgrade!"
+
+    max-tier:
+      name: "<gradient:#FF1493:#9400D3>Maximum Tier Reached!</gradient>"
+      lore:
+        - "&#808080This generator is fully upgraded!"
+        - ""
+        - "&#FFD700You're at the peak!"
+
+  # Shop GUI
+  shop:
+    generator:
+      name: "<gradient:#4ECDC4:#556270>Tier {tier} Generator</gradient>"
+      lore:
+        - "&#808080Block: &#FFFFFF{block}"
+        - "&#808080Money: &#00FF00${money} &#404040/ 10s"
+        - "&#808080Gems: &#DDA0DD{gems} &#404040({chance}%)"
+        - ""
+        - "&#FFFF00Price: &#FFD700${price}"
+        - ""
+        - "&#00FF00Left-Click: Buy 1"
+        - "&#00FF00Right-Click: Buy 8"
+        - "&#00FF00Shift-Click: Buy 64"
+
+    locked:
+      name: "&#FF0000Tier {tier} - LOCKED"
+      lore:
+        - "&#808080This tier requires premium!"
+        - ""
+        - "&#FFD700Purchase premium to unlock"
+        - "&#FFD700all generator tiers!"
+
+  # Level Up GUI
+  levelup:
+    current:
+      name: "<gradient:#FFD700:#FF69B4>Current Level: {level}</gradient>"
+      lore:
+        - "&#808080Generator Slots: &#00FF00{slots}"
+        - ""
+        - "&#00FFFFClick 'Next Level' to upgrade!"
+
+    next:
+      name: "<gradient:#2ECC71:#27AE60>Next Level: {level}</gradient>"
+      lore:
+        - "&#808080Generator Slots: &#00FF00{slots}"
+        - ""
+        - "&#FFFF00Cost: &#FFD700${money}"
+        - "&#FFFF00Gems: &#DDA0DD{gems}"
+        - ""
+        - "&#00FF00Click to level up!"
+
+    max:
+      name: "<gradient:#FF1493:#9400D3>Maximum Level!</gradient>"
+      lore:
+        - "&#808080You've reached the highest level!"
+        - ""
+        - "&#FFD700Congratulations!"
+
+  # Stats GUI
+  stats:
+    level:
+      name: "<gradient:#FFD700:#FFA500>Level</gradient>"
+      lore:
+        - "&#FFFFFF{level}"
+
+    kills:
+      name: "&#FF0000Player Kills"
+      lore:
+        - "&#FFFFFF{kills}"
+
+    deaths:
+      name: "&#8B0000Deaths"
+      lore:
+        - "&#FFFFFF{deaths}"
+
+    kdr:
+      name: "&#FFD700K/D Ratio"
+      lore:
+        - "&#FFFFFF{kdr}"
+
+    blocks-placed:
+      name: "&#00FF00Blocks Placed"
+      lore:
+        - "&#FFFFFF{blocks}"
+
+    blocks-broken:
+      name: "&#FFFF00Blocks Broken"
+      lore:
+        - "&#FFFFFF{blocks}"
+
+    money-collected:
+      name: "<gradient:#2ECC71:#27AE60>Money Collected</gradient>"
+      lore:
+        - "&#FFFFFF${money}"
+
+    gems-collected:
+      name: "<gradient:#E74C3C:#9B59B6>Gems Collected</gradient>"
+      lore:
+        - "&#FFFFFF{gems}"
+
+    playtime:
+      name: "&#00FFFFPlaytime"
+      lore:
+        - "&#FFFFFF{playtime}"
+
+    generators:
+      name: "<gradient:#4ECDC4:#556270>Generators</gradient>"
+      lore:
+        - "&#808080Placed: &#FFFFFF{placed}/{max}"
+
+  # Common items
+  close:
+    name: "&#FF0000Close"
+    lore:
+      - "&#808080Click to close this menu"
+
+  back:
+    name: "&#FFFF00Back"
+    lore:
+      - "&#808080Return to previous menu"
+
+  info:
+    name: "&#00FFFFInformation"
+
+# Placeholders for item lore descriptions
+placeholders:
+  money-format: "${amount}"
+  gems-format: "{amount} Gem(s)"
+  percentage-format: "{value}%"
