@@ -36,9 +36,7 @@ public class ArmoryGUI extends BaseGUI {
     @Override
     protected void setContents() {
         // Column positions for each armor set (with spacing)
-        // Blaze: 10-37, Armadillo: 12-39, Angel: 14-41, Speedstar: 16-43
-
-        int[] columns = {10, 12, 14, 16};
+        int[] columns = {1, 3, 5, 7};
 
         for (int i = 0; i < ARMOR_SETS.size(); i++) {
             String setName = ARMOR_SETS.get(i);
@@ -141,7 +139,7 @@ public class ArmoryGUI extends BaseGUI {
             ItemStack clone = displayItem.clone();
             org.bukkit.inventory.meta.ItemMeta meta = clone.getItemMeta();
             meta.setDisplayName(ColorUtil.colorize(name));
-            meta.setLore(lore);
+            meta.setLore(colorizedLore);
             clone.setItemMeta(meta);
             return clone;
         }
@@ -239,7 +237,7 @@ public class ArmoryGUI extends BaseGUI {
      * Gets set name from slot
      */
     private String getSetNameFromSlot(int slot) {
-        int[] columns = {10, 12, 14, 16};
+        int[] columns = {1, 3, 5, 7};
 
         for (int i = 0; i < columns.length; i++) {
             int baseSlot = columns[i];
@@ -256,7 +254,7 @@ public class ArmoryGUI extends BaseGUI {
      * Gets piece type from slot
      */
     private String getPieceTypeFromSlot(int slot) {
-        int[] columns = {10, 12, 14, 16};
+        int[] columns = {1, 3, 5, 7};
 
         for (int baseSlot : columns) {
             if (slot == baseSlot) {

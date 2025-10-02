@@ -16,7 +16,7 @@ armor-sets:
       - ""
       - "&#FF4500Full Set Bonus:"
       - "&#FF8C00• Burns enemies on hit"
-      - "&#FF8C001 second per piece worn"
+      - "&#FF8C00• 1 second per piece worn"
 
     helmet:
       name: "<gradient:#FF4500:#FF8C00>Blaze Helmet</gradient>"
@@ -98,7 +98,7 @@ armor-sets:
     header-lore:
       - "&#808080Grants extra health!"
       - ""
-      - "&#FFFFFFull Set Bonus:"
+      - "&#FFFFFFFull Set Bonus:"
       - "&#F0F8FF• +0.5 hearts per piece"
       - "&#F0F8FF• +2 hearts total for full set"
 
@@ -140,7 +140,7 @@ armor-sets:
     header-lore:
       - "&#808080Increased movement speed!"
       - ""
-      - "&#00FFFFull Set Bonus:"
+      - "&#00FFFFFull Set Bonus:"
       - "&#87CEEB• Speed I-IV per piece"
       - "&#87CEEB• Maximum mobility"
 
