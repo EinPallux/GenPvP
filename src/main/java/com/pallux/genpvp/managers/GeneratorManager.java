@@ -149,7 +149,7 @@ public class GeneratorManager {
         ItemMeta meta = item.getItemMeta();
 
         if (meta != null) {
-            String name = section.getString("name", "$%amount% Money");
+            String name = section.getString("name", "<gradient:#2ECC71:#27AE60>{amount} Money</gradient>");
             name = name.replace("{amount}", String.valueOf(amount));
             meta.setDisplayName(ColorUtil.colorize(name));
 
@@ -187,7 +187,7 @@ public class GeneratorManager {
         ItemMeta meta = item.getItemMeta();
 
         if (meta != null) {
-            String name = section.getString("name", "%amount% Gem(s)");
+            String name = section.getString("name", "<gradient:#E74C3C:#9B59B6>{amount} Gem(s)</gradient>");
             name = name.replace("{amount}", String.valueOf(amount));
             meta.setDisplayName(ColorUtil.colorize(name));
 

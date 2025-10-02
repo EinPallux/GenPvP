@@ -2,6 +2,7 @@ package com.pallux.genpvp.listeners;
 
 import com.pallux.genpvp.GenPvP;
 import com.pallux.genpvp.guis.*;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -46,12 +47,20 @@ public class GUIListener implements Listener {
             return;
         }
 
+        Player player = (Player) event.getPlayer();
         InventoryHolder holder = event.getInventory().getHolder();
 
-        if (holder instanceof BaseGUI) {
-            Player player = (Player) event.getPlayer();
-            BaseGUI gui = (BaseGUI) holder;
+        if (holder instanceof CubeRollGUI) {
+            CubeRollGUI gui = (CubeRollGUI) holder;
+            if (gui.isRolling()) {
+                // Re-open GUI on the next tick to prevent closing
+                Bukkit.getScheduler().runTask(plugin, () -> player.openInventory(gui.getInventory()));
+                return; // Don't call handleClose and stop the animation
+            }
+        }
 
+        if (holder instanceof BaseGUI) {
+            BaseGUI gui = (BaseGUI) holder;
             gui.handleClose(player);
         }
     }

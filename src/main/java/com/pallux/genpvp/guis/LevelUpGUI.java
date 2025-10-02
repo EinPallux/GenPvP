@@ -9,6 +9,7 @@ import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LevelUpGUI extends BaseGUI {
 
@@ -18,7 +19,7 @@ public class LevelUpGUI extends BaseGUI {
 
     @Override
     protected String getTitle() {
-        return plugin.getConfigManager().getColorizedString("messages.yml", "gui-titles.level-up");
+        return ColorUtil.colorize(plugin.getConfigManager().getMessagesConfig().getString("gui-titles.level-up"));
     }
 
     @Override
@@ -110,17 +111,17 @@ public class LevelUpGUI extends BaseGUI {
     }
 
     private ItemStack createCurrentLevelItem(PlayerData data) {
-        String nameFormat = plugin.getConfigManager().getColorizedString("messages.yml", "gui.levelup.current.name");
-        String name = ColorUtil.replacePlaceholders(nameFormat, "{level}", String.valueOf(data.getLevel()));
+        String nameFormat = plugin.getConfigManager().getMessagesConfig().getString("gui.levelup.current.name");
+        String name = ColorUtil.colorize(replacePlaceholders(nameFormat, "{level}", String.valueOf(data.getLevel())));
 
         int currentSlots = plugin.getLevelManager().getCurrentSlots(data);
 
-        List<String> loreFormat = plugin.getConfigManager().getColorizedStringList("messages.yml", "gui.levelup.current.lore");
+        List<String> loreFormat = plugin.getConfigManager().getMessagesConfig().getStringList("gui.levelup.current.lore");
         List<String> lore = replacePlaceholders(loreFormat,
                 "{level}", String.valueOf(data.getLevel()),
                 "{slots}", String.valueOf(currentSlots));
 
-        return createItem(Material.EXPERIENCE_BOTTLE, name, lore, true);
+        return createItem(Material.EXPERIENCE_BOTTLE, name, lore.stream().map(ColorUtil::colorize).collect(Collectors.toList()), true);
     }
 
     private ItemStack createNextLevelItem(PlayerData data) {
@@ -129,23 +130,23 @@ public class LevelUpGUI extends BaseGUI {
         double moneyCost = plugin.getLevelManager().calculateLevelCost(nextLevel);
         int gemCost = plugin.getLevelManager().calculateGemCost(nextLevel);
 
-        String nameFormat = plugin.getConfigManager().getColorizedString("messages.yml", "gui.levelup.next.name");
-        String name = ColorUtil.replacePlaceholders(nameFormat, "{level}", String.valueOf(nextLevel));
+        String nameFormat = plugin.getConfigManager().getMessagesConfig().getString("gui.levelup.next.name");
+        String name = ColorUtil.colorize(replacePlaceholders(nameFormat, "{level}", String.valueOf(nextLevel)));
 
-        List<String> loreFormat = plugin.getConfigManager().getColorizedStringList("messages.yml", "gui.levelup.next.lore");
+        List<String> loreFormat = plugin.getConfigManager().getMessagesConfig().getStringList("gui.levelup.next.lore");
         List<String> lore = replacePlaceholders(loreFormat,
                 "{level}", String.valueOf(nextLevel),
                 "{slots}", String.valueOf(nextSlots),
                 "{money}", ColorUtil.formatNumber(moneyCost),
                 "{gems}", gemCost > 0 ? String.valueOf(gemCost) : "0");
 
-        return createItem(Material.NETHER_STAR, name, lore, true);
+        return createItem(Material.NETHER_STAR, name, lore.stream().map(ColorUtil::colorize).collect(Collectors.toList()), true);
     }
 
     private ItemStack createMaxLevelItem() {
-        String name = plugin.getConfigManager().getColorizedString("messages.yml", "gui.levelup.max.name");
-        List<String> lore = plugin.getConfigManager().getColorizedStringList("messages.yml", "gui.levelup.max.lore");
+        String name = ColorUtil.colorize(plugin.getConfigManager().getMessagesConfig().getString("gui.levelup.max.name"));
+        List<String> lore = plugin.getConfigManager().getMessagesConfig().getStringList("gui.levelup.max.lore");
 
-        return createItem(Material.BEACON, name, lore, true);
+        return createItem(Material.BEACON, name, lore.stream().map(ColorUtil::colorize).collect(Collectors.toList()), true);
     }
 }

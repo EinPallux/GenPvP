@@ -15,6 +15,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 public class CubeRollGUI extends BaseGUI {
 
@@ -31,8 +32,9 @@ public class CubeRollGUI extends BaseGUI {
 
     @Override
     protected String getTitle() {
-        String titleFormat = plugin.getConfigManager().getColorizedString("cubes.yml", "animation.title");
-        return ColorUtil.replacePlaceholders(titleFormat, "{rarity}", capitalizeFirst(rarity));
+        String titleFormat = plugin.getConfigManager().getMessagesConfig().getString("gui-titles.cube-roll");
+        String replacedTitle = ColorUtil.replacePlaceholders(titleFormat, "{rarity}", capitalizeFirst(rarity));
+        return ColorUtil.colorize(replacedTitle);
     }
 
     @Override
@@ -59,11 +61,17 @@ public class CubeRollGUI extends BaseGUI {
         isRolling = false;
     }
 
-    private void fillWithCycleItems() {
-        String cycleName = plugin.getConfigManager().getColorizedString("cubes.yml", "animation.cycle-item.name");
-        List<String> cycleLore = plugin.getConfigManager().getColorizedStringList("cubes.yml", "animation.cycle-item.lore");
+    public boolean isRolling() {
+        return isRolling;
+    }
 
-        ItemStack cycleItem = createItem(Material.BARRIER, cycleName, cycleLore);
+    private void fillWithCycleItems() {
+        String cycleName = plugin.getConfigManager().getCubesConfig().getString("animation.cycle-item.name");
+        List<String> cycleLore = plugin.getConfigManager().getCubesConfig().getStringList("animation.cycle-item.lore");
+
+        ItemStack cycleItem = createItem(Material.BARRIER, ColorUtil.colorize(cycleName),
+                cycleLore.stream().map(ColorUtil::colorize).collect(Collectors.toList()));
+
 
         for (int i = 0; i < inventory.getSize(); i++) {
             inventory.setItem(i, cycleItem);

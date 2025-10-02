@@ -182,26 +182,6 @@ public class ConfigManager {
         return getMessage(path, new Object[0]);
     }
 
-    /**
-     * Gets a string from any config with color support (AUTOMATICALLY COLORIZED)
-     */
-    public String getColorizedString(String config, String path) {
-        FileConfiguration cfg = getConfig(config);
-        String value = cfg.getString(path, "");
-        return ColorUtil.colorize(value);
-    }
-
-    /**
-     * Gets a string list from any config with color support (AUTOMATICALLY COLORIZED)
-     */
-    public List<String> getColorizedStringList(String config, String path) {
-        FileConfiguration cfg = getConfig(config);
-        List<String> list = cfg.getStringList(path);
-        return list.stream()
-                .map(ColorUtil::colorize)
-                .collect(Collectors.toList());
-    }
-
     // Settings getter methods
     public double getDeathMoneyLossPercentage() {
         return getMainConfig().getDouble("settings.death-money-loss-percentage", 0.15);
