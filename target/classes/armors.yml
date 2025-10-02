@@ -1,0 +1,181 @@
+# ═══════════════════════════════════════════════════════════
+#  GenPvP Armors Configuration
+#  Configure all custom armor sets and their effects
+# ═══════════════════════════════════════════════════════════
+
+armor-sets:
+  blaze:
+    display-name: "<gradient:#FF4500:#FF8C00>Blaze Armor</gradient>"
+    color: "#FF8C00" # Orange
+    effect-type: "BLAZE"
+    effect-value: 1.0
+
+    header-name: "<gradient:#FF4500:#FF8C00>Blaze Armor</gradient>"
+    header-lore:
+      - "&#808080Sets attackers on fire!"
+      - ""
+      - "&#FF4500Full Set Bonus:"
+      - "&#FF8C00• Burns enemies on hit"
+      - "&#FF8C001 second per piece worn"
+
+    helmet:
+      name: "<gradient:#FF4500:#FF8C00>Blaze Helmet</gradient>"
+      armor: 1
+      money-cost: 250000
+      gems-cost: 25
+      required-item: "LEATHER_HELMET"
+
+    chestplate:
+      name: "<gradient:#FF4500:#FF8C00>Blaze Chestplate</gradient>"
+      armor: 3
+      money-cost: 750000
+      gems-cost: 25
+      required-item: "LEATHER_CHESTPLATE"
+
+    leggings:
+      name: "<gradient:#FF4500:#FF8C00>Blaze Leggings</gradient>"
+      armor: 2
+      money-cost: 500000
+      gems-cost: 25
+      required-item: "LEATHER_LEGGINGS"
+
+    boots:
+      name: "<gradient:#FF4500:#FF8C00>Blaze Boots</gradient>"
+      armor: 1
+      money-cost: 250000
+      gems-cost: 25
+      required-item: "LEATHER_BOOTS"
+
+  armadillo:
+    display-name: "<gradient:#2F4F4F:#000000>Armadillo Armor</gradient>"
+    color: "#000000" # Black
+    effect-type: "HARDENED"
+    effect-value: 1.0
+
+    header-name: "<gradient:#2F4F4F:#000000>Armadillo Armor</gradient>"
+    header-lore:
+      - "&#808080Enhanced armor protection!"
+      - ""
+      - "&#2F4F4FFull Set Bonus:"
+      - "&#000000• Maximum armor points"
+      - "&#000000• Superior defense"
+
+    helmet:
+      name: "<gradient:#2F4F4F:#000000>Armadillo Helmet</gradient>"
+      armor: 3
+      money-cost: 250000
+      gems-cost: 25
+      required-item: "LEATHER_HELMET"
+
+    chestplate:
+      name: "<gradient:#2F4F4F:#000000>Armadillo Chestplate</gradient>"
+      armor: 5
+      money-cost: 750000
+      gems-cost: 25
+      required-item: "LEATHER_CHESTPLATE"
+
+    leggings:
+      name: "<gradient:#2F4F4F:#000000>Armadillo Leggings</gradient>"
+      armor: 4
+      money-cost: 500000
+      gems-cost: 25
+      required-item: "LEATHER_LEGGINGS"
+
+    boots:
+      name: "<gradient:#2F4F4F:#000000>Armadillo Boots</gradient>"
+      armor: 3
+      money-cost: 250000
+      gems-cost: 25
+      required-item: "LEATHER_BOOTS"
+
+  angel:
+    display-name: "<gradient:#FFFFFF:#F0F8FF>Angel Armor</gradient>"
+    color: "#FFFFFF" # White
+    effect-type: "EXTRA_HEARTS"
+    effect-value: 0.5 # 0.5 hearts per piece
+
+    header-name: "<gradient:#FFFFFF:#F0F8FF>Angel Armor</gradient>"
+    header-lore:
+      - "&#808080Grants extra health!"
+      - ""
+      - "&#FFFFFFull Set Bonus:"
+      - "&#F0F8FF• +0.5 hearts per piece"
+      - "&#F0F8FF• +2 hearts total for full set"
+
+    helmet:
+      name: "<gradient:#FFFFFF:#F0F8FF>Angel Helmet</gradient>"
+      armor: 1
+      money-cost: 250000
+      gems-cost: 25
+      required-item: "LEATHER_HELMET"
+
+    chestplate:
+      name: "<gradient:#FFFFFF:#F0F8FF>Angel Chestplate</gradient>"
+      armor: 3
+      money-cost: 750000
+      gems-cost: 25
+      required-item: "LEATHER_CHESTPLATE"
+
+    leggings:
+      name: "<gradient:#FFFFFF:#F0F8FF>Angel Leggings</gradient>"
+      armor: 2
+      money-cost: 500000
+      gems-cost: 25
+      required-item: "LEATHER_LEGGINGS"
+
+    boots:
+      name: "<gradient:#FFFFFF:#F0F8FF>Angel Boots</gradient>"
+      armor: 1
+      money-cost: 250000
+      gems-cost: 25
+      required-item: "LEATHER_BOOTS"
+
+  speedstar:
+    display-name: "<gradient:#00FFFF:#87CEEB>Speedstar Armor</gradient>"
+    color: "#87CEEB" # Light Blue
+    effect-type: "SPEED"
+    effect-value: 1.0
+
+    header-name: "<gradient:#00FFFF:#87CEEB>Speedstar Armor</gradient>"
+    header-lore:
+      - "&#808080Increased movement speed!"
+      - ""
+      - "&#00FFFFull Set Bonus:"
+      - "&#87CEEB• Speed I-IV per piece"
+      - "&#87CEEB• Maximum mobility"
+
+    helmet:
+      name: "<gradient:#00FFFF:#87CEEB>Speedstar Helmet</gradient>"
+      armor: 1
+      money-cost: 250000
+      gems-cost: 25
+      required-item: "LEATHER_HELMET"
+
+    chestplate:
+      name: "<gradient:#00FFFF:#87CEEB>Speedstar Chestplate</gradient>"
+      armor: 3
+      money-cost: 750000
+      gems-cost: 25
+      required-item: "LEATHER_CHESTPLATE"
+
+    leggings:
+      name: "<gradient:#00FFFF:#87CEEB>Speedstar Leggings</gradient>"
+      armor: 2
+      money-cost: 500000
+      gems-cost: 25
+      required-item: "LEATHER_LEGGINGS"
+
+    boots:
+      name: "<gradient:#00FFFF:#87CEEB>Speedstar Boots</gradient>"
+      armor: 1
+      money-cost: 250000
+      gems-cost: 25
+      required-item: "LEATHER_BOOTS"
+
+# Armor update settings
+armor-effects:
+  # How often to check and update armor effects (in ticks)
+  update-interval: 20
+
+  # Enable debug messages
+  debug: false

@@ -10,7 +10,7 @@ softdepend: [Vault, PlaceholderAPI]
 commands:
   gpvp:
     description: Main GenPvP command
-    usage: /gpvp <gen|cube|level|shop|gems|stats|reload>
+    usage: /gpvp <gen|cube|armor|level|shop|armory|gems|stats|reload>
     aliases: []
 
   level:
@@ -33,6 +33,16 @@ commands:
     usage: /stats
     aliases: []
 
+  armor:
+    description: Opens armory GUI
+    usage: /armor
+    aliases: [armory]
+
+  armory:
+    description: Opens armory GUI
+    usage: /armory
+    aliases: []
+
 permissions:
   gpvp.admin:
     description: Access to all admin commands
@@ -42,6 +52,7 @@ permissions:
       gpvp.gen.giveall: true
       gpvp.cube.give: true
       gpvp.cube.giveall: true
+      gpvp.armor.give: true  # ADD THIS LINE
       gpvp.reload: true
 
   gpvp.gen.give:
@@ -58,6 +69,10 @@ permissions:
 
   gpvp.cube.giveall:
     description: Give cubes to all online players
+    default: op
+
+  gpvp.armor.give:
+    description: Give armor to players
     default: op
 
   gpvp.reload:

@@ -8,8 +8,10 @@ import com.pallux.genpvp.placeholders.GenPvPPlaceholders;
 import com.pallux.genpvp.utils.ColorUtil;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitTask;
 
 import java.util.logging.Level;
 
@@ -24,12 +26,19 @@ public class GenPvP extends JavaPlugin {
     private LevelManager levelManager;
     private CubeManager cubeManager;
     private StatisticsManager statisticsManager;
+    private ArmorManager armorManager;
 
     // Economy
     private Economy economy;
 
     // PlaceholderAPI support
     private boolean placeholderAPIEnabled = false;
+
+    // Listeners
+    private ArmorListener armorListener;
+
+    // Tasks
+    private BukkitTask armorEffectTask;
 
     @Override
     public void onEnable() {
@@ -71,6 +80,9 @@ public class GenPvP extends JavaPlugin {
         // Start auto-save task
         dataManager.startAutoSaveTask();
 
+        // Start armor effect task
+        startArmorEffectTask();
+
         getLogger().info("GenPvP has been enabled successfully!");
     }
 
@@ -85,6 +97,10 @@ public class GenPvP extends JavaPlugin {
         // Stop tasks
         if (generatorManager != null) {
             generatorManager.stopGeneratorTask();
+        }
+
+        if (armorEffectTask != null) {
+            armorEffectTask.cancel();
         }
 
         getLogger().info("GenPvP has been disabled!");
@@ -106,6 +122,7 @@ public class GenPvP extends JavaPlugin {
         levelManager = new LevelManager(this);
         cubeManager = new CubeManager(this);
         statisticsManager = new StatisticsManager(this);
+        armorManager = new ArmorManager(this);
 
         getLogger().info("All managers initialized!");
     }
@@ -139,6 +156,12 @@ public class GenPvP extends JavaPlugin {
         if (getCommand("stats") != null) {
             getCommand("stats").setExecutor(aliasCommands);
         }
+        if (getCommand("armor") != null) {
+            getCommand("armor").setExecutor(aliasCommands);
+        }
+        if (getCommand("armory") != null) {
+            getCommand("armory").setExecutor(aliasCommands);
+        }
 
         getLogger().info("Commands registered!");
     }
@@ -151,6 +174,11 @@ public class GenPvP extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new NuggetListener(this), this);
         getServer().getPluginManager().registerEvents(new CubeListener(this), this);
         getServer().getPluginManager().registerEvents(new GUIListener(this), this);
+
+        // Register armor listeners
+        armorListener = new ArmorListener(this);
+        getServer().getPluginManager().registerEvents(armorListener, this);
+        getServer().getPluginManager().registerEvents(new ArmorEquipListener(this, armorListener), this);
 
         getLogger().info("Listeners registered!");
     }
@@ -186,6 +214,18 @@ public class GenPvP extends JavaPlugin {
         }
     }
 
+    private void startArmorEffectTask() {
+        int interval = configManager.getArmorEffectUpdateInterval();
+
+        armorEffectTask = Bukkit.getScheduler().runTaskTimer(this, () -> {
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                armorListener.updateArmorEffects(player);
+            }
+        }, interval, interval);
+
+        getLogger().info("Armor effect task started!");
+    }
+
     public void reload() {
         getLogger().info("Reloading GenPvP...");
 
@@ -199,6 +239,13 @@ public class GenPvP extends JavaPlugin {
         generatorManager.reload();
         levelManager.reload();
         cubeManager.reload();
+        armorManager.reload();
+
+        // Stop and restart armor effect task
+        if (armorEffectTask != null) {
+            armorEffectTask.cancel();
+        }
+        startArmorEffectTask();
 
         getLogger().info("GenPvP reloaded successfully!");
     }
@@ -230,6 +277,10 @@ public class GenPvP extends JavaPlugin {
 
     public StatisticsManager getStatisticsManager() {
         return statisticsManager;
+    }
+
+    public ArmorManager getArmorManager() {
+        return armorManager;
     }
 
     public Economy getEconomy() {

@@ -1,6 +1,7 @@
 package com.pallux.genpvp.commands;
 
 import com.pallux.genpvp.GenPvP;
+import com.pallux.genpvp.guis.ArmoryGUI;
 import com.pallux.genpvp.guis.LevelUpGUI;
 import com.pallux.genpvp.guis.ShopGUI;
 import com.pallux.genpvp.guis.StatsGUI;
@@ -47,6 +48,11 @@ public class AliasCommands implements CommandExecutor {
 
             case "stats":
                 new StatsGUI(plugin, player).open();
+                break;
+
+            case "armor":
+            case "armory":
+                new ArmoryGUI(plugin, player).open();
                 break;
 
             default:

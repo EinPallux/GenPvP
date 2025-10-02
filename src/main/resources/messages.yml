@@ -32,6 +32,16 @@ generator:
   received: "{prefix} &#00FF00You received {amount}x Tier {tier} generator(s)!"
   given-all: "{prefix} &#00FF00You gave {amount}x Tier {tier} generator(s) to all online players!"
 
+# Armor Messages
+armory:
+  purchased: "{prefix} &#00FF00You purchased {armor}!"
+  not-enough-money: "{prefix} &#FF0000You need ${cost} to purchase this armor!"
+  not-enough-gems: "{prefix} &#FF0000You need {gems} gem(s) to purchase this armor!"
+  missing-required-item: "{prefix} &#FF0000You need a {item} to purchase this armor!"
+  inventory-full: "{prefix} &#FF0000Your inventory is full!"
+  given: "{prefix} &#00FF00You gave {armor} to {player}!"
+  received: "{prefix} &#00FF00You received {armor}!"
+
 # Money & Gems Nugget Messages
 nugget:
   money-collected: "{prefix} <gradient:#2ECC71:#27AE60>+${amount}</gradient> &#808080collected!"
@@ -75,6 +85,7 @@ stats:
 # GUI Titles (Supports hex colors and gradients)
 gui-titles:
   generator-upgrade: "<gradient:#FF6B6B:#4ECDC4>Generator Upgrade</gradient>"
+  armory: "<gradient:#FF6B6B:#4ECDC4>Armory</gradient>"
   shop: "<gradient:#FFD700:#FFA500>Generator Shop</gradient>"
   level-up: "<gradient:#4ECDC4:#556270>Level Up</gradient>"
   stats: "<gradient:#9B59B6:#E74C3C>{player}'s Stats</gradient>"
@@ -110,6 +121,20 @@ gui:
         - "&#808080This generator is fully upgraded!"
         - ""
         - "&#FFD700You're at the peak!"
+
+  # Armory GUI
+  armory:
+    armor-piece:
+      lore:
+        - "&#808080Armor: &#FFFFFF{armor}"
+        - "&#808080Effect: &#FFFF00{effect}"
+        - ""
+        - "&#FFFF00Cost:"
+        - "&#808080• Money: &#FFD700${money}"
+        - "&#808080• Gems: &#DDA0DD{gems}"
+        - "&#808080• Required: &#FFFFFF{required}"
+        - ""
+        - "&#00FF00Click to purchase!"
 
   # Shop GUI
   shop:

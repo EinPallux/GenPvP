@@ -35,12 +35,14 @@ public class ConfigManager {
         saveDefaultConfig("messages.yml");
         saveDefaultConfig("generators.yml");
         saveDefaultConfig("cubes.yml");
+        saveDefaultConfig("armors.yml");
 
         // Load all configs
         loadConfig("config.yml");
         loadConfig("messages.yml");
         loadConfig("generators.yml");
         loadConfig("cubes.yml");
+        loadConfig("armors.yml");
 
         plugin.getLogger().info("All configuration files loaded!");
     }
@@ -149,6 +151,13 @@ public class ConfigManager {
      */
     public FileConfiguration getCubesConfig() {
         return getConfig("cubes.yml");
+    }
+
+    /**
+     * Gets the armors.yml
+     */
+    public FileConfiguration getArmorsConfig() {
+        return getConfig("armors.yml");
     }
 
     /**
@@ -357,5 +366,14 @@ public class ConfigManager {
 
     public int getDecimalPlaces() {
         return getMainConfig().getInt("placeholders.decimal-places", 1);
+    }
+
+    // Armor settings
+    public int getArmorEffectUpdateInterval() {
+        return getArmorsConfig().getInt("armor-effects.update-interval", 20);
+    }
+
+    public boolean isArmorDebugEnabled() {
+        return getArmorsConfig().getBoolean("armor-effects.debug", false);
     }
 }
