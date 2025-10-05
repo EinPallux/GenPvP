@@ -5,8 +5,11 @@
 
 # General Settings
 settings:
-  # Money loss percentage on death (0.0 to 1.0, where 0.15 = 15%)
-  death-money-loss-percentage: 0.15
+  # Disable hunger loss
+  disable-hunger: true
+
+  # Money loss percentage on death (0.0 to 1.0, where 0.05 = 5%)
+  death-money-loss-percentage: 0.05
 
   # Generator generation interval in seconds
   generator-interval: 10
@@ -33,7 +36,7 @@ levels:
   base-cost: 1000
 
   # Cost multiplier per level (increases exponentially)
-  cost-multiplier: 1.5
+  cost-multiplier: 1.75
 
   # From which level gems are required for levelup
   gems-required-from-level: 30
@@ -47,14 +50,14 @@ levels:
   # Generator slots per level (1 slot per level)
   slots-per-level: 1
 
-  # From level 20, only every 2nd level gives a new slot
+  # From level 20, only every 5th level gives a new slot
   reduced-slots-from-level: 20
 
   # Slots given every X levels after reduced-slots-from-level
-  slots-every-x-levels: 2
+  slots-every-x-levels: 5
 
   # Maximum level (0 = unlimited)
-  max-level: 100
+  max-level: 200
 
 # Statistics tracked for players
 statistics:

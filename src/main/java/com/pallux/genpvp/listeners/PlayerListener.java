@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -103,5 +104,12 @@ public class PlayerListener implements Listener {
                 .getMessage("death.money-stolen",
                         "{amount}", ColorUtil.formatNumber(moneyLost),
                         "{player}", victim.getName()));
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    public void onFoodLevelChange(FoodLevelChangeEvent event) {
+        if (plugin.getConfigManager().isHungerDisabled()) {
+            event.setCancelled(true);
+        }
     }
 }

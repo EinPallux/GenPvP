@@ -192,6 +192,10 @@ public class ConfigManager {
     }
 
     // Settings getter methods
+    public boolean isHungerDisabled() {
+        return getMainConfig().getBoolean("settings.disable-hunger", false);
+    }
+
     public double getDeathMoneyLossPercentage() {
         return getMainConfig().getDouble("settings.death-money-loss-percentage", 0.15);
     }
