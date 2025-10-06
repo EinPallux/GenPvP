@@ -30,19 +30,17 @@ public class DefenseShopGUI extends BaseGUI {
 
     @Override
     protected void setContents() {
-        // Add all defense tiers (slots 10-16 for tiers 1-6, slot 22 for door)
-        int[] slots = {10, 11, 12, 13, 14, 15, 16, 22};
-        int index = 0;
+        // Add defense tiers 1-6 in slots 10-15
+        // Add door (tier 7) in slot 16
+        int[] slots = {10, 11, 12, 13, 14, 15, 16};
 
-        for (int tier = 1; tier <= 7; tier++) {
+        for (int i = 0; i < slots.length; i++) {
+            int tier = i + 1;
             DefenseManager.DefenseTier defenseTier = plugin.getDefenseManager().getDefenseTier(tier);
             if (defenseTier == null) continue;
 
-            if (index >= slots.length) break;
-
             ItemStack item = createDefenseShopItem(defenseTier);
-            inventory.setItem(slots[index], item);
-            index++;
+            inventory.setItem(slots[i], item);
         }
 
         // Back button (slot 45)
@@ -70,7 +68,7 @@ public class DefenseShopGUI extends BaseGUI {
         }
 
         // Determine which defense tier was clicked
-        int[] slots = {10, 11, 12, 13, 14, 15, 16, 22};
+        int[] slots = {10, 11, 12, 13, 14, 15, 16};
         int tier = -1;
 
         for (int i = 0; i < slots.length; i++) {
@@ -137,7 +135,12 @@ public class DefenseShopGUI extends BaseGUI {
     private ItemStack createDefenseShopItem(DefenseManager.DefenseTier tier) {
         String nameFormat = plugin.getConfigManager().getMessagesConfig()
                 .getString("gui.defense-shop.defense.name", "<gradient:#808080:#C0C0C0>Tier {tier} Defense</gradient>");
-        String name = replacePlaceholders(nameFormat, "{tier}", String.valueOf(tier.getTier()));
+
+        // Replace placeholders in name
+        String name = nameFormat
+                .replace("{tier}", String.valueOf(tier.getTier()))
+                .replace("{name}", ColorUtil.stripColor(tier.getDisplayName()))
+                .replace("{block}", tier.getBlock().toString().replace("_", " "));
 
         List<String> loreFormat = plugin.getConfigManager().getMessagesConfig()
                 .getStringList("gui.defense-shop.defense.lore");

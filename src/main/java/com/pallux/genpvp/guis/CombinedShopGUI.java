@@ -41,7 +41,7 @@ public class CombinedShopGUI extends BaseGUI {
                 ), true);
         inventory.setItem(20, generatorShopItem);
 
-        // Defense Shop Button (slot 24)
+        // Defense Shop Button (slot 22)
         ItemStack defenseShopItem = createItem(Material.STONE_BRICKS,
                 "<gradient:#808080:#C0C0C0>Defense Shop</gradient>",
                 List.of(
@@ -50,7 +50,18 @@ public class CombinedShopGUI extends BaseGUI {
                         "",
                         "&#00FF00Click to browse!"
                 ), true);
-        inventory.setItem(24, defenseShopItem);
+        inventory.setItem(22, defenseShopItem);
+
+        // Armory Shop Button (slot 24)
+        ItemStack armoryShopItem = createItem(Material.DIAMOND_CHESTPLATE,
+                "<gradient:#FF6B6B:#4ECDC4>Armory</gradient>",
+                List.of(
+                        "&#808080Buy custom armor sets",
+                        "&#808080with special abilities!",
+                        "",
+                        "&#00FF00Click to browse!"
+                ), true);
+        inventory.setItem(24, armoryShopItem);
 
         // Close button (slot 49)
         inventory.setItem(49, createCloseButton());
@@ -65,9 +76,13 @@ public class CombinedShopGUI extends BaseGUI {
             // Open Generator Shop
             new GeneratorShopGUI(plugin, player).open();
             playOpenSound();
-        } else if (slot == 24) {
+        } else if (slot == 22) {
             // Open Defense Shop
             new DefenseShopGUI(plugin, player).open();
+            playOpenSound();
+        } else if (slot == 24) {
+            // Open Armory
+            new ArmoryGUI(plugin, player).open();
             playOpenSound();
         } else if (slot == 49) {
             // Close button

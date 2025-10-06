@@ -68,7 +68,7 @@ defense-blocks:
     hearts: 3500
     price: 12500
     upgrade-price: 0
-    display-name: "<gradient:#D3D3D3:#708090>Defense Door</gradient>"
+    display-name: "<gradient:#D3D3D3:#708090>Access Defense</gradient>"
     is-door: true
 
 # Defense block settings
@@ -77,7 +77,7 @@ settings:
   show-hearts-on-damage: true
 
   # Damage format message
-  damage-format: "&#FF0000{hearts} ❤ &#808080remaining"
+  damage-format: "&#EB4034{hearts} ❤"
 
   # Prevent block from dropping when broken
   prevent-drop: true

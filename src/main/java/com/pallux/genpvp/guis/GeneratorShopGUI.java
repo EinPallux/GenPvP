@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GeneratorShopGUI extends BaseGUI {
@@ -31,12 +32,17 @@ public class GeneratorShopGUI extends BaseGUI {
     protected void setContents() {
         boolean hasTierUnlock = player.hasPermission("gpvp.shop.tierunlock");
 
-        // Add all generator tiers
+        // Add all generator tiers in a clean grid (rows 2-3 for tiers 1-18)
         for (int tier = 1; tier <= plugin.getGeneratorManager().getMaxTier(); tier++) {
             GeneratorManager.GeneratorTier genTier = plugin.getGeneratorManager().getGeneratorTier(tier);
             if (genTier == null) continue;
 
-            int slot = tier - 1 + (tier > 9 ? 9 : 0); // Distribute across rows
+            int slot;
+            if (tier <= 9) {
+                slot = tier - 1 + 10; // Row 2: slots 10-18
+            } else {
+                slot = tier - 10 + 19; // Row 3: slots 19-27
+            }
 
             // Check if tier is locked
             boolean isLocked = tier > 1 && !hasTierUnlock;
@@ -54,7 +60,7 @@ public class GeneratorShopGUI extends BaseGUI {
         // Back button (slot 45)
         inventory.setItem(45, createBackButton());
 
-        // Close button
+        // Close button (slot 49)
         inventory.setItem(49, createCloseButton());
 
         // Fill empty slots
@@ -76,7 +82,15 @@ public class GeneratorShopGUI extends BaseGUI {
         }
 
         // Calculate tier from slot
-        int tier = slot + 1 - (slot >= 9 ? 9 : 0);
+        int tier;
+        if (slot >= 10 && slot <= 18) {
+            tier = slot - 9; // Tiers 1-9
+        } else if (slot >= 19 && slot <= 27) {
+            tier = slot - 9; // Tiers 10-18
+        } else {
+            return;
+        }
+
         if (tier < 1 || tier > plugin.getGeneratorManager().getMaxTier()) {
             return;
         }
@@ -141,17 +155,26 @@ public class GeneratorShopGUI extends BaseGUI {
     private ItemStack createGeneratorShopItem(GeneratorManager.GeneratorTier tier) {
         String nameFormat = plugin.getConfigManager().getMessagesConfig()
                 .getString("gui.shop.generator.name", "<gradient:#4ECDC4:#556270>Tier {tier} Generator</gradient>");
-        String name = replacePlaceholders(nameFormat, "{tier}", String.valueOf(tier.getTier()));
+
+        // Replace placeholders in name
+        String name = nameFormat
+                .replace("{tier}", String.valueOf(tier.getTier()))
+                .replace("{name}", ColorUtil.stripColor(tier.getDisplayName()));
 
         List<String> loreFormat = plugin.getConfigManager().getMessagesConfig()
                 .getStringList("gui.shop.generator.lore");
-        List<String> lore = replacePlaceholders(loreFormat,
-                "{tier}", String.valueOf(tier.getTier()),
-                "{block}", tier.getBlock().toString().replace("_", " "),
-                "{money}", String.valueOf(tier.getMoney()),
-                "{gems}", String.valueOf(tier.getGems()),
-                "{chance}", String.valueOf(tier.getGemChance()),
-                "{price}", ColorUtil.formatNumber(tier.getShopPrice()));
+
+        List<String> lore = new ArrayList<>();
+        for (String line : loreFormat) {
+            String processed = line
+                    .replace("{tier}", String.valueOf(tier.getTier()))
+                    .replace("{block}", tier.getBlock().toString().replace("_", " "))
+                    .replace("{money}", String.valueOf(tier.getMoney()))
+                    .replace("{gems}", String.valueOf(tier.getGems()))
+                    .replace("{chance}", String.valueOf(tier.getGemChance()))
+                    .replace("{price}", ColorUtil.formatNumber(tier.getShopPrice()));
+            lore.add(processed);
+        }
 
         return createItem(tier.getBlock(), name, lore, true);
     }

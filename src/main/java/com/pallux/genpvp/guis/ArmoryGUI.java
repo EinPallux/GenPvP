@@ -59,6 +59,9 @@ public class ArmoryGUI extends BaseGUI {
             }
         }
 
+        // Back button (slot 45)
+        inventory.setItem(45, createBackButton());
+
         // Close button
         inventory.setItem(49, createCloseButton());
 
@@ -68,6 +71,12 @@ public class ArmoryGUI extends BaseGUI {
 
     @Override
     public void handleClick(Player player, int slot, ItemStack item, ClickType clickType) {
+        if (slot == 45) {
+            // Back to main shop
+            new CombinedShopGUI(plugin, player).open();
+            return;
+        }
+
         if (slot == 49) {
             close();
             return;

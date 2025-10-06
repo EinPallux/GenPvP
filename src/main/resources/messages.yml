@@ -156,15 +156,15 @@ gui:
     current-tier:
       name: "<gradient:#FFD700:#FFA500>Current: Tier {tier}</gradient>"
       lore:
-        - "&#808080Max Hearts: &#FF0000{hearts} ❤"
-        - "&#808080Current Hearts: &#FF0000{current_hearts} ❤"
+        - "&#808080Max Hearts: &#EB4034{hearts} ❤"
+        - "&#808080Current Hearts: &#EB4034{current_hearts} ❤"
         - ""
         - "&#FFFF00Shift + Right-Click to upgrade!"
 
     next-tier:
       name: "<gradient:#2ECC71:#27AE60>Upgrade to Tier {tier}</gradient>"
       lore:
-        - "&#808080Max Hearts: &#FF0000{hearts} ❤"
+        - "&#808080Max Hearts: &#EB4034{hearts} ❤"
         - ""
         - "&#FFFF00Upgrade Cost: &#FFD700${cost}"
         - ""

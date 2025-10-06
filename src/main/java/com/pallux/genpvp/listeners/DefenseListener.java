@@ -5,6 +5,8 @@ import com.pallux.genpvp.guis.DefenseUpgradeGUI;
 import com.pallux.genpvp.managers.DefenseDataManager;
 import com.pallux.genpvp.managers.DefenseManager;
 import com.pallux.genpvp.utils.ColorUtil;
+import net.md_5.bungee.api.ChatMessageType;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Particle;
@@ -82,9 +84,6 @@ public class DefenseListener implements Listener {
         if (plugin.getConfigManager().isSoundsEnabled()) {
             player.playSound(player.getLocation(), Sound.BLOCK_STONE_PLACE, 1.0f, 1.0f);
         }
-
-        player.sendMessage(plugin.getConfigManager().getMessage("defense.placed",
-                "{tier}", String.valueOf(tier)));
     }
 
     @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
@@ -104,16 +103,27 @@ public class DefenseListener implements Listener {
         DefenseDataManager.DefenseBlockData data = plugin.getDefenseDataManager().getDefenseData(location);
         if (data == null) return;
 
+        UUID owner = data.getOwner();
+
+        // If player is owner, break instantly
+        if (owner != null && player.getUniqueId().equals(owner)) {
+            handleDefenseDestruction(player, block, location, data);
+            return;
+        }
+
         // Damage the block
         plugin.getDefenseDataManager().damageDefenseBlock(location, 1);
         int remainingHearts = plugin.getDefenseDataManager().getCurrentHearts(location);
 
-        // Show hearts remaining
+        // Show hearts remaining in ACTION BAR
         if (shouldShowHearts()) {
             String message = plugin.getConfigManager().getDefenseConfig()
-                    .getString("settings.damage-format", "&#FF0000{hearts} ❤ &#808080remaining");
+                    .getString("settings.damage-format", "&#EB4034{hearts} ❤");
             message = message.replace("{hearts}", String.valueOf(remainingHearts));
-            player.sendMessage(ColorUtil.colorize(plugin.getConfigManager().getMessage("prefix") + " " + message));
+
+            // Send to action bar
+            player.spigot().sendMessage(ChatMessageType.ACTION_BAR,
+                    new TextComponent(ColorUtil.colorize(message)));
         }
 
         // Spawn particles
@@ -259,9 +269,6 @@ public class DefenseListener implements Listener {
 
         // Play sound
         player.playSound(location, Sound.BLOCK_STONE_BREAK, 1.0f, 1.0f);
-
-        player.sendMessage(plugin.getConfigManager().getMessage("defense.broken",
-                "{tier}", String.valueOf(tier)));
     }
 
     private void spawnDamageParticles(Location location) {
