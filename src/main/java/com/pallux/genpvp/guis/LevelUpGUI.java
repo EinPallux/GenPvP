@@ -56,7 +56,7 @@ public class LevelUpGUI extends BaseGUI {
     @Override
     public void handleClick(Player player, int slot, ItemStack item, ClickType clickType) {
         if (slot == 15) {
-            // Level up button
+            // Level up button (automatic now, just shows info)
             PlayerData data = plugin.getDataManager().getPlayerData(player);
 
             if (plugin.getLevelManager().isMaxLevel(data.getLevel())) {
@@ -65,45 +65,8 @@ public class LevelUpGUI extends BaseGUI {
                 return;
             }
 
-            int nextLevel = data.getLevel() + 1;
-            double moneyCost = plugin.getLevelManager().calculateLevelCost(nextLevel);
-            int gemCost = plugin.getLevelManager().calculateGemCost(nextLevel);
-
-            // Check money
-            double balance = plugin.getEconomy().getBalance(player);
-            if (balance < moneyCost) {
-                playErrorSound();
-                player.sendMessage(plugin.getConfigManager()
-                        .getMessage("level.not-enough-money", "{cost}", ColorUtil.formatNumber(moneyCost)));
-                return;
-            }
-
-            // Check gems
-            if (gemCost > 0 && data.getGems() < gemCost) {
-                playErrorSound();
-                player.sendMessage(plugin.getConfigManager()
-                        .getMessage("level.not-enough-gems", "{gems}", String.valueOf(gemCost)));
-                return;
-            }
-
-            // Attempt level up
-            if (plugin.getLevelManager().levelUp(data)) {
-                int newSlots = plugin.getLevelManager().getCurrentSlots(data);
-
-                // Send messages
-                player.sendMessage(plugin.getConfigManager()
-                        .getMessage("level.leveled-up", "{level}", String.valueOf(data.getLevel())));
-                player.sendMessage(plugin.getConfigManager()
-                        .getMessage("level.new-slots", "{slots}", String.valueOf(newSlots)));
-
-                // Play success sound
-                playSuccessSound();
-
-                // Refresh GUI
-                refresh();
-            } else {
-                playErrorSound();
-            }
+            // Just refresh to show updated progress
+            refresh();
         } else if (slot == 22) {
             // Close button
             close();
@@ -115,11 +78,17 @@ public class LevelUpGUI extends BaseGUI {
         String name = ColorUtil.colorize(replacePlaceholders(nameFormat, "{level}", String.valueOf(data.getLevel())));
 
         int currentSlots = plugin.getLevelManager().getCurrentSlots(data);
+        int currentXP = data.getExperience();
+        int nextLevelXP = plugin.getLevelManager().calculateXPRequired(data.getLevel() + 1);
+        double progress = plugin.getLevelManager().getXPProgress(data);
 
         List<String> loreFormat = plugin.getConfigManager().getMessagesConfig().getStringList("gui.levelup.current.lore");
         List<String> lore = replacePlaceholders(loreFormat,
                 "{level}", String.valueOf(data.getLevel()),
-                "{slots}", String.valueOf(currentSlots));
+                "{slots}", String.valueOf(currentSlots),
+                "{xp}", String.valueOf(currentXP),
+                "{required_xp}", String.valueOf(nextLevelXP),
+                "{progress}", String.format("%.1f", progress));
 
         return createItem(Material.EXPERIENCE_BOTTLE, name, lore.stream().map(ColorUtil::colorize).collect(Collectors.toList()), true);
     }
@@ -127,8 +96,8 @@ public class LevelUpGUI extends BaseGUI {
     private ItemStack createNextLevelItem(PlayerData data) {
         int nextLevel = data.getLevel() + 1;
         int nextSlots = plugin.getLevelManager().calculateGeneratorSlots(nextLevel);
-        double moneyCost = plugin.getLevelManager().calculateLevelCost(nextLevel);
-        int gemCost = plugin.getLevelManager().calculateGemCost(nextLevel);
+        int xpRequired = plugin.getLevelManager().calculateXPRequired(nextLevel);
+        int currentXP = data.getExperience();
 
         String nameFormat = plugin.getConfigManager().getMessagesConfig().getString("gui.levelup.next.name");
         String name = ColorUtil.colorize(replacePlaceholders(nameFormat, "{level}", String.valueOf(nextLevel)));
@@ -137,8 +106,8 @@ public class LevelUpGUI extends BaseGUI {
         List<String> lore = replacePlaceholders(loreFormat,
                 "{level}", String.valueOf(nextLevel),
                 "{slots}", String.valueOf(nextSlots),
-                "{money}", ColorUtil.formatNumber(moneyCost),
-                "{gems}", gemCost > 0 ? String.valueOf(gemCost) : "0");
+                "{xp}", String.valueOf(currentXP),
+                "{required_xp}", String.valueOf(xpRequired));
 
         return createItem(Material.NETHER_STAR, name, lore.stream().map(ColorUtil::colorize).collect(Collectors.toList()), true);
     }

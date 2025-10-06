@@ -18,7 +18,7 @@ public class DataManager {
 
     private final GenPvP plugin;
     private final Map<UUID, PlayerData> playerDataMap;
-    private final Map<Location, GeneratorData> generatorLocations; // Changed to store GeneratorData
+    private final Map<Location, GeneratorData> generatorLocations;
     private File dataFolder;
     private File playersFolder;
     private File generatorsFile;
@@ -101,6 +101,7 @@ public class DataManager {
             data = new PlayerData(uuid);
 
             data.setLevel(config.getInt("level", plugin.getConfigManager().getStartingLevel()));
+            data.setExperience(config.getInt("experience", 0));
             data.setGems(config.getInt("gems", 0));
             data.setGeneratorsPlaced(config.getInt("generators-placed", 0));
 
@@ -118,6 +119,7 @@ public class DataManager {
         } else {
             data = new PlayerData(uuid);
             data.setLevel(plugin.getConfigManager().getStartingLevel());
+            data.setExperience(0);
             data.setFirstJoin(System.currentTimeMillis());
             data.setLastJoin(System.currentTimeMillis());
         }
@@ -137,6 +139,7 @@ public class DataManager {
         FileConfiguration config = new YamlConfiguration();
 
         config.set("level", data.getLevel());
+        config.set("experience", data.getExperience());
         config.set("gems", data.getGems());
         config.set("generators-placed", data.getGeneratorsPlaced());
 

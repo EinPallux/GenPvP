@@ -226,24 +226,16 @@ public class ConfigManager {
         return getMainConfig().getInt("levels.starting-level", 1);
     }
 
-    public double getBaseLevelCost() {
-        return getMainConfig().getDouble("levels.base-cost", 1000);
+    public int getBaseSlotsAtLevelOne() {
+        return getMainConfig().getInt("levels.base-slots-at-level-one", 4);
     }
 
-    public double getLevelCostMultiplier() {
-        return getMainConfig().getDouble("levels.cost-multiplier", 1.5);
+    public double getBaseXPRequired() {
+        return getMainConfig().getDouble("levels.base-xp-required", 100);
     }
 
-    public int getGemsRequiredFromLevel() {
-        return getMainConfig().getInt("levels.gems-required-from-level", 30);
-    }
-
-    public int getBaseGemCost() {
-        return getMainConfig().getInt("levels.base-gem-cost", 5);
-    }
-
-    public double getGemCostMultiplier() {
-        return getMainConfig().getDouble("levels.gem-cost-multiplier", 1.3);
+    public double getXPMultiplier() {
+        return getMainConfig().getDouble("levels.xp-multiplier", 1.5);
     }
 
     public int getSlotsPerLevel() {
@@ -255,11 +247,11 @@ public class ConfigManager {
     }
 
     public int getSlotsEveryXLevels() {
-        return getMainConfig().getInt("levels.slots-every-x-levels", 2);
+        return getMainConfig().getInt("levels.slots-every-x-levels", 5);
     }
 
     public int getMaxLevel() {
-        return getMainConfig().getInt("levels.max-level", 100);
+        return getMainConfig().getInt("levels.max-level", 200);
     }
 
     // GUI settings

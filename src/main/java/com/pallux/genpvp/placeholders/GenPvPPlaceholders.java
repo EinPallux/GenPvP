@@ -61,6 +61,29 @@ public class GenPvPPlaceholders extends PlaceholderExpansion {
             return String.valueOf(data.getLevel());
         }
 
+        // XP placeholders
+        if (params.equalsIgnoreCase("xp")) {
+            return String.valueOf(data.getExperience());
+        }
+
+        if (params.equalsIgnoreCase("xp_formatted")) {
+            return formatNumber(data.getExperience());
+        }
+
+        if (params.equalsIgnoreCase("xp_required")) {
+            int required = plugin.getLevelManager().calculateXPRequired(data.getLevel() + 1);
+            return String.valueOf(required);
+        }
+
+        if (params.equalsIgnoreCase("xp_required_formatted")) {
+            int required = plugin.getLevelManager().calculateXPRequired(data.getLevel() + 1);
+            return formatNumber(required);
+        }
+
+        if (params.equalsIgnoreCase("xp_progress")) {
+            return String.format("%.1f", plugin.getLevelManager().getXPProgress(data));
+        }
+
         // Gems placeholders
         if (params.equalsIgnoreCase("gems")) {
             return String.valueOf(data.getGems());
@@ -140,24 +163,9 @@ public class GenPvPPlaceholders extends PlaceholderExpansion {
             return String.valueOf(data.getPlaytime());
         }
 
-        // Level cost placeholders
+        // Level info placeholders
         if (params.equalsIgnoreCase("next_level")) {
             return String.valueOf(data.getLevel() + 1);
-        }
-
-        if (params.equalsIgnoreCase("next_level_cost")) {
-            double cost = plugin.getLevelManager().calculateLevelCost(data.getLevel() + 1);
-            return String.valueOf((int) cost);
-        }
-
-        if (params.equalsIgnoreCase("next_level_cost_formatted")) {
-            double cost = plugin.getLevelManager().calculateLevelCost(data.getLevel() + 1);
-            return formatNumber(cost);
-        }
-
-        if (params.equalsIgnoreCase("next_level_gems")) {
-            int gemCost = plugin.getLevelManager().calculateGemCost(data.getLevel() + 1);
-            return String.valueOf(gemCost);
         }
 
         if (params.equalsIgnoreCase("next_level_slots")) {

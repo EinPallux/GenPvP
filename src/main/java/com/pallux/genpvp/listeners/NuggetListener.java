@@ -87,10 +87,32 @@ public class NuggetListener implements Listener {
         // Record statistic
         plugin.getStatisticsManager().recordMoneyCollected(player, totalMoney);
 
-        // Send messages
-        if (nuggetCount > 1) {
-            player.sendMessage(plugin.getConfigManager().getMessage("nugget.all-collected"));
+        // Add XP for level system
+        PlayerData data = plugin.getDataManager().getPlayerData(player);
+        int xpGained = (int) totalMoney;
+        data.addExperience(xpGained);
+
+        // Check for level up
+        while (plugin.getLevelManager().canLevelUp(data)) {
+            int oldLevel = data.getLevel();
+            plugin.getLevelManager().levelUp(data);
+            int newLevel = data.getLevel();
+            int newSlots = plugin.getLevelManager().getCurrentSlots(data);
+
+            // Send level up message
+            player.sendMessage(plugin.getConfigManager()
+                    .getMessage("level.leveled-up", "{level}", String.valueOf(newLevel)));
+            player.sendMessage(plugin.getConfigManager()
+                    .getMessage("level.new-slots", "{slots}", String.valueOf(newSlots)));
+
+            // Play level up sound
+            if (plugin.getConfigManager().isSoundsEnabled()) {
+                player.playSound(player.getLocation(),
+                        Sound.valueOf(plugin.getConfigManager().getSuccessSound()), 1.0f, 1.0f);
+            }
         }
+
+        // Send money collected message
         player.sendMessage(plugin.getConfigManager()
                 .getMessage("nugget.money-collected", "{amount}", ColorUtil.formatNumber(totalMoney)));
 
@@ -133,10 +155,7 @@ public class NuggetListener implements Listener {
         // Record statistic
         plugin.getStatisticsManager().recordGemsCollected(player, totalGems);
 
-        // Send messages
-        if (nuggetCount > 1) {
-            player.sendMessage(plugin.getConfigManager().getMessage("nugget.all-collected"));
-        }
+        // Send gems collected message
         player.sendMessage(plugin.getConfigManager()
                 .getMessage("nugget.gems-collected", "{amount}", String.valueOf(totalGems)));
 

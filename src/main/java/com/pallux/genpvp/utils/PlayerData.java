@@ -8,6 +8,7 @@ public class PlayerData {
 
     // Core data
     private int level;
+    private int experience;
     private int gems;
     private int generatorsPlaced;
 
@@ -28,6 +29,7 @@ public class PlayerData {
     public PlayerData(UUID uuid) {
         this.uuid = uuid;
         this.level = 1;
+        this.experience = 0;
         this.gems = 0;
         this.generatorsPlaced = 0;
         this.kills = 0;
@@ -58,6 +60,23 @@ public class PlayerData {
 
     public void addLevel(int amount) {
         this.level += amount;
+    }
+
+    // Experience
+    public int getExperience() {
+        return experience;
+    }
+
+    public void setExperience(int experience) {
+        this.experience = Math.max(0, experience);
+    }
+
+    public void addExperience(int amount) {
+        this.experience += amount;
+    }
+
+    public void removeExperience(int amount) {
+        this.experience = Math.max(0, this.experience - amount);
     }
 
     // Gems
@@ -246,6 +265,7 @@ public class PlayerData {
         return "PlayerData{" +
                 "uuid=" + uuid +
                 ", level=" + level +
+                ", experience=" + experience +
                 ", gems=" + gems +
                 ", generatorsPlaced=" + generatorsPlaced +
                 ", kills=" + kills +

@@ -3,6 +3,8 @@ package com.pallux.genpvp.managers;
 import com.pallux.genpvp.GenPvP;
 import com.pallux.genpvp.utils.ColorUtil;
 import org.bukkit.*;
+import org.bukkit.block.Block;
+import org.bukkit.block.Hopper;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Item;
@@ -306,18 +308,21 @@ public class GeneratorManager {
                 GeneratorTier genTier = getGeneratorTier(tier);
                 if (genTier == null) continue;
 
+                // Find the highest generator in the stack
+                Location topLocation = findTopGenerator(location);
+
                 // Check if max items reached at this location
-                if (countItemsAtLocation(location) >= plugin.getConfigManager().getMaxItemsPerGenerator()) {
+                if (countItemsAtLocation(topLocation) >= plugin.getConfigManager().getMaxItemsPerGenerator()) {
                     continue;
                 }
 
                 // Generate money nugget
-                spawnNugget(location, createMoneyNugget(genTier.getMoney()), false);
+                spawnNugget(topLocation, createMoneyNugget(genTier.getMoney()), false);
 
                 // Chance to generate gem nugget
                 double random = Math.random() * 100;
                 if (random < genTier.getGemChance()) {
-                    spawnNugget(location, createGemNugget(genTier.getGems()), true);
+                    spawnNugget(topLocation, createGemNugget(genTier.getGems()), true);
                 }
             }
         }, interval, interval);
@@ -336,9 +341,50 @@ public class GeneratorManager {
     }
 
     /**
-     * Spawns a nugget at a location
+     * Finds the topmost generator in a stack
+     */
+    private Location findTopGenerator(Location location) {
+        Location current = location.clone();
+
+        // Check upwards for more generators
+        while (true) {
+            Location above = current.clone().add(0, 1, 0);
+            if (plugin.getDataManager().isGenerator(above)) {
+                current = above;
+            } else {
+                break;
+            }
+        }
+
+        return current;
+    }
+
+    /**
+     * Spawns a nugget at a location (with hopper support)
      */
     private void spawnNugget(Location location, ItemStack item, boolean isGem) {
+        // Check if there's a hopper above the generator
+        Location hopperLocation = location.clone().add(0, 1, 0);
+        Block hopperBlock = hopperLocation.getBlock();
+
+        if (hopperBlock.getType() == Material.HOPPER) {
+            // Try to add to hopper
+            Hopper hopper = (Hopper) hopperBlock.getState();
+
+            // Check if hopper has space
+            HashMap<Integer, ItemStack> leftover = hopper.getInventory().addItem(item);
+
+            if (leftover.isEmpty()) {
+                // Successfully added to hopper, spawn particles
+                if (plugin.getConfigManager().isParticlesEnabled()) {
+                    spawnParticles(location, isGem);
+                }
+                return;
+            }
+            // If hopper is full, continue to drop item normally
+        }
+
+        // No hopper or hopper is full, spawn item as entity
         Location spawnLoc = location.clone().add(0.5, 1.2, 0.5);
         Item droppedItem = location.getWorld().dropItem(spawnLoc, item);
         droppedItem.setVelocity(droppedItem.getVelocity().zero());
@@ -346,19 +392,27 @@ public class GeneratorManager {
 
         // Spawn particles
         if (plugin.getConfigManager().isParticlesEnabled()) {
-            String particleType = isGem ?
-                    plugin.getConfigManager().getGemsParticleType() :
-                    plugin.getConfigManager().getMoneyParticleType();
-            int particleCount = isGem ?
-                    plugin.getConfigManager().getGemsParticleCount() :
-                    plugin.getConfigManager().getMoneyParticleCount();
+            spawnParticles(location, isGem);
+        }
+    }
 
-            try {
-                Particle particle = Particle.valueOf(particleType);
-                location.getWorld().spawnParticle(particle, spawnLoc, particleCount, 0.3, 0.3, 0.3, 0);
-            } catch (IllegalArgumentException e) {
-                plugin.getLogger().warning("Invalid particle type: " + particleType);
-            }
+    /**
+     * Spawns particles for nugget generation
+     */
+    private void spawnParticles(Location location, boolean isGem) {
+        String particleType = isGem ?
+                plugin.getConfigManager().getGemsParticleType() :
+                plugin.getConfigManager().getMoneyParticleType();
+        int particleCount = isGem ?
+                plugin.getConfigManager().getGemsParticleCount() :
+                plugin.getConfigManager().getMoneyParticleCount();
+
+        try {
+            Particle particle = Particle.valueOf(particleType);
+            Location spawnLoc = location.clone().add(0.5, 1.2, 0.5);
+            location.getWorld().spawnParticle(particle, spawnLoc, particleCount, 0.3, 0.3, 0.3, 0);
+        } catch (IllegalArgumentException e) {
+            plugin.getLogger().warning("Invalid particle type: " + particleType);
         }
     }
 

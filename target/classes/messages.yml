@@ -21,7 +21,7 @@ generator:
   placed: "{prefix} &#00FF00Generator placed! &#808080({current}/{max})"
   removed: "{prefix} &#FFFF00Generator removed! &#808080({current}/{max})"
   max-reached: "{prefix} &#FF0000You've reached your maximum generator limit! &#808080({max})"
-  max-reached-hint: "{prefix} &#FFD700Use /level to purchase more generator slots!"
+  max-reached-hint: "{prefix} &#FFD700Collect money from generators to gain XP and level up!"
   not-generator: "{prefix} &#FF0000This is not a generator block!"
   upgraded: "{prefix} <gradient:#FFD700:#FFA500>Generator upgraded to Tier {tier}!</gradient>"
   max-tier: "{prefix} <gradient:#FF1493:#9400D3>This generator is already at maximum tier!</gradient>"
@@ -58,7 +58,6 @@ gems:
 nugget:
   money-collected: "{prefix} <gradient:#2ECC71:#27AE60>+${amount}</gradient> &#808080collected!"
   gems-collected: "{prefix} <gradient:#E74C3C:#9B59B6>+{amount} Gem(s)</gradient> &#808080collected!"
-  all-collected: "{prefix} &#00FF00Collected all nuggets from inventory!"
   none-found: "{prefix} &#FFFF00No collectable nuggets found in your inventory!"
 
 # Shop Messages
@@ -72,10 +71,9 @@ shop:
 level:
   leveled-up: "{prefix} <gradient:#FFD700:#FF69B4>Level Up! You are now level {level}!</gradient>"
   new-slots: "{prefix} &#00FF00You now have {slots} generator slot(s)!"
-  not-enough-money: "{prefix} &#FF0000You need ${cost} to level up!"
-  not-enough-gems: "{prefix} &#FF0000You need {gems} gem(s) to level up!"
   max-level: "{prefix} <gradient:#FF1493:#9400D3>You've reached the maximum level!</gradient>"
-  current-level: "{prefix} &#00FFFF Your current level: &#FFFFFFe{level}"
+  current-level: "{prefix} &#00FFFF Your current level: &#FFFFFF{level}"
+  xp-gained: "{prefix} &#00FF00+{xp} XP"
 
 # Cube Messages
 cube:
@@ -99,7 +97,7 @@ gui-titles:
   generator-upgrade: "<gradient:#FF6B6B:#4ECDC4>Generator Upgrade</gradient>"
   armory: "<gradient:#FF6B6B:#4ECDC4>Armory</gradient>"
   shop: "<gradient:#FFD700:#FFA500>Generator Shop</gradient>"
-  level-up: "<gradient:#4ECDC4:#556270>Level Up</gradient>"
+  level-up: "<gradient:#4ECDC4:#556270>Level Progress</gradient>"
   stats: "<gradient:#9B59B6:#E74C3C>{player}'s Stats</gradient>"
   cube-roll: "<gradient:#FF1493:#9400D3>{rarity} Cube</gradient>"
 
@@ -178,18 +176,21 @@ gui:
       name: "<gradient:#FFD700:#FF69B4>Current Level: {level}</gradient>"
       lore:
         - "&#808080Generator Slots: &#00FF00{slots}"
+        - "&#808080Current XP: &#FFFF00{xp}"
+        - "&#808080Required XP: &#FFFF00{required_xp}"
+        - "&#808080Progress: &#00FF00{progress}%"
         - ""
-        - "&#00FFFFClick 'Next Level' to upgrade!"
+        - "&#00FFFFCollect money to gain XP!"
 
     next:
       name: "<gradient:#2ECC71:#27AE60>Next Level: {level}</gradient>"
       lore:
         - "&#808080Generator Slots: &#00FF00{slots}"
+        - "&#808080Current XP: &#FFFF00{xp}"
+        - "&#808080Required XP: &#FFFF00{required_xp}"
         - ""
-        - "&#FFFF00Cost: &#FFD700${money}"
-        - "&#FFFF00Gems: &#DDA0DD{gems}"
-        - ""
-        - "&#00FF00Click to level up!"
+        - "&#00FFFFCollect money from generators"
+        - "&#00FFFFto automatically level up!"
 
     max:
       name: "<gradient:#FF1493:#9400D3>Maximum Level!</gradient>"

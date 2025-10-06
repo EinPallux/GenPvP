@@ -12,46 +12,34 @@ public class LevelManager {
     }
 
     /**
-     * Calculates the cost for a specific level
+     * Calculates the XP required for a specific level
      */
-    public double calculateLevelCost(int level) {
-        double baseCost = plugin.getConfigManager().getBaseLevelCost();
-        double multiplier = plugin.getConfigManager().getLevelCostMultiplier();
+    public int calculateXPRequired(int level) {
+        double baseXP = plugin.getConfigManager().getBaseXPRequired();
+        double multiplier = plugin.getConfigManager().getXPMultiplier();
 
-        return baseCost * Math.pow(multiplier, level - 1);
-    }
-
-    /**
-     * Calculates the gem cost for a specific level
-     */
-    public int calculateGemCost(int level) {
-        int gemsRequiredFrom = plugin.getConfigManager().getGemsRequiredFromLevel();
-
-        if (level < gemsRequiredFrom) {
-            return 0;
-        }
-
-        int baseGemCost = plugin.getConfigManager().getBaseGemCost();
-        double multiplier = plugin.getConfigManager().getGemCostMultiplier();
-        int levelsAboveThreshold = level - gemsRequiredFrom;
-
-        return (int) (baseGemCost * Math.pow(multiplier, levelsAboveThreshold));
+        return (int) (baseXP * Math.pow(multiplier, level - 1));
     }
 
     /**
      * Calculates the number of generator slots for a specific level
      */
     public int calculateGeneratorSlots(int level) {
+        int baseSlotsAtLevelOne = plugin.getConfigManager().getBaseSlotsAtLevelOne();
         int slotsPerLevel = plugin.getConfigManager().getSlotsPerLevel();
         int reducedFrom = plugin.getConfigManager().getReducedSlotsFromLevel();
         int slotsEveryX = plugin.getConfigManager().getSlotsEveryXLevels();
 
+        if (level == 1) {
+            return baseSlotsAtLevelOne;
+        }
+
         if (level < reducedFrom) {
-            return level * slotsPerLevel;
+            return baseSlotsAtLevelOne + ((level - 1) * slotsPerLevel);
         }
 
         // Base slots from levels before reduction
-        int baseSlots = (reducedFrom - 1) * slotsPerLevel;
+        int baseSlots = baseSlotsAtLevelOne + ((reducedFrom - 2) * slotsPerLevel);
 
         // Additional slots from reduced rate
         int levelsAboveThreshold = level - reducedFrom + 1;
@@ -72,21 +60,9 @@ public class LevelManager {
             return false;
         }
 
-        // Check money requirement
-        double cost = calculateLevelCost(currentLevel + 1);
-        double balance = plugin.getEconomy().getBalance(plugin.getServer().getOfflinePlayer(data.getUuid()));
-
-        if (balance < cost) {
-            return false;
-        }
-
-        // Check gem requirement
-        int gemCost = calculateGemCost(currentLevel + 1);
-        if (gemCost > 0 && data.getGems() < gemCost) {
-            return false;
-        }
-
-        return true;
+        // Check XP requirement
+        int xpRequired = calculateXPRequired(currentLevel + 1);
+        return data.getExperience() >= xpRequired;
     }
 
     /**
@@ -100,17 +76,11 @@ public class LevelManager {
         int currentLevel = data.getLevel();
         int nextLevel = currentLevel + 1;
 
-        // Calculate costs
-        double moneyCost = calculateLevelCost(nextLevel);
-        int gemCost = calculateGemCost(nextLevel);
+        // Calculate XP cost
+        int xpRequired = calculateXPRequired(nextLevel);
 
-        // Withdraw money
-        plugin.getEconomy().withdrawPlayer(plugin.getServer().getOfflinePlayer(data.getUuid()), moneyCost);
-
-        // Withdraw gems if required
-        if (gemCost > 0) {
-            data.removeGems(gemCost);
-        }
+        // Remove XP
+        data.removeExperience(xpRequired);
 
         // Level up
         data.setLevel(nextLevel);
@@ -178,6 +148,20 @@ public class LevelManager {
         int usedSlots = data.getGeneratorsPlaced();
 
         return Math.max(0, currentSlots - usedSlots);
+    }
+
+    /**
+     * Gets XP progress percentage for current level
+     */
+    public double getXPProgress(PlayerData data) {
+        if (isMaxLevel(data.getLevel())) {
+            return 100.0;
+        }
+
+        int currentXP = data.getExperience();
+        int requiredXP = calculateXPRequired(data.getLevel() + 1);
+
+        return ((double) currentXP / requiredXP) * 100.0;
     }
 
     /**
