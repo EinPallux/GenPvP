@@ -28,6 +28,8 @@ public class GenPvP extends JavaPlugin {
     private StatisticsManager statisticsManager;
     private ArmorManager armorManager;
     private WorldGuardManager worldGuardManager;
+    private DefenseManager defenseManager;
+    private DefenseDataManager defenseDataManager;
 
     // Economy
     private Economy economy;
@@ -107,6 +109,12 @@ public class GenPvP extends JavaPlugin {
             getLogger().info("All player data saved!");
         }
 
+        // Save defense blocks
+        if (defenseDataManager != null) {
+            defenseDataManager.saveDefenseBlocks();
+            getLogger().info("All defense blocks saved!");
+        }
+
         // Stop tasks
         if (generatorManager != null) {
             generatorManager.stopGeneratorTask();
@@ -133,12 +141,17 @@ public class GenPvP extends JavaPlugin {
         dataManager = new DataManager(this);
         dataManager.loadAllData();
 
+        // Defense data manager
+        defenseDataManager = new DefenseDataManager(this);
+        defenseDataManager.loadDefenseBlocks();
+
         // Game managers
         generatorManager = new GeneratorManager(this);
         levelManager = new LevelManager(this);
         cubeManager = new CubeManager(this);
         statisticsManager = new StatisticsManager(this);
         armorManager = new ArmorManager(this);
+        defenseManager = new DefenseManager(this);
 
         getLogger().info("All managers initialized!");
     }
@@ -178,6 +191,9 @@ public class GenPvP extends JavaPlugin {
         if (getCommand("armory") != null) {
             getCommand("armory").setExecutor(aliasCommands);
         }
+        if (getCommand("shop") != null) {
+            getCommand("shop").setExecutor(aliasCommands);
+        }
 
         getLogger().info("Commands registered!");
     }
@@ -190,6 +206,7 @@ public class GenPvP extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new NuggetListener(this), this);
         getServer().getPluginManager().registerEvents(new CubeListener(this), this);
         getServer().getPluginManager().registerEvents(new GUIListener(this), this);
+        getServer().getPluginManager().registerEvents(new DefenseListener(this), this);
 
         // Register armor listeners
         armorListener = new ArmorListener(this);
@@ -247,6 +264,7 @@ public class GenPvP extends JavaPlugin {
 
         // Save data before reload
         dataManager.saveAllData();
+        defenseDataManager.saveDefenseBlocks();
 
         // Reload configs
         configManager.loadConfigs();
@@ -256,6 +274,7 @@ public class GenPvP extends JavaPlugin {
         levelManager.reload();
         cubeManager.reload();
         armorManager.reload();
+        defenseManager.reload();
 
         // Stop and restart armor effect task
         if (armorEffectTask != null) {
@@ -301,6 +320,14 @@ public class GenPvP extends JavaPlugin {
 
     public WorldGuardManager getWorldGuardManager() {
         return worldGuardManager;
+    }
+
+    public DefenseManager getDefenseManager() {
+        return defenseManager;
+    }
+
+    public DefenseDataManager getDefenseDataManager() {
+        return defenseDataManager;
     }
 
     public Economy getEconomy() {

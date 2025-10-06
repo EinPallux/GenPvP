@@ -10,7 +10,7 @@ softdepend: [Vault, PlaceholderAPI, WorldGuard]
 commands:
   gpvp:
     description: Main GenPvP command
-    usage: /gpvp <gen|cube|armor|level|shop|armory|gems|stats|reload>
+    usage: /gpvp <gen|defense|cube|armor|level|shop|armory|gems|stats|reload>
     aliases: []
 
   level:
@@ -43,6 +43,11 @@ commands:
     usage: /armory
     aliases: []
 
+  shop:
+    description: Opens the main shop (generators and defense blocks)
+    usage: /shop
+    aliases: []
+
 permissions:
   gpvp.admin:
     description: Access to all admin commands
@@ -50,6 +55,8 @@ permissions:
     children:
       gpvp.gen.give: true
       gpvp.gen.giveall: true
+      gpvp.defense.give: true
+      gpvp.defense.giveall: true
       gpvp.cube.give: true
       gpvp.cube.giveall: true
       gpvp.armor.give: true
@@ -64,6 +71,14 @@ permissions:
 
   gpvp.gen.giveall:
     description: Give generators to all online players
+    default: op
+
+  gpvp.defense.give:
+    description: Give defense blocks to players
+    default: op
+
+  gpvp.defense.giveall:
+    description: Give defense blocks to all online players
     default: op
 
   gpvp.cube.give:

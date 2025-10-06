@@ -36,6 +36,7 @@ public class ConfigManager {
         saveDefaultConfig("generators.yml");
         saveDefaultConfig("cubes.yml");
         saveDefaultConfig("armors.yml");
+        saveDefaultConfig("defense.yml");
 
         // Load all configs
         loadConfig("config.yml");
@@ -43,6 +44,7 @@ public class ConfigManager {
         loadConfig("generators.yml");
         loadConfig("cubes.yml");
         loadConfig("armors.yml");
+        loadConfig("defense.yml");
 
         plugin.getLogger().info("All configuration files loaded!");
     }
@@ -77,7 +79,12 @@ public class ConfigManager {
         File file = new File(plugin.getDataFolder(), fileName);
 
         if (!file.exists()) {
-            plugin.saveResource(fileName, false);
+            try {
+                plugin.saveResource(fileName, false);
+            } catch (IllegalArgumentException e) {
+                // File doesn't exist in resources, create empty
+                plugin.getLogger().warning("Default " + fileName + " not found in resources, creating empty file.");
+            }
         }
     }
 
@@ -158,6 +165,13 @@ public class ConfigManager {
      */
     public FileConfiguration getArmorsConfig() {
         return getConfig("armors.yml");
+    }
+
+    /**
+     * Gets the defense.yml
+     */
+    public FileConfiguration getDefenseConfig() {
+        return getConfig("defense.yml");
     }
 
     /**

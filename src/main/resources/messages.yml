@@ -32,6 +32,22 @@ generator:
   received: "{prefix} &#00FF00You received {amount}x Tier {tier} generator(s)!"
   given-all: "{prefix} &#00FF00You gave {amount}x Tier {tier} generator(s) to all online players!"
 
+# Defense Block Messages
+defense:
+  placed: "{prefix} &#00FF00Defense block placed! &#808080(Tier {tier})"
+  broken: "{prefix} &#FF0000Defense block destroyed! &#808080(Tier {tier})"
+  upgraded: "{prefix} <gradient:#FFD700:#FFA500>Defense block upgraded to Tier {tier}!</gradient>"
+  max-tier: "{prefix} <gradient:#FF1493:#9400D3>This defense block is already at maximum tier!</gradient>"
+  not-enough-money: "{prefix} &#FF0000You need ${amount} to upgrade this defense block!"
+  not-owner: "{prefix} &#FF0000This defense block belongs to someone else!"
+  world-disabled: "{prefix} &#FF0000Defense blocks cannot be placed in this world!"
+  upgrades-disabled: "{prefix} &#FF0000Defense block upgrades are currently disabled!"
+
+  given: "{prefix} &#00FF00You gave {amount}x Tier {tier} defense block(s) to {player}!"
+  received: "{prefix} &#00FF00You received {amount}x Tier {tier} defense block(s)!"
+  given-all: "{prefix} &#00FF00You gave {amount}x Tier {tier} defense block(s) to all online players!"
+  purchased: "{prefix} &#00FF00You purchased {amount}x Tier {tier} defense block(s) for ${cost}!"
+
 # Armor Messages
 armory:
   purchased: "{prefix} &#00FF00You purchased {armor}!"
@@ -95,8 +111,11 @@ stats:
 # GUI Titles (Supports hex colors and gradients)
 gui-titles:
   generator-upgrade: "<gradient:#FF6B6B:#4ECDC4>Generator Upgrade</gradient>"
+  defense-upgrade: "<gradient:#FF6B6B:#4ECDC4>Defense Upgrade</gradient>"
   armory: "<gradient:#FF6B6B:#4ECDC4>Armory</gradient>"
-  shop: "<gradient:#FFD700:#FFA500>Generator Shop</gradient>"
+  shop: "<gradient:#FFD700:#FFA500>Shop</gradient>"
+  generator-shop: "<gradient:#FFD700:#FFA500>Generator Shop</gradient>"
+  defense-shop: "<gradient:#808080:#C0C0C0>Defense Shop</gradient>"
   level-up: "<gradient:#4ECDC4:#556270>Level Progress</gradient>"
   stats: "<gradient:#9B59B6:#E74C3C>{player}'s Stats</gradient>"
   cube-roll: "<gradient:#FF1493:#9400D3>{rarity} Cube</gradient>"
@@ -131,6 +150,32 @@ gui:
         - "&#808080This generator is fully upgraded!"
         - ""
         - "&#FFD700You're at the peak!"
+
+  # Defense Upgrade GUI
+  defense-upgrade:
+    current-tier:
+      name: "<gradient:#FFD700:#FFA500>Current: Tier {tier}</gradient>"
+      lore:
+        - "&#808080Max Hearts: &#FF0000{hearts} ❤"
+        - "&#808080Current Hearts: &#FF0000{current_hearts} ❤"
+        - ""
+        - "&#FFFF00Shift + Right-Click to upgrade!"
+
+    next-tier:
+      name: "<gradient:#2ECC71:#27AE60>Upgrade to Tier {tier}</gradient>"
+      lore:
+        - "&#808080Max Hearts: &#FF0000{hearts} ❤"
+        - ""
+        - "&#FFFF00Upgrade Cost: &#FFD700${cost}"
+        - ""
+        - "&#00FF00Click to upgrade!"
+
+    max-tier:
+      name: "<gradient:#FF1493:#9400D3>Maximum Tier Reached!</gradient>"
+      lore:
+        - "&#808080This defense block is fully upgraded!"
+        - ""
+        - "&#FFD700Maximum protection!"
 
   # Armory GUI
   armory:
@@ -169,6 +214,20 @@ gui:
         - ""
         - "&#FFD700Purchase premium to unlock"
         - "&#FFD700all generator tiers!"
+
+  # Defense Shop GUI
+  defense-shop:
+    defense:
+      name: "<gradient:#808080:#C0C0C0>Tier {tier} Defense</gradient>"
+      lore:
+        - "&#808080Block: &#FFFFFF{block}"
+        - "&#808080Hearts: &#FF0000{hearts} ❤"
+        - ""
+        - "&#FFFF00Price: &#FFD700${price}"
+        - ""
+        - "&#00FF00Left-Click: Buy 1"
+        - "&#00FF00Right-Click: Buy 8"
+        - "&#00FF00Shift-Click: Buy 16"
 
   # Level Up GUI
   levelup:

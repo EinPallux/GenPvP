@@ -1,10 +1,7 @@
 package com.pallux.genpvp.commands;
 
 import com.pallux.genpvp.GenPvP;
-import com.pallux.genpvp.guis.ArmoryGUI;
-import com.pallux.genpvp.guis.LevelUpGUI;
-import com.pallux.genpvp.guis.ShopGUI;
-import com.pallux.genpvp.guis.StatsGUI;
+import com.pallux.genpvp.guis.*;
 import com.pallux.genpvp.utils.PlayerData;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -37,7 +34,7 @@ public class AliasCommands implements CommandExecutor {
 
             case "gens":
             case "generators":
-                new ShopGUI(plugin, player).open();
+                new GeneratorShopGUI(plugin, player).open();
                 break;
 
             case "gems":
@@ -53,6 +50,10 @@ public class AliasCommands implements CommandExecutor {
             case "armor":
             case "armory":
                 new ArmoryGUI(plugin, player).open();
+                break;
+
+            case "shop":
+                new CombinedShopGUI(plugin, player).open();
                 break;
 
             default:
