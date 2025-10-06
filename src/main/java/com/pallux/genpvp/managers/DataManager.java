@@ -18,7 +18,7 @@ public class DataManager {
 
     private final GenPvP plugin;
     private final Map<UUID, PlayerData> playerDataMap;
-    private final Map<Location, Integer> generatorLocations; // Location -> Tier
+    private final Map<Location, GeneratorData> generatorLocations; // Changed to store GeneratorData
     private File dataFolder;
     private File playersFolder;
     private File generatorsFile;
@@ -226,6 +226,16 @@ public class DataManager {
                 int y = genSection.getInt("y");
                 int z = genSection.getInt("z");
                 int tier = genSection.getInt("tier");
+                String ownerString = genSection.getString("owner");
+
+                UUID owner = null;
+                if (ownerString != null && !ownerString.isEmpty()) {
+                    try {
+                        owner = UUID.fromString(ownerString);
+                    } catch (IllegalArgumentException e) {
+                        plugin.getLogger().warning("Invalid owner UUID in generator data: " + ownerString);
+                    }
+                }
 
                 Location location = new Location(
                         Bukkit.getWorld(worldName),
@@ -233,7 +243,7 @@ public class DataManager {
                 );
 
                 if (location.getWorld() != null) {
-                    generatorLocations.put(location, tier);
+                    generatorLocations.put(location, new GeneratorData(tier, owner));
                 }
             } catch (Exception e) {
                 plugin.getLogger().warning("Error loading generator at key: " + key);
@@ -250,16 +260,17 @@ public class DataManager {
         FileConfiguration config = new YamlConfiguration();
 
         int index = 0;
-        for (Map.Entry<Location, Integer> entry : generatorLocations.entrySet()) {
+        for (Map.Entry<Location, GeneratorData> entry : generatorLocations.entrySet()) {
             Location loc = entry.getKey();
-            int tier = entry.getValue();
+            GeneratorData data = entry.getValue();
 
             String path = "generators." + index;
             config.set(path + ".world", loc.getWorld().getName());
             config.set(path + ".x", loc.getBlockX());
             config.set(path + ".y", loc.getBlockY());
             config.set(path + ".z", loc.getBlockZ());
-            config.set(path + ".tier", tier);
+            config.set(path + ".tier", data.getTier());
+            config.set(path + ".owner", data.getOwner() != null ? data.getOwner().toString() : "");
 
             index++;
         }
@@ -273,17 +284,18 @@ public class DataManager {
     }
 
     /**
-     * Adds a generator location
+     * Adds a generator location with owner
      */
-    public void addGenerator(Location location, int tier) {
-        generatorLocations.put(location, tier);
+    public void addGenerator(Location location, int tier, UUID owner) {
+        generatorLocations.put(location, new GeneratorData(tier, owner));
     }
 
     /**
-     * Removes a generator location
+     * Removes a generator location and returns the owner UUID
      */
-    public void removeGenerator(Location location) {
-        generatorLocations.remove(location);
+    public UUID removeGenerator(Location location) {
+        GeneratorData data = generatorLocations.remove(location);
+        return data != null ? data.getOwner() : null;
     }
 
     /**
@@ -297,23 +309,37 @@ public class DataManager {
      * Gets the tier of a generator at a location
      */
     public int getGeneratorTier(Location location) {
-        return generatorLocations.getOrDefault(location, 0);
+        GeneratorData data = generatorLocations.get(location);
+        return data != null ? data.getTier() : 0;
+    }
+
+    /**
+     * Gets the owner of a generator at a location
+     */
+    public UUID getGeneratorOwner(Location location) {
+        GeneratorData data = generatorLocations.get(location);
+        return data != null ? data.getOwner() : null;
     }
 
     /**
      * Updates the tier of a generator
      */
     public void updateGeneratorTier(Location location, int tier) {
-        if (generatorLocations.containsKey(location)) {
-            generatorLocations.put(location, tier);
+        GeneratorData data = generatorLocations.get(location);
+        if (data != null) {
+            generatorLocations.put(location, new GeneratorData(tier, data.getOwner()));
         }
     }
 
     /**
-     * Gets all generator locations
+     * Gets all generator locations (returns map with tiers only for compatibility)
      */
     public Map<Location, Integer> getAllGenerators() {
-        return new HashMap<>(generatorLocations);
+        Map<Location, Integer> result = new HashMap<>();
+        for (Map.Entry<Location, GeneratorData> entry : generatorLocations.entrySet()) {
+            result.put(entry.getKey(), entry.getValue().getTier());
+        }
+        return result;
     }
 
     /**
@@ -352,5 +378,26 @@ public class DataManager {
      */
     public Collection<PlayerData> getAllPlayerData() {
         return playerDataMap.values();
+    }
+
+    /**
+     * Inner class to store generator data (tier and owner)
+     */
+    public static class GeneratorData {
+        private final int tier;
+        private final UUID owner;
+
+        public GeneratorData(int tier, UUID owner) {
+            this.tier = tier;
+            this.owner = owner;
+        }
+
+        public int getTier() {
+            return tier;
+        }
+
+        public UUID getOwner() {
+            return owner;
+        }
     }
 }

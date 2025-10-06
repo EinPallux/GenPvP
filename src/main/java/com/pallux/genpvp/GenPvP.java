@@ -27,6 +27,7 @@ public class GenPvP extends JavaPlugin {
     private CubeManager cubeManager;
     private StatisticsManager statisticsManager;
     private ArmorManager armorManager;
+    private WorldGuardManager worldGuardManager;
 
     // Economy
     private Economy economy;
@@ -39,6 +40,18 @@ public class GenPvP extends JavaPlugin {
 
     // Tasks
     private BukkitTask armorEffectTask;
+
+    @Override
+    public void onLoad() {
+        // WorldGuard flags MUST be registered in onLoad()
+        try {
+            Class.forName("com.sk89q.worldguard.WorldGuard");
+            worldGuardManager = new WorldGuardManager(this);
+            worldGuardManager.registerFlags();
+        } catch (ClassNotFoundException e) {
+            getLogger().warning("WorldGuard not found! Generator protection will not be available.");
+        }
+    }
 
     @Override
     public void onEnable() {
@@ -112,6 +125,9 @@ public class GenPvP extends JavaPlugin {
         // Config manager must be first
         configManager = new ConfigManager(this);
         configManager.loadConfigs();
+
+        // WorldGuard manager (must be before listeners)
+        worldGuardManager = new WorldGuardManager(this);
 
         // Data manager
         dataManager = new DataManager(this);
@@ -281,6 +297,10 @@ public class GenPvP extends JavaPlugin {
 
     public ArmorManager getArmorManager() {
         return armorManager;
+    }
+
+    public WorldGuardManager getWorldGuardManager() {
+        return worldGuardManager;
     }
 
     public Economy getEconomy() {

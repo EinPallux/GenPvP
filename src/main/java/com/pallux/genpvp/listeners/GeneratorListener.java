@@ -5,7 +5,6 @@ import com.pallux.genpvp.guis.GeneratorUpgradeGUI;
 import com.pallux.genpvp.utils.ColorUtil;
 import com.pallux.genpvp.utils.PlayerData;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -18,6 +17,8 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.UUID;
+
 public class GeneratorListener implements Listener {
 
     private final GenPvP plugin;
@@ -26,7 +27,32 @@ public class GeneratorListener implements Listener {
         this.plugin = plugin;
     }
 
-    @EventHandler(priority = EventPriority.HIGH)
+    @EventHandler(priority = EventPriority.LOWEST)
+    public void onBlockPlaceEarly(BlockPlaceEvent event) {
+        // Early check to prevent the block from even being placed if it's a generator in a protected area
+        if (event.isCancelled()) {
+            return;
+        }
+
+        Player player = event.getPlayer();
+        Block block = event.getBlock();
+        ItemStack item = event.getItemInHand();
+
+        // Check if the placed block is a generator
+        if (!isGeneratorItem(item)) {
+            return;
+        }
+
+        // Check WorldGuard protection immediately
+        if (!plugin.getWorldGuardManager().canPlaceGenerator(player, block.getLocation())) {
+            event.setCancelled(true);
+            player.sendMessage(ColorUtil.colorize("{prefix} &#FF0000You cannot place generators in this protected area!")
+                    .replace("{prefix}", plugin.getConfigManager().getMessage("prefix")));
+            return;
+        }
+    }
+
+    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onBlockPlace(BlockPlaceEvent event) {
         Player player = event.getPlayer();
         Block block = event.getBlock();
@@ -42,6 +68,12 @@ public class GeneratorListener implements Listener {
             event.setCancelled(true);
             player.sendMessage(ColorUtil.colorize(plugin.getConfigManager().getMessage("generator.world-disabled")));
             return;
+        }
+
+        // WorldGuard check is already done in onBlockPlaceEarly, but double-check here
+        if (!plugin.getWorldGuardManager().canPlaceGenerator(player, block.getLocation())) {
+            event.setCancelled(true);
+            return; // Don't show message again, already shown in early check
         }
 
         // Get player data
@@ -67,16 +99,10 @@ public class GeneratorListener implements Listener {
             return;
         }
 
-        // Add generator to data
+        // Add generator to data with owner - ONLY after all checks pass
         Location location = block.getLocation();
-        plugin.getDataManager().addGenerator(location, tier);
+        plugin.getDataManager().addGenerator(location, tier, player.getUniqueId());
         data.addGenerator();
-
-        // Send success message
-        player.sendMessage(ColorUtil.colorize(plugin.getConfigManager()
-                .getMessage("generator.placed",
-                        "{current}", String.valueOf(data.getGeneratorsPlaced()),
-                        "{max}", String.valueOf(plugin.getLevelManager().getCurrentSlots(data)))));
 
         // Play sound
         if (plugin.getConfigManager().isSoundsEnabled()) {
@@ -87,7 +113,7 @@ public class GeneratorListener implements Listener {
         plugin.getStatisticsManager().recordBlockPlaced(player);
     }
 
-    @EventHandler(priority = EventPriority.HIGH)
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
     public void onBlockBreak(BlockBreakEvent event) {
         Player player = event.getPlayer();
         Block block = event.getBlock();
@@ -98,20 +124,35 @@ public class GeneratorListener implements Listener {
             return;
         }
 
-        // Get generator tier
+        // Check WorldGuard protection BEFORE doing anything else
+        if (!plugin.getWorldGuardManager().canBreakGenerator(player, location)) {
+            event.setCancelled(true);
+            player.sendMessage(ColorUtil.colorize("{prefix} &#FF0000You cannot break generators in this protected area!")
+                    .replace("{prefix}", plugin.getConfigManager().getMessage("prefix")));
+            return;
+        }
+
+        // Prevent XP drops from generators
+        event.setExpToDrop(0);
+
+        // Get generator tier and owner
         int tier = plugin.getDataManager().getGeneratorTier(location);
+        UUID ownerUUID = plugin.getDataManager().getGeneratorOwner(location);
 
         // Remove generator from data
         plugin.getDataManager().removeGenerator(location);
 
-        // Find and update the owner's generator count
-        // Since generators can be stolen, we need to check all players
-        for (PlayerData data : plugin.getDataManager().getAllPlayerData()) {
-            if (data.getGeneratorsPlaced() > 0) {
-                // We'll just decrement the breaker's count if they have any
-                if (data.getUuid().equals(player.getUniqueId())) {
-                    data.removeGenerator();
-                    break;
+        // Update the OWNER's generator count, not the breaker's
+        if (ownerUUID != null) {
+            PlayerData ownerData = plugin.getDataManager().getPlayerData(ownerUUID);
+            ownerData.removeGenerator();
+
+            // Notify owner if they're online and it's not them breaking it
+            if (!player.getUniqueId().equals(ownerUUID)) {
+                Player owner = plugin.getServer().getPlayer(ownerUUID);
+                if (owner != null && owner.isOnline()) {
+                    owner.sendMessage(ColorUtil.colorize(plugin.getConfigManager().getMessage("prefix") +
+                            " &#FF0000One of your generators was stolen by " + player.getName() + "!"));
                 }
             }
         }
@@ -130,15 +171,6 @@ public class GeneratorListener implements Listener {
                 block.getWorld().dropItemNaturally(location, generator);
             }
         }
-
-        // Get player data for the breaker
-        PlayerData breakerData = plugin.getDataManager().getPlayerData(player);
-
-        // Send message
-        player.sendMessage(ColorUtil.colorize(plugin.getConfigManager()
-                .getMessage("generator.removed",
-                        "{current}", String.valueOf(breakerData.getGeneratorsPlaced()),
-                        "{max}", String.valueOf(plugin.getLevelManager().getCurrentSlots(breakerData)))));
 
         // Play sound
         if (plugin.getConfigManager().isSoundsEnabled()) {
@@ -177,6 +209,14 @@ public class GeneratorListener implements Listener {
         // Check if player is sneaking (shift + right-click)
         if (player.isSneaking()) {
             event.setCancelled(true);
+
+            // Check if player is the owner
+            UUID ownerUUID = plugin.getDataManager().getGeneratorOwner(location);
+            if (ownerUUID != null && !player.getUniqueId().equals(ownerUUID)) {
+                player.sendMessage(ColorUtil.colorize(plugin.getConfigManager().getMessage("prefix") +
+                        " &#FF0000This generator belongs to someone else!"));
+                return;
+            }
 
             // Open upgrade GUI
             int tier = plugin.getDataManager().getGeneratorTier(location);

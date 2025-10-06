@@ -3,6 +3,7 @@ com\pallux\genpvp\GenPvP.class
 com\pallux\genpvp\managers\GeneratorManager$GeneratorTier.class
 com\pallux\genpvp\listeners\ArmorEquipListener$1.class
 com\pallux\genpvp\guis\CubeRollGUI.class
+com\pallux\genpvp\managers\DataManager$GeneratorData.class
 com\pallux\genpvp\utils\PlayerData.class
 com\pallux\genpvp\guis\ShopGUI.class
 com\pallux\genpvp\guis\StatsGUI.class
@@ -32,3 +33,4 @@ com\pallux\genpvp\managers\DataManager.class
 com\pallux\genpvp\managers\StatisticsManager.class
 com\pallux\genpvp\listeners\ArmorListener.class
 com\pallux\genpvp\listeners\PlayerListener.class
+com\pallux\genpvp\managers\WorldGuardManager.class
