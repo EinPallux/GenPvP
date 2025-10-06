@@ -244,6 +244,15 @@ particles:
     offset-y: 0.5
     offset-z: 0.5
 
+# Hopper Collection Settings
+hopper-collection:
+  # Enable automatic collection into hoppers placed on top of generators
+  enabled: true
+
+  # When generators are stacked, spawn items on the topmost generator
+  # This prevents items from dropping around stacked generators
+  collect-from-stacks: true
+
 # Hologram settings (if you want floating text above generators)
 holograms:
   enabled: false

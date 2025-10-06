@@ -346,6 +346,15 @@ public class ConfigManager {
         return getGeneratorsConfig().getInt("particles.gems.count", 10);
     }
 
+    // Hopper settings
+    public boolean isHopperCollectionEnabled() {
+        return getGeneratorsConfig().getBoolean("hopper-collection.enabled", true);
+    }
+
+    public boolean isHopperCollectFromStacks() {
+        return getGeneratorsConfig().getBoolean("hopper-collection.collect-from-stacks", true);
+    }
+
     // Storage settings
     public String getStorageType() {
         return getMainConfig().getString("storage.type", "YAML");

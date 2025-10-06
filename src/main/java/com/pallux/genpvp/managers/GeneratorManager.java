@@ -344,6 +344,11 @@ public class GeneratorManager {
      * Finds the topmost generator in a stack
      */
     private Location findTopGenerator(Location location) {
+        // Only find top generator if config allows it
+        if (!plugin.getConfigManager().isHopperCollectFromStacks()) {
+            return location;
+        }
+
         Location current = location.clone();
 
         // Check upwards for more generators
@@ -363,28 +368,31 @@ public class GeneratorManager {
      * Spawns a nugget at a location (with hopper support)
      */
     private void spawnNugget(Location location, ItemStack item, boolean isGem) {
-        // Check if there's a hopper above the generator
-        Location hopperLocation = location.clone().add(0, 1, 0);
-        Block hopperBlock = hopperLocation.getBlock();
+        // Check if hopper collection is enabled
+        if (plugin.getConfigManager().isHopperCollectionEnabled()) {
+            // Check if there's a hopper above the generator
+            Location hopperLocation = location.clone().add(0, 1, 0);
+            Block hopperBlock = hopperLocation.getBlock();
 
-        if (hopperBlock.getType() == Material.HOPPER) {
-            // Try to add to hopper
-            Hopper hopper = (Hopper) hopperBlock.getState();
+            if (hopperBlock.getType() == Material.HOPPER) {
+                // Try to add to hopper
+                Hopper hopper = (Hopper) hopperBlock.getState();
 
-            // Check if hopper has space
-            HashMap<Integer, ItemStack> leftover = hopper.getInventory().addItem(item);
+                // Check if hopper has space
+                HashMap<Integer, ItemStack> leftover = hopper.getInventory().addItem(item);
 
-            if (leftover.isEmpty()) {
-                // Successfully added to hopper, spawn particles
-                if (plugin.getConfigManager().isParticlesEnabled()) {
-                    spawnParticles(location, isGem);
+                if (leftover.isEmpty()) {
+                    // Successfully added to hopper, spawn particles
+                    if (plugin.getConfigManager().isParticlesEnabled()) {
+                        spawnParticles(location, isGem);
+                    }
+                    return;
                 }
-                return;
+                // If hopper is full, continue to drop item normally
             }
-            // If hopper is full, continue to drop item normally
         }
 
-        // No hopper or hopper is full, spawn item as entity
+        // No hopper or hopper is full or feature disabled, spawn item as entity
         Location spawnLoc = location.clone().add(0.5, 1.2, 0.5);
         Item droppedItem = location.getWorld().dropItem(spawnLoc, item);
         droppedItem.setVelocity(droppedItem.getVelocity().zero());
