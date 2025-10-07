@@ -235,7 +235,7 @@ public class DefenseListener implements Listener {
         // Remove from data
         plugin.getDefenseDataManager().removeDefenseBlock(location);
 
-        // If it's a door, also remove the other half
+        // If it's a door, also remove the other half and set it to air
         if (defenseTier != null && defenseTier.isDoor() && block.getType() == Material.IRON_DOOR) {
             Door doorData = (Door) block.getBlockData();
             Block otherHalf;
@@ -244,10 +244,13 @@ public class DefenseListener implements Listener {
             } else {
                 otherHalf = block.getRelative(BlockFace.DOWN);
             }
-            plugin.getDefenseDataManager().removeDefenseBlock(otherHalf.getLocation());
+            if(otherHalf.getType() == Material.IRON_DOOR) {
+                plugin.getDefenseDataManager().removeDefenseBlock(otherHalf.getLocation());
+                otherHalf.setType(Material.AIR); // Set other half to air
+            }
         }
 
-        // Break the block
+        // Break the original block
         block.setType(Material.AIR);
 
         // Handle drop

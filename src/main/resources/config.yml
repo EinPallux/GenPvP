@@ -97,7 +97,8 @@ cube-animation:
   # Sound when reward is determined
   win-sound: ENTITY_PLAYER_LEVELUP
 
-# Data Storage
+# Data Storage - !!DO NOT USE MYSQL!!
+# The MYSQL/SQLITE Storage Feature is not yet implemented!
 storage:
   # Storage type: YAML, SQLITE, or MYSQL
   type: YAML
@@ -114,7 +115,7 @@ storage:
     password: password
     use-ssl: false
 
-# PlaceholderAPI Settings
+# PlaceholderAPI Settings - DO NOT EDIT ANYTHING HERE!
 placeholders:
   # Number format for large numbers (true = 1.5K, false = 1500)
   compact-numbers: true

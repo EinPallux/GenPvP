@@ -18,8 +18,6 @@ config-reloaded: "{prefix} &#00FF00All configurations have been reloaded!"
 
 # Generator Messages
 generator:
-  placed: "{prefix} &#00FF00Generator placed! &#808080({current}/{max})"
-  removed: "{prefix} &#FFFF00Generator removed! &#808080({current}/{max})"
   max-reached: "{prefix} &#FF0000You've reached your maximum generator limit! &#808080({max})"
   max-reached-hint: "{prefix} &#FFD700Collect money from generators to gain XP and level up!"
   not-generator: "{prefix} &#FF0000This is not a generator block!"
@@ -34,8 +32,6 @@ generator:
 
 # Defense Block Messages
 defense:
-  placed: "{prefix} &#00FF00Defense block placed! &#808080(Tier {tier})"
-  broken: "{prefix} &#FF0000Defense block destroyed! &#808080(Tier {tier})"
   upgraded: "{prefix} <gradient:#FFD700:#FFA500>Defense block upgraded to Tier {tier}!</gradient>"
   max-tier: "{prefix} <gradient:#FF1493:#9400D3>This defense block is already at maximum tier!</gradient>"
   not-enough-money: "{prefix} &#FF0000You need ${amount} to upgrade this defense block!"
@@ -177,21 +173,6 @@ gui:
         - ""
         - "&#FFD700Maximum protection!"
 
-  # Armory GUI
-  armory:
-    armor-piece:
-      lore:
-        - "&#808080&m                          "
-        - "  &#FFFFFF&l» &#808080Armor: &#FFFFFF{armor}"
-        - "  &#FFFF00&l» &#808080Effect: &#FFFF00{effect}"
-        - ""
-        - "  &#FFD700&lCOST"
-        - "  &#808080&l- &#FFD700${money}"
-        - "  &#DDA0DD&l- {gems} Gems"
-        - "&#808080&m                          "
-        - ""
-        - "&#00FF00Click to purchase!"
-
   # Shop GUI
   shop:
     generator:
@@ -214,20 +195,6 @@ gui:
         - ""
         - "&#FFD700Purchase premium to unlock"
         - "&#FFD700all generator tiers!"
-
-  # Defense Shop GUI
-  defense-shop:
-    defense:
-      name: "<gradient:#808080:#C0C0C0>Tier {tier} Defense</gradient>"
-      lore:
-        - "&#808080Block: &#FFFFFF{block}"
-        - "&#808080Hearts: &#FF0000{hearts} ❤"
-        - ""
-        - "&#FFFF00Price: &#FFD700${price}"
-        - ""
-        - "&#00FF00Left-Click: Buy 1"
-        - "&#00FF00Right-Click: Buy 8"
-        - "&#00FF00Shift-Click: Buy 16"
 
   # Level Up GUI
   levelup:
@@ -320,12 +287,3 @@ gui:
     name: "&#FFFF00Back"
     lore:
       - "&#808080Return to previous menu"
-
-  info:
-    name: "&#00FFFFInformation"
-
-# Placeholders for item lore descriptions
-placeholders:
-  money-format: "${amount}"
-  gems-format: "{amount} Gem(s)"
-  percentage-format: "{value}%"

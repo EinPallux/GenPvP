@@ -11,20 +11,21 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class DefenseManager {
 
     private final GenPvP plugin;
     private final Map<Integer, DefenseTier> defenseTiers;
     private final NamespacedKey defenseKey;
-    private final NamespacedKey defenseTierKey;
 
     public DefenseManager(GenPvP plugin) {
         this.plugin = plugin;
         this.defenseTiers = new HashMap<>();
         this.defenseKey = new NamespacedKey(plugin, "defense_block");
-        this.defenseTierKey = new NamespacedKey(plugin, "defense_tier");
         loadDefenseTiers();
     }
 
@@ -51,10 +52,14 @@ public class DefenseManager {
                 double price = tierSection.getDouble("price", 1000);
                 double upgradePrice = tierSection.getDouble("upgrade-price", 0);
                 String displayName = tierSection.getString("display-name", "Defense Block");
+                String itemName = tierSection.getString("item-name", displayName);
+                List<String> lore = tierSection.getStringList("lore");
+                String shopItemName = tierSection.getString("shop-item-name", itemName);
+                List<String> shopLore = tierSection.getStringList("shop-lore");
                 boolean isDoor = tierSection.getBoolean("is-door", false);
 
                 DefenseTier defenseTier = new DefenseTier(
-                        tier, block, hearts, price, upgradePrice, displayName, isDoor
+                        tier, block, hearts, price, upgradePrice, displayName, itemName, lore, shopItemName, shopLore, isDoor
                 );
 
                 defenseTiers.put(tier, defenseTier);
@@ -97,24 +102,15 @@ public class DefenseManager {
         ItemMeta meta = item.getItemMeta();
 
         if (meta != null) {
-            meta.setDisplayName(ColorUtil.colorize(defenseTier.getDisplayName()));
+            meta.setDisplayName(ColorUtil.colorize(defenseTier.getItemName()));
 
             List<String> lore = new ArrayList<>();
-            lore.add(ColorUtil.colorize("&#808080Tier: &#FFFFFF" + tier));
-            lore.add(ColorUtil.colorize("&#808080Hearts: &#FF0000" + defenseTier.getHearts() + " ❤"));
-
-            if (defenseTier.isDoor()) {
-                lore.add("");
-                lore.add(ColorUtil.colorize("&#FFFF00Right-Click to open (Owner only)"));
+            for (String line : defenseTier.getLore()) {
+                lore.add(ColorUtil.colorize(line
+                        .replace("{tier}", String.valueOf(tier))
+                        .replace("{hearts}", String.valueOf(defenseTier.getHearts()))
+                ));
             }
-
-            lore.add("");
-            lore.add(ColorUtil.colorize("&#00FF00Place to defend your base!"));
-
-            if (!defenseTier.isDoor() && tier < getMaxTier()) {
-                lore.add(ColorUtil.colorize("&#FFFF00Shift + Right-Click to upgrade!"));
-            }
-
             meta.setLore(lore);
 
             // Add glow effect
@@ -160,16 +156,25 @@ public class DefenseManager {
         private final double price;
         private final double upgradePrice;
         private final String displayName;
+        private final String itemName;
+        private final List<String> lore;
+        private final String shopItemName;
+        private final List<String> shopLore;
         private final boolean isDoor;
 
         public DefenseTier(int tier, Material block, int hearts, double price,
-                           double upgradePrice, String displayName, boolean isDoor) {
+                           double upgradePrice, String displayName, String itemName, List<String> lore,
+                           String shopItemName, List<String> shopLore, boolean isDoor) {
             this.tier = tier;
             this.block = block;
             this.hearts = hearts;
             this.price = price;
             this.upgradePrice = upgradePrice;
             this.displayName = displayName;
+            this.itemName = itemName;
+            this.lore = lore;
+            this.shopItemName = shopItemName;
+            this.shopLore = shopLore;
             this.isDoor = isDoor;
         }
 
@@ -179,6 +184,11 @@ public class DefenseManager {
         public double getPrice() { return price; }
         public double getUpgradePrice() { return upgradePrice; }
         public String getDisplayName() { return displayName; }
+        public String getItemName() { return itemName; }
+        public List<String> getLore() { return lore; }
+        public String getShopItemName() { return shopItemName; }
+        public List<String> getShopLore() { return shopLore; }
         public boolean isDoor() { return isDoor; }
     }
 }
+

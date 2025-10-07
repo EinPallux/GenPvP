@@ -5,89 +5,116 @@
 
 defense-blocks:
   1:
-    # Block type for this defense tier
     block: CRACKED_STONE_BRICKS
-
-    # Hearts (how many times it needs to be broken)
     hearts: 250
-
-    # Price to buy in shop
     price: 2500
-
-    # Upgrade cost (difference to next tier)
     upgrade-price: 2500
-
-    # Display name in GUIs
     display-name: "<gradient:#808080:#A9A9A9>Cracked Stone Defense</gradient>"
-
-    # Is this a door?
+    item-name: "<gradient:#808080:#A9A9A9>Tier 1 Defense Block</gradient>"
+    lore:
+      - "&#808080Tier: &#FFFFFF{tier}"
+      - "&#808080Hearts: &#FF0000{hearts} ❤"
+      - ""
+      - "&#00FF00Place to defend your base!"
+      - "&#FFFF00Shift + Right-Click to upgrade!"
     is-door: false
-
   2:
     block: STONE_BRICKS
     hearts: 500
     price: 5000
     upgrade-price: 5000
     display-name: "<gradient:#A9A9A9:#C0C0C0>Stone Defense</gradient>"
+    item-name: "<gradient:#A9A9A9:#C0C0C0>Tier 2 Defense Block</gradient>"
+    lore:
+      - "&#808080Tier: &#FFFFFF{tier}"
+      - "&#808080Hearts: &#FF0000{hearts} ❤"
+      - ""
+      - "&#00FF00Place to defend your base!"
+      - "&#FFFF00Shift + Right-Click to upgrade!"
     is-door: false
-
   3:
     block: CHISELED_STONE_BRICKS
     hearts: 1000
     price: 10000
     upgrade-price: 10000
     display-name: "<gradient:#C0C0C0:#D3D3D3>Chiseled Stone Defense</gradient>"
+    item-name: "<gradient:#C0C0C0:#D3D3D3>Tier 3 Defense Block</gradient>"
+    lore:
+      - "&#808080Tier: &#FFFFFF{tier}"
+      - "&#808080Hearts: &#FF0000{hearts} ❤"
+      - ""
+      - "&#00FF00Place to defend your base!"
+      - "&#FFFF00Shift + Right-Click to upgrade!"
     is-door: false
-
   4:
     block: CRACKED_POLISHED_BLACKSTONE_BRICKS
     hearts: 2000
     price: 20000
     upgrade-price: 15000
     display-name: "<gradient:#2F4F4F:#1C1C1C>Cracked Blackstone Defense</gradient>"
+    item-name: "<gradient:#2F4F4F:#1C1C1C>Tier 4 Defense Block</gradient>"
+    lore:
+      - "&#808080Tier: &#FFFFFF{tier}"
+      - "&#808080Hearts: &#FF0000{hearts} ❤"
+      - ""
+      - "&#00FF00Place to defend your base!"
+      - "&#FFFF00Shift + Right-Click to upgrade!"
     is-door: false
-
   5:
     block: POLISHED_BLACKSTONE_BRICKS
     hearts: 3000
     price: 35000
     upgrade-price: 15000
     display-name: "<gradient:#1C1C1C:#000000>Blackstone Defense</gradient>"
+    item-name: "<gradient:#1C1C1C:#000000>Tier 5 Defense Block</gradient>"
+    lore:
+      - "&#808080Tier: &#FFFFFF{tier}"
+      - "&#808080Hearts: &#FF0000{hearts} ❤"
+      - ""
+      - "&#00FF00Place to defend your base!"
+      - "&#FFFF00Shift + Right-Click to upgrade!"
     is-door: false
-
   6:
     block: END_STONE_BRICKS
     hearts: 4000
     price: 50000
     upgrade-price: 0
     display-name: "<gradient:#FFFACD:#F0E68C>End Stone Defense</gradient>"
+    item-name: "<gradient:#FFFACD:#F0E68C>Tier 6 Defense Block</gradient>"
+    lore:
+      - "&#808080Tier: &#FFFFFF{tier}"
+      - "&#808080Hearts: &#FF0000{hearts} ❤"
+      - ""
+      - "&#00FF00Place to defend your base!"
     is-door: false
-
   7:
     block: IRON_DOOR
     hearts: 3500
     price: 12500
     upgrade-price: 0
     display-name: "<gradient:#D3D3D3:#708090>Access Defense</gradient>"
+    item-name: "<gradient:#D3D3D3:#708090>Access Defense Door</gradient>"
+    lore:
+      - "&#808080Tier: &#FFFFFF{tier}"
+      - "&#808080Hearts: &#FF0000{hearts} ❤"
+      - ""
+      - "&#FFFF00Right-Click to open (Owner only)"
+      - ""
+      - "&#00FF00Place to defend your base!"
     is-door: true
 
 # Defense block settings
 settings:
   # Show hearts remaining when block is damaged
   show-hearts-on-damage: true
-
   # Damage format message
   damage-format: "&#EB4034{hearts} ❤"
-
   # Prevent block from dropping when broken
   prevent-drop: true
-
   # Auto-pickup defense blocks when broken (if false, drops as item)
   auto-pickup-on-break: true
-
   # Allow block upgrades
   allow-upgrades: true
-
   # World whitelist for defense placement (empty = all worlds)
   allowed-worlds:
     - world
@@ -95,9 +122,7 @@ settings:
 # Defense block particles when damaged (optional)
 particles:
   enabled: true
-
   # Particle type when damaged
   type: BLOCK_CRACK
-
   # Particle count
   count: 10

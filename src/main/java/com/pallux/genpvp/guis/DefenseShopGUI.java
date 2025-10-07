@@ -133,34 +133,30 @@ public class DefenseShopGUI extends BaseGUI {
     }
 
     private ItemStack createDefenseShopItem(DefenseManager.DefenseTier tier) {
-        String nameFormat = plugin.getConfigManager().getMessagesConfig()
-                .getString("gui.defense-shop.defense.name", "<gradient:#808080:#C0C0C0>Tier {tier} Defense</gradient>");
+        // Get the name from the DefenseTier object, which is loaded from defense.yml
+        String nameFormat = tier.getShopItemName();
 
         // Replace placeholders in name
-        String name = nameFormat
-                .replace("{tier}", String.valueOf(tier.getTier()))
-                .replace("{name}", ColorUtil.stripColor(tier.getDisplayName()))
-                .replace("{block}", tier.getBlock().toString().replace("_", " "));
+        String name = replacePlaceholders(nameFormat,
+                "{tier}", String.valueOf(tier.getTier()),
+                "{name}", ColorUtil.stripColor(tier.getDisplayName()),
+                "{block}", tier.getBlock().toString().replace("_", " ")
+        );
 
-        List<String> loreFormat = plugin.getConfigManager().getMessagesConfig()
-                .getStringList("gui.defense-shop.defense.lore");
+        // Get the lore from the DefenseTier object
+        List<String> loreFormat = tier.getShopLore();
 
-        List<String> lore = new ArrayList<>();
-        for (String line : loreFormat) {
-            String processed = line
-                    .replace("{tier}", String.valueOf(tier.getTier()))
-                    .replace("{block}", tier.getBlock().toString().replace("_", " "))
-                    .replace("{hearts}", String.valueOf(tier.getHearts()))
-                    .replace("{price}", ColorUtil.formatNumber(tier.getPrice()));
-            lore.add(processed);
-        }
+        // Replace placeholders in the lore
+        List<String> lore = replacePlaceholders(loreFormat,
+                "{tier}", String.valueOf(tier.getTier()),
+                "{block}", tier.getBlock().toString().replace("_", " "),
+                "{hearts}", String.valueOf(tier.getHearts()),
+                "{price}", ColorUtil.formatNumber(tier.getPrice())
+        );
 
-        // Add special note for doors
-        if (tier.isDoor()) {
-            lore.add("");
-            lore.add(ColorUtil.colorize("&#FFFF00Right-Click to open (Owner only)"));
-        }
-
+        // The createItem method in BaseGUI already handles colorizing the lore,
+        // so we just pass the processed list.
         return createItem(tier.getBlock(), name, lore, true);
     }
 }
+

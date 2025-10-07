@@ -32,17 +32,23 @@ public class GeneratorShopGUI extends BaseGUI {
     protected void setContents() {
         boolean hasTierUnlock = player.hasPermission("gpvp.shop.tierunlock");
 
-        // Add all generator tiers in a clean grid (rows 2-3 for tiers 1-18)
+        // Add all generator tiers in the middle 7 columns
         for (int tier = 1; tier <= plugin.getGeneratorManager().getMaxTier(); tier++) {
             GeneratorManager.GeneratorTier genTier = plugin.getGeneratorManager().getGeneratorTier(tier);
             if (genTier == null) continue;
 
             int slot;
-            if (tier <= 9) {
-                slot = tier - 1 + 10; // Row 2: slots 10-18
+            if (tier <= 7) {
+                // Row 2 (slots 10 to 16)
+                slot = 9 + tier;
+            } else if (tier <= 14) {
+                // Row 3 (slots 19 to 25)
+                slot = 19 + (tier - 8);
             } else {
-                slot = tier - 10 + 19; // Row 3: slots 19-27
+                // Row 4 (slots 28 to 34)
+                slot = 28 + (tier - 15);
             }
+
 
             // Check if tier is locked
             boolean isLocked = tier > 1 && !hasTierUnlock;
@@ -83,10 +89,12 @@ public class GeneratorShopGUI extends BaseGUI {
 
         // Calculate tier from slot
         int tier;
-        if (slot >= 10 && slot <= 18) {
-            tier = slot - 9; // Tiers 1-9
-        } else if (slot >= 19 && slot <= 27) {
-            tier = slot - 9; // Tiers 10-18
+        if (slot >= 10 && slot <= 16) { // Tiers 1-7
+            tier = slot - 9;
+        } else if (slot >= 19 && slot <= 25) { // Tiers 8-14
+            tier = slot - 19 + 8;
+        } else if (slot >= 28 && slot <= 34) { // Tiers 15-18
+            tier = slot - 28 + 15;
         } else {
             return;
         }

@@ -1,5 +1,5 @@
 name: GenPvP
-version: '2.1'
+version: '2.3'
 main: com.pallux.genpvp.GenPvP
 api-version: '1.19'
 author: Pallux

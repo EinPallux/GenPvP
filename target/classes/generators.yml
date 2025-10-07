@@ -252,18 +252,3 @@ hopper-collection:
   # When generators are stacked, spawn items on the topmost generator
   # This prevents items from dropping around stacked generators
   collect-from-stacks: true
-
-# Hologram settings (if you want floating text above generators)
-holograms:
-  enabled: false
-
-  # Lines to display above generator
-  lines:
-    - "<gradient:#FFD700:#FFA500>Tier {tier}</gradient>"
-    - "&#808080$&#00FF00{money} &#404040/ 10s"
-
-  # Height above generator block
-  height: 1.5
-
-  # Update interval in ticks
-  update-interval: 20
