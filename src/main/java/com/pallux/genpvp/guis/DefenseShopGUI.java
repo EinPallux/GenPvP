@@ -146,6 +146,20 @@ public class DefenseShopGUI extends BaseGUI {
         // Get the lore from the DefenseTier object
         List<String> loreFormat = tier.getShopLore();
 
+        // If shop lore is empty, create default shop lore
+        if (loreFormat == null || loreFormat.isEmpty()) {
+            loreFormat = new ArrayList<>();
+            loreFormat.add("&#808080Tier: &#FFFFFF{tier}");
+            loreFormat.add("&#808080Block: &#FFFFFF{block}");
+            loreFormat.add("&#808080Hearts: &#EB4034{hearts} ❤");
+            loreFormat.add("");
+            loreFormat.add("&#FFFF00Price: &#FFD700${price}");
+            loreFormat.add("");
+            loreFormat.add("&#00FF00Left-Click: Buy 1");
+            loreFormat.add("&#00FF00Right-Click: Buy 8");
+            loreFormat.add("&#00FF00Shift-Click: Buy 16");
+        }
+
         // Replace placeholders in the lore
         List<String> lore = replacePlaceholders(loreFormat,
                 "{tier}", String.valueOf(tier.getTier()),
@@ -159,4 +173,3 @@ public class DefenseShopGUI extends BaseGUI {
         return createItem(tier.getBlock(), name, lore, true);
     }
 }
-

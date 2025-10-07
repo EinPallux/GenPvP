@@ -11,13 +11,25 @@ defense-blocks:
     upgrade-price: 2500
     display-name: "<gradient:#808080:#A9A9A9>Cracked Stone Defense</gradient>"
     item-name: "<gradient:#808080:#A9A9A9>Tier 1 Defense Block</gradient>"
+    shop-item-name: "<gradient:#808080:#A9A9A9>Tier 1 Defense</gradient>"
     lore:
       - "&#808080Tier: &#FFFFFF{tier}"
       - "&#808080Hearts: &#FF0000{hearts} ❤"
       - ""
       - "&#00FF00Place to defend your base!"
       - "&#FFFF00Shift + Right-Click to upgrade!"
+    shop-lore:
+      - "&#808080Tier: &#FFFFFF{tier}"
+      - "&#808080Block: &#FFFFFF{block}"
+      - "&#808080Hearts: &#EB4034{hearts} ❤"
+      - ""
+      - "&#FFFF00Price: &#FFD700${price}"
+      - ""
+      - "&#00FF00Left-Click: Buy 1"
+      - "&#00FF00Right-Click: Buy 8"
+      - "&#00FF00Shift-Click: Buy 16"
     is-door: false
+
   2:
     block: STONE_BRICKS
     hearts: 500
@@ -25,13 +37,25 @@ defense-blocks:
     upgrade-price: 5000
     display-name: "<gradient:#A9A9A9:#C0C0C0>Stone Defense</gradient>"
     item-name: "<gradient:#A9A9A9:#C0C0C0>Tier 2 Defense Block</gradient>"
+    shop-item-name: "<gradient:#A9A9A9:#C0C0C0>Tier 2 Defense</gradient>"
     lore:
       - "&#808080Tier: &#FFFFFF{tier}"
       - "&#808080Hearts: &#FF0000{hearts} ❤"
       - ""
       - "&#00FF00Place to defend your base!"
       - "&#FFFF00Shift + Right-Click to upgrade!"
+    shop-lore:
+      - "&#808080Tier: &#FFFFFF{tier}"
+      - "&#808080Block: &#FFFFFF{block}"
+      - "&#808080Hearts: &#EB4034{hearts} ❤"
+      - ""
+      - "&#FFFF00Price: &#FFD700${price}"
+      - ""
+      - "&#00FF00Left-Click: Buy 1"
+      - "&#00FF00Right-Click: Buy 8"
+      - "&#00FF00Shift-Click: Buy 16"
     is-door: false
+
   3:
     block: CHISELED_STONE_BRICKS
     hearts: 1000
@@ -39,13 +63,25 @@ defense-blocks:
     upgrade-price: 10000
     display-name: "<gradient:#C0C0C0:#D3D3D3>Chiseled Stone Defense</gradient>"
     item-name: "<gradient:#C0C0C0:#D3D3D3>Tier 3 Defense Block</gradient>"
+    shop-item-name: "<gradient:#C0C0C0:#D3D3D3>Tier 3 Defense</gradient>"
     lore:
       - "&#808080Tier: &#FFFFFF{tier}"
       - "&#808080Hearts: &#FF0000{hearts} ❤"
       - ""
       - "&#00FF00Place to defend your base!"
       - "&#FFFF00Shift + Right-Click to upgrade!"
+    shop-lore:
+      - "&#808080Tier: &#FFFFFF{tier}"
+      - "&#808080Block: &#FFFFFF{block}"
+      - "&#808080Hearts: &#EB4034{hearts} ❤"
+      - ""
+      - "&#FFFF00Price: &#FFD700${price}"
+      - ""
+      - "&#00FF00Left-Click: Buy 1"
+      - "&#00FF00Right-Click: Buy 8"
+      - "&#00FF00Shift-Click: Buy 16"
     is-door: false
+
   4:
     block: CRACKED_POLISHED_BLACKSTONE_BRICKS
     hearts: 2000
@@ -53,13 +89,25 @@ defense-blocks:
     upgrade-price: 15000
     display-name: "<gradient:#2F4F4F:#1C1C1C>Cracked Blackstone Defense</gradient>"
     item-name: "<gradient:#2F4F4F:#1C1C1C>Tier 4 Defense Block</gradient>"
+    shop-item-name: "<gradient:#2F4F4F:#1C1C1C>Tier 4 Defense</gradient>"
     lore:
       - "&#808080Tier: &#FFFFFF{tier}"
       - "&#808080Hearts: &#FF0000{hearts} ❤"
       - ""
       - "&#00FF00Place to defend your base!"
       - "&#FFFF00Shift + Right-Click to upgrade!"
+    shop-lore:
+      - "&#808080Tier: &#FFFFFF{tier}"
+      - "&#808080Block: &#FFFFFF{block}"
+      - "&#808080Hearts: &#EB4034{hearts} ❤"
+      - ""
+      - "&#FFFF00Price: &#FFD700${price}"
+      - ""
+      - "&#00FF00Left-Click: Buy 1"
+      - "&#00FF00Right-Click: Buy 8"
+      - "&#00FF00Shift-Click: Buy 16"
     is-door: false
+
   5:
     block: POLISHED_BLACKSTONE_BRICKS
     hearts: 3000
@@ -67,13 +115,25 @@ defense-blocks:
     upgrade-price: 15000
     display-name: "<gradient:#1C1C1C:#000000>Blackstone Defense</gradient>"
     item-name: "<gradient:#1C1C1C:#000000>Tier 5 Defense Block</gradient>"
+    shop-item-name: "<gradient:#1C1C1C:#000000>Tier 5 Defense</gradient>"
     lore:
       - "&#808080Tier: &#FFFFFF{tier}"
       - "&#808080Hearts: &#FF0000{hearts} ❤"
       - ""
       - "&#00FF00Place to defend your base!"
       - "&#FFFF00Shift + Right-Click to upgrade!"
+    shop-lore:
+      - "&#808080Tier: &#FFFFFF{tier}"
+      - "&#808080Block: &#FFFFFF{block}"
+      - "&#808080Hearts: &#EB4034{hearts} ❤"
+      - ""
+      - "&#FFFF00Price: &#FFD700${price}"
+      - ""
+      - "&#00FF00Left-Click: Buy 1"
+      - "&#00FF00Right-Click: Buy 8"
+      - "&#00FF00Shift-Click: Buy 16"
     is-door: false
+
   6:
     block: END_STONE_BRICKS
     hearts: 4000
@@ -81,12 +141,26 @@ defense-blocks:
     upgrade-price: 0
     display-name: "<gradient:#FFFACD:#F0E68C>End Stone Defense</gradient>"
     item-name: "<gradient:#FFFACD:#F0E68C>Tier 6 Defense Block</gradient>"
+    shop-item-name: "<gradient:#FFFACD:#F0E68C>Tier 6 Defense</gradient>"
     lore:
       - "&#808080Tier: &#FFFFFF{tier}"
       - "&#808080Hearts: &#FF0000{hearts} ❤"
       - ""
       - "&#00FF00Place to defend your base!"
+    shop-lore:
+      - "&#808080Tier: &#FFFFFF{tier}"
+      - "&#808080Block: &#FFFFFF{block}"
+      - "&#808080Hearts: &#EB4034{hearts} ❤"
+      - ""
+      - "&#FFD700Maximum tier - Cannot be upgraded"
+      - ""
+      - "&#FFFF00Price: &#FFD700${price}"
+      - ""
+      - "&#00FF00Left-Click: Buy 1"
+      - "&#00FF00Right-Click: Buy 8"
+      - "&#00FF00Shift-Click: Buy 16"
     is-door: false
+
   7:
     block: IRON_DOOR
     hearts: 3500
@@ -94,6 +168,7 @@ defense-blocks:
     upgrade-price: 0
     display-name: "<gradient:#D3D3D3:#708090>Access Defense</gradient>"
     item-name: "<gradient:#D3D3D3:#708090>Access Defense Door</gradient>"
+    shop-item-name: "<gradient:#D3D3D3:#708090>Access Door</gradient>"
     lore:
       - "&#808080Tier: &#FFFFFF{tier}"
       - "&#808080Hearts: &#FF0000{hearts} ❤"
@@ -101,6 +176,19 @@ defense-blocks:
       - "&#FFFF00Right-Click to open (Owner only)"
       - ""
       - "&#00FF00Place to defend your base!"
+    shop-lore:
+      - "&#808080Tier: &#FFFFFF{tier}"
+      - "&#808080Block: &#FFFFFF{block}"
+      - "&#808080Hearts: &#EB4034{hearts} ❤"
+      - ""
+      - "&#00FFFFSpecial: Owner-only access door"
+      - "&#00FFFFRight-click to open/close"
+      - ""
+      - "&#FFFF00Price: &#FFD700${price}"
+      - ""
+      - "&#00FF00Left-Click: Buy 1"
+      - "&#00FF00Right-Click: Buy 8"
+      - "&#00FF00Shift-Click: Buy 16"
     is-door: true
 
 # Defense block settings
