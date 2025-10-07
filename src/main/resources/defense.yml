@@ -14,7 +14,7 @@ defense-blocks:
     shop-item-name: "<gradient:#808080:#A9A9A9>Tier 1 Defense</gradient>"
     lore:
       - "&#808080Tier: &#FFFFFF{tier}"
-      - "&#808080Hearts: &#FF0000{hearts} ❤"
+      - "&#808080Hearts: &#EB4034{hearts} ❤"
       - ""
       - "&#00FF00Place to defend your base!"
       - "&#FFFF00Shift + Right-Click to upgrade!"
@@ -40,7 +40,7 @@ defense-blocks:
     shop-item-name: "<gradient:#A9A9A9:#C0C0C0>Tier 2 Defense</gradient>"
     lore:
       - "&#808080Tier: &#FFFFFF{tier}"
-      - "&#808080Hearts: &#FF0000{hearts} ❤"
+      - "&#808080Hearts: &#EB4034{hearts} ❤"
       - ""
       - "&#00FF00Place to defend your base!"
       - "&#FFFF00Shift + Right-Click to upgrade!"
@@ -66,7 +66,7 @@ defense-blocks:
     shop-item-name: "<gradient:#C0C0C0:#D3D3D3>Tier 3 Defense</gradient>"
     lore:
       - "&#808080Tier: &#FFFFFF{tier}"
-      - "&#808080Hearts: &#FF0000{hearts} ❤"
+      - "&#808080Hearts: &#EB4034{hearts} ❤"
       - ""
       - "&#00FF00Place to defend your base!"
       - "&#FFFF00Shift + Right-Click to upgrade!"
@@ -92,7 +92,7 @@ defense-blocks:
     shop-item-name: "<gradient:#2F4F4F:#1C1C1C>Tier 4 Defense</gradient>"
     lore:
       - "&#808080Tier: &#FFFFFF{tier}"
-      - "&#808080Hearts: &#FF0000{hearts} ❤"
+      - "&#808080Hearts: &#EB4034{hearts} ❤"
       - ""
       - "&#00FF00Place to defend your base!"
       - "&#FFFF00Shift + Right-Click to upgrade!"
@@ -118,7 +118,7 @@ defense-blocks:
     shop-item-name: "<gradient:#1C1C1C:#000000>Tier 5 Defense</gradient>"
     lore:
       - "&#808080Tier: &#FFFFFF{tier}"
-      - "&#808080Hearts: &#FF0000{hearts} ❤"
+      - "&#808080Hearts: &#EB4034{hearts} ❤"
       - ""
       - "&#00FF00Place to defend your base!"
       - "&#FFFF00Shift + Right-Click to upgrade!"
@@ -144,7 +144,7 @@ defense-blocks:
     shop-item-name: "<gradient:#FFFACD:#F0E68C>Tier 6 Defense</gradient>"
     lore:
       - "&#808080Tier: &#FFFFFF{tier}"
-      - "&#808080Hearts: &#FF0000{hearts} ❤"
+      - "&#808080Hearts: &#EB4034{hearts} ❤"
       - ""
       - "&#00FF00Place to defend your base!"
     shop-lore:
@@ -171,9 +171,10 @@ defense-blocks:
     shop-item-name: "<gradient:#D3D3D3:#708090>Access Door</gradient>"
     lore:
       - "&#808080Tier: &#FFFFFF{tier}"
-      - "&#808080Hearts: &#FF0000{hearts} ❤"
+      - "&#808080Hearts: &#EB4034{hearts} ❤"
       - ""
-      - "&#FFFF00Right-Click to open (Owner only)"
+      - "&#00FFFFSpecial: Owner-only access door"
+      - "&#00FFFFRight-click to open/close"
       - ""
       - "&#00FF00Place to defend your base!"
     shop-lore:

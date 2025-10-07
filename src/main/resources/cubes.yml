@@ -28,41 +28,33 @@ cubes:
     rewards:
       1:
         type: MONEY
-        amount: 100
+        amount: 500
         chance: 30.0
-        display: "&#00FF00$100"
+        display: "&#00FF00$500"
 
       2:
         type: MONEY
-        amount: 250
+        amount: 1500
         chance: 25.0
-        display: "&#00FF00$250"
+        display: "&#00FF00$1,500"
 
       3:
         type: MONEY
-        amount: 500
+        amount: 2000
         chance: 20.0
-        display: "&#00FF00$500"
+        display: "&#00FF00$2,000"
 
       4:
         type: GEMS
-        amount: 1
+        amount: 5
         chance: 15.0
-        display: "&#DDA0DD1 Gem"
+        display: "&#DDA0DD5 Gems"
 
       5:
-        type: COMMAND
-        commands:
-          - "give {player} diamond 1"
-        chance: 7.0
-        display: "&#00FFFF1 Diamond"
-
-      6:
-        type: ITEM
-        material: IRON_INGOT
-        amount: 16
-        chance: 3.0
-        display: "&#FFFFFF16 Iron Ingots"
+        type: GEMS
+        amount: 10
+        chance: 5.0
+        display: "&#DDA0DD10 Gems"
 
   uncommon:
     material: LIME_DYE
@@ -76,47 +68,33 @@ cubes:
     rewards:
       1:
         type: MONEY
-        amount: 500
+        amount: 1000
         chance: 28.0
-        display: "&#00FF00$500"
+        display: "&#00FF00$1,000"
 
       2:
         type: MONEY
-        amount: 1000
+        amount: 2000
         chance: 24.0
-        display: "&#00FF00$1,000"
+        display: "&#00FF00$2,000"
 
       3:
         type: MONEY
-        amount: 2500
+        amount: 4500
         chance: 18.0
-        display: "&#00FF00$2,500"
+        display: "&#00FF00$4,500"
 
       4:
         type: GEMS
-        amount: 3
+        amount: 15
         chance: 15.0
-        display: "&#DDA0DD3 Gems"
+        display: "&#DDA0DD15 Gems"
 
       5:
         type: GEMS
-        amount: 5
+        amount: 25
         chance: 8.0
-        display: "&#DDA0DD5 Gems"
-
-      6:
-        type: COMMAND
-        commands:
-          - "give {player} diamond 5"
-        chance: 5.0
-        display: "&#00FFFF5 Diamonds"
-
-      7:
-        type: ITEM
-        material: GOLDEN_APPLE
-        amount: 3
-        chance: 2.0
-        display: "&#FFD7003 Golden Apples"
+        display: "&#DDA0DD25 Gems"
 
   rare:
     material: BLUE_DYE
@@ -130,15 +108,15 @@ cubes:
     rewards:
       1:
         type: MONEY
-        amount: 2500
+        amount: 5000
         chance: 25.0
-        display: "&#00FF00$2,500"
+        display: "&#00FF00$5,000"
 
       2:
         type: MONEY
-        amount: 5000
+        amount: 7500
         chance: 22.0
-        display: "&#00FF00$5,000"
+        display: "&#00FF00$7,500"
 
       3:
         type: MONEY
@@ -148,36 +126,36 @@ cubes:
 
       4:
         type: GEMS
-        amount: 10
+        amount: 30
         chance: 15.0
-        display: "&#DDA0DD10 Gems"
+        display: "&#DDA0DD30 Gems"
 
       5:
         type: GEMS
-        amount: 15
+        amount: 50
         chance: 10.0
-        display: "&#DDA0DD15 Gems"
+        display: "&#DDA0DD50 Gems"
 
       6:
         type: COMMAND
         commands:
-          - "give {player} diamond 16"
+          - "gpvp gen give {player} 10 1"
         chance: 6.0
-        display: "&#00FFFF16 Diamonds"
+        display: "&#FFD7001 Tier 10 Generator"
 
       7:
-        type: ITEM
-        material: ENCHANTED_GOLDEN_APPLE
-        amount: 1
-        chance: 3.0
-        display: "&#FFD7001 Enchanted Golden Apple"
+        type: COMMAND
+        commands:
+          - "gpvp cube give {player} rare 2"
+        chance: 6.0
+        display: "&#1E90FF2 Rare Cubes"
 
       8:
-        type: ITEM
-        material: NETHERITE_INGOT
-        amount: 1
-        chance: 1.0
-        display: "&#8B00001 Netherite Ingot"
+        type: COMMAND
+        commands:
+          - "gpvp cube give {player} epic 1"
+        chance: 6.0
+        display: "&#8B008B1 Epic Cube"
 
   epic:
     material: PURPLE_DYE
@@ -209,36 +187,36 @@ cubes:
 
       4:
         type: GEMS
-        amount: 25
+        amount: 50
         chance: 15.0
-        display: "&#DDA0DD25 Gems"
+        display: "&#DDA0DD50 Gems"
 
       5:
         type: GEMS
-        amount: 50
+        amount: 75
         chance: 12.0
-        display: "&#DDA0DD50 Gems"
+        display: "&#DDA0DD75 Gems"
 
       6:
         type: COMMAND
         commands:
-          - "give {player} diamond_block 5"
-        chance: 7.0
-        display: "&#00FFFF5 Diamond Blocks"
+          - "gpvp cube give {player} epic 2"
+        chance: 6.0
+        display: "&#8B008B2 Epic Cube"
 
       7:
-        type: ITEM
-        material: NETHERITE_INGOT
-        amount: 3
-        chance: 4.0
-        display: "&#8B00003 Netherite Ingots"
+        type: COMMAND
+        commands:
+          - "gpvp cube give {player} legendary 1"
+        chance: 6.0
+        display: "&#FFD7001 Legendary Cube"
 
       8:
         type: COMMAND
         commands:
-          - "gpvp gen give {player} 10 1"
+          - "gpvp gen give {player} 13 1"
         chance: 2.0
-        display: "&#FFD7001 Tier 10 Generator"
+        display: "&#FFD7001 Tier 13 Generator"
 
   legendary:
     material: ORANGE_DYE
@@ -294,11 +272,11 @@ cubes:
         display: "<gradient:#7FFFD4:#48D1CC>1 Tier 15 Generator</gradient>"
 
       8:
-        type: ITEM
-        material: NETHERITE_BLOCK
-        amount: 1
-        chance: 4.0
-        display: "&#8B00001 Netherite Block"
+        type: COMMAND
+        commands:
+          - "gpvp cube give {player} legendary 2"
+        chance: 2.0
+        display: "&#FFD7002 Legendary Cube"
 
       9:
         type: COMMAND
@@ -309,9 +287,9 @@ cubes:
 
       10:
         type: GEMS
-        amount: 500
+        amount: 300
         chance: 1.0
-        display: "<gradient:#E74C3C:#9B59B6>500 Gems</gradient>"
+        display: "<gradient:#E74C3C:#9B59B6>300 Gems</gradient>"
 
 # Roll animation settings
 animation:

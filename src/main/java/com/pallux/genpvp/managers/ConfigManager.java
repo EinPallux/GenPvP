@@ -37,6 +37,7 @@ public class ConfigManager {
         saveDefaultConfig("cubes.yml");
         saveDefaultConfig("armors.yml");
         saveDefaultConfig("defense.yml");
+        saveDefaultConfig("raid.yml");
 
         // Load all configs
         loadConfig("config.yml");
@@ -45,6 +46,7 @@ public class ConfigManager {
         loadConfig("cubes.yml");
         loadConfig("armors.yml");
         loadConfig("defense.yml");
+        loadConfig("raid.yml");
 
         plugin.getLogger().info("All configuration files loaded!");
     }
@@ -172,6 +174,13 @@ public class ConfigManager {
      */
     public FileConfiguration getDefenseConfig() {
         return getConfig("defense.yml");
+    }
+
+    /**
+     * Gets the raid.yml
+     */
+    public FileConfiguration getRaidConfig() {
+        return getConfig("raid.yml");
     }
 
     /**

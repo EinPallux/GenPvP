@@ -63,6 +63,17 @@ public class CombinedShopGUI extends BaseGUI {
                 ), true);
         inventory.setItem(24, armoryShopItem);
 
+        // Raid Shop Button (slot 30)
+        ItemStack raidShopItem = createItem(Material.TNT,
+                "<gradient:#FF0000:#8B0000>Raid Shop</gradient>",
+                List.of(
+                        "&#808080Buy raid items to",
+                        "&#808080destroy enemy defenses!",
+                        "",
+                        "&#00FF00Click to browse!"
+                ), true);
+        inventory.setItem(30, raidShopItem);
+
         // Close button (slot 49)
         inventory.setItem(49, createCloseButton());
 
@@ -83,6 +94,10 @@ public class CombinedShopGUI extends BaseGUI {
         } else if (slot == 24) {
             // Open Armory
             new ArmoryGUI(plugin, player).open();
+            playOpenSound();
+        } else if (slot == 30) {
+            // Open Raid Shop
+            new RaidShopGUI(plugin, player).open();
             playOpenSound();
         } else if (slot == 49) {
             // Close button

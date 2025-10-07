@@ -30,6 +30,7 @@ public class GenPvP extends JavaPlugin {
     private WorldGuardManager worldGuardManager;
     private DefenseManager defenseManager;
     private DefenseDataManager defenseDataManager;
+    private RaidManager raidManager;
 
     // Economy
     private Economy economy;
@@ -152,6 +153,7 @@ public class GenPvP extends JavaPlugin {
         statisticsManager = new StatisticsManager(this);
         armorManager = new ArmorManager(this);
         defenseManager = new DefenseManager(this);
+        raidManager = new RaidManager(this);
 
         getLogger().info("All managers initialized!");
     }
@@ -207,6 +209,7 @@ public class GenPvP extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new CubeListener(this), this);
         getServer().getPluginManager().registerEvents(new GUIListener(this), this);
         getServer().getPluginManager().registerEvents(new DefenseListener(this), this);
+        getServer().getPluginManager().registerEvents(new RaidListener(this), this);
 
         // Register armor listeners
         armorListener = new ArmorListener(this);
@@ -328,6 +331,10 @@ public class GenPvP extends JavaPlugin {
 
     public DefenseDataManager getDefenseDataManager() {
         return defenseDataManager;
+    }
+
+    public RaidManager getRaidManager() {
+        return raidManager;
     }
 
     public Economy getEconomy() {

@@ -1,0 +1,100 @@
+# ═══════════════════════════════════════════════════════════
+#  GenPvP Raid Shop Configuration
+#  Configure all raid items here
+# ═══════════════════════════════════════════════════════════
+
+raid-items:
+  raid_pickaxe:
+    material: GOLDEN_PICKAXE
+    name: "<gradient:#FFD700:#FF8C00>Raid Pickaxe</gradient>"
+    lore:
+      - "&#808080Damage: &#FF00003500 ❤"
+      - "&#808080Durability: &#FFFF001 Use"
+      - ""
+      - "&#FF0000Destroys defense blocks quickly!"
+    gem-cost: 150
+    damage: 3500
+    glow: true
+
+  raid_bomb:
+    material: FIRE_CHARGE
+    name: "<gradient:#FF4500:#FF6347>Raid Bomb</gradient>"
+    lore:
+      - "&#808080Damage: &#FF0000250-750 ❤"
+      - "&#808080Usage: &#FFFF00Right-Click on Block"
+      - ""
+      - "&#FF0000One-time use explosive!"
+      - "&#00FF00Targets single defense block!"
+    gem-cost: 50
+    min-damage: 250
+    max-damage: 750
+    glow: true
+
+  quickbreak_potion:
+    material: POTION
+    name: "<gradient:#87CEEB:#4682B4>Potion of Quickbreak</gradient>"
+    lore:
+      - "&#808080Effect: &#00FFFFHaste II"
+      - "&#808080Duration: &#FFFF005 Minutes"
+      - ""
+      - "&#00FFFFMine blocks faster!"
+      - "&#00FFFFBreak defenses quicker!"
+    gem-cost: 20
+    effect: FAST_DIGGING
+    effect-level: 2
+    duration: 6000
+    glow: true
+
+# Shop GUI Configuration
+shop-gui:
+  raid_pickaxe:
+    slot: 20
+    shop-name: "<gradient:#FFD700:#FF8C00>Raid Pickaxe</gradient>"
+    shop-lore:
+      - "&#808080Damage: &#FF00003500 ❤"
+      - "&#808080Durability: &#FFFF001 Use"
+      - ""
+      - "&#FF0000Destroys defense blocks quickly!"
+      - ""
+      - "&#DDA0DD&lCOST: 150 Gems"
+      - ""
+      - "&#00FF00Click to purchase!"
+
+  raid_bomb:
+    slot: 22
+    shop-name: "<gradient:#FF4500:#FF6347>Raid Bomb</gradient>"
+    shop-lore:
+      - "&#808080Damage: &#FF0000250-750 ❤"
+      - "&#808080Usage: &#FFFF00Right-Click on Block"
+      - ""
+      - "&#FF0000One-time use explosive!"
+      - "&#00FF00Targets single defense block!"
+      - ""
+      - "&#DDA0DD&lCOST: 50 Gems"
+      - ""
+      - "&#00FF00Click to purchase!"
+
+  quickbreak_potion:
+    slot: 24
+    shop-name: "<gradient:#87CEEB:#4682B4>Potion of Quickbreak</gradient>"
+    shop-lore:
+      - "&#808080Effect: &#00FFFFHaste II"
+      - "&#808080Duration: &#FFFF005 Minutes"
+      - ""
+      - "&#00FFFFMine blocks faster!"
+      - "&#00FFFFBreak defenses quicker!"
+      - ""
+      - "&#DDA0DD&lCOST: 20 Gems"
+      - ""
+      - "&#00FF00Click to purchase!"
+
+# Damage display settings
+damage-display:
+  # Show damage in action bar
+  show-action-bar: true
+
+  # Format for damage dealt message
+  damage-format: "&#EB4034-{damage} ❤ &#EB4034({remaining} ❤ remaining)"
+
+  # Format for block destroyed message
+  destroyed-format: "&#EB4034Defense block destroyed!"

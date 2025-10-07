@@ -12,6 +12,7 @@ com\pallux\genpvp\managers\ConfigManager.class
 com\pallux\genpvp\guis\ArmoryGUI.class
 com\pallux\genpvp\listeners\GUIListener.class
 com\pallux\genpvp\managers\GeneratorManager.class
+com\pallux\genpvp\managers\RaidManager.class
 com\pallux\genpvp\managers\CubeManager.class
 com\pallux\genpvp\guis\DefenseShopGUI.class
 com\pallux\genpvp\listeners\GeneratorListener.class
@@ -35,11 +36,13 @@ com\pallux\genpvp\listeners\CubeListener.class
 com\pallux\genpvp\guis\LevelUpGUI.class
 com\pallux\genpvp\guis\CombinedShopGUI.class
 com\pallux\genpvp\managers\ArmorManager$ArmorSet.class
+com\pallux\genpvp\guis\RaidShopGUI.class
 com\pallux\genpvp\managers\DefenseManager$DefenseTier.class
 com\pallux\genpvp\commands\GenPvPCommand.class
 com\pallux\genpvp\listeners\NuggetListener.class
 com\pallux\genpvp\guis\BaseGUI.class
 com\pallux\genpvp\listeners\DefenseListener.class
+com\pallux\genpvp\listeners\RaidListener.class
 com\pallux\genpvp\guis\DefenseUpgradeGUI.class
 com\pallux\genpvp\managers\CubeManager$CubeReward.class
 com\pallux\genpvp\managers\WorldGuardManager.class

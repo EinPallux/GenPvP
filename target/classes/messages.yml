@@ -53,6 +53,13 @@ armory:
   given: "{prefix} &#00FF00You gave {armor} to {player}!"
   received: "{prefix} &#00FF00You received {armor}!"
 
+# Raid Shop Messages
+raid-shop:
+  purchased: "{prefix} &#00FF00You purchased {item} for {gems} gems!"
+  not-enough-gems: "{prefix} &#FF0000You need {gems} gems to purchase this!"
+  pickaxe-only-defense: "{prefix} &#FF0000Raid Pickaxe can only be used on defense blocks!"
+  bomb-only-defense: "{prefix} &#FF0000Raid Bomb can only be used on defense blocks!"
+
 # Gems Messages
 gems:
   set: "{prefix} &#00FF00Set {player}'s gems to {amount}."
@@ -112,6 +119,7 @@ gui-titles:
   shop: "<gradient:#FFD700:#FFA500>Shop</gradient>"
   generator-shop: "<gradient:#FFD700:#FFA500>Generator Shop</gradient>"
   defense-shop: "<gradient:#808080:#C0C0C0>Defense Shop</gradient>"
+  raid-shop: "<gradient:#FF0000:#8B0000>Raid Shop</gradient>"
   level-up: "<gradient:#4ECDC4:#556270>Level Progress</gradient>"
   stats: "<gradient:#9B59B6:#E74C3C>{player}'s Stats</gradient>"
   cube-roll: "<gradient:#FF1493:#9400D3>{rarity} Cube</gradient>"
